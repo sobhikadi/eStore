@@ -16,3 +16,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+a {
+    color: black !important;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #92C5C8 !important;
+}

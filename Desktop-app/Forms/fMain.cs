@@ -37,7 +37,7 @@ namespace Desktop_app.Forms
                     DisableButton();
 
                     currentButton = (Button)btnSender;
-                    currentButton.BackColor = Color.CadetBlue;
+                    currentButton.BackColor = ColorTranslator.FromHtml("224, 0, 0");
                     currentButton.ForeColor = Color.White;
                     currentButton.Font = new System.Drawing.Font("Segoe UI", 14F);
                     
@@ -47,7 +47,7 @@ namespace Desktop_app.Forms
 
         private void DisableButton()
         {
-            foreach (Control previousBtn in flpanelSidebar.Controls)
+            foreach (Control previousBtn in flpanelContainerSidebar.Controls)
             {
                 if (previousBtn.GetType() == typeof(Button))
                 {
@@ -76,12 +76,12 @@ namespace Desktop_app.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.TestForm1(), sender);
+            OpenChildForm(new Forms.fEmployeeInfo(), sender);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.TestForm2(), sender);
+            OpenChildForm(new Forms.fAnimalInfo(), sender);
         }
 
     }

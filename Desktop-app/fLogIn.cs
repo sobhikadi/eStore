@@ -1,11 +1,11 @@
 using Desktop_app.Forms;
-using ClassLibrary;
+using LogicClassLibrary;
 
 namespace Desktop_app
 {
     public partial class fLogin : Form
     {
-
+        
         public fLogin()
         {
             InitializeComponent();

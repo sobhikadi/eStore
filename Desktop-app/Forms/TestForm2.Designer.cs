@@ -1,6 +1,6 @@
 ﻿namespace Desktop_app.Forms
 {
-    partial class TestForm2
+    partial class fEmployee
     {
         /// <summary>
         /// Required designer variable.
@@ -40,13 +40,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "test2";
             // 
-            // TestForm2
+            // fEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1101, 813);
             this.Controls.Add(this.label1);
-            this.Name = "TestForm2";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "fEmployee";
             this.Text = "TestForm2";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -37,7 +37,7 @@ namespace Desktop_app.Forms
                     DisableButton();
 
                     currentButton = (Button)btnSender;
-                    currentButton.BackColor = ColorTranslator.FromHtml("224, 0, 0");
+                    currentButton.BackColor = ColorTranslator.FromHtml("35, 40, 45");
                     currentButton.ForeColor = Color.White;
                     currentButton.Font = new System.Drawing.Font("Segoe UI", 14F);
                     
@@ -51,8 +51,8 @@ namespace Desktop_app.Forms
             {
                 if (previousBtn.GetType() == typeof(Button))
                 {
-                    previousBtn.BackColor = ColorTranslator.FromHtml("#23282D");
-                    previousBtn.ForeColor = Color.Gainsboro;
+                    previousBtn.BackColor = ColorTranslator.FromHtml("75, 144, 149");
+                    previousBtn.ForeColor = Color.Black;
                     previousBtn.Font = new System.Drawing.Font("Segoe UI", 12F);
                 }
             }
@@ -76,12 +76,12 @@ namespace Desktop_app.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.fEmployeeInfo(), sender);
+            OpenChildForm(new Forms.fProducts(), sender);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.fAnimalInfo(), sender);
+            OpenChildForm(new Forms.fEmployee(), sender);
         }
 
     }

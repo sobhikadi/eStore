@@ -52,7 +52,7 @@
             this.flpanelContainerSidebar.ForeColor = System.Drawing.Color.White;
             this.flpanelContainerSidebar.Location = new System.Drawing.Point(0, 0);
             this.flpanelContainerSidebar.Name = "flpanelContainerSidebar";
-            this.flpanelContainerSidebar.Size = new System.Drawing.Size(274, 813);
+            this.flpanelContainerSidebar.Size = new System.Drawing.Size(274, 935);
             this.flpanelContainerSidebar.TabIndex = 7;
             // 
             // panelLogo
@@ -83,7 +83,7 @@
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Location = new System.Drawing.Point(3, 178);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
             this.button1.Name = "button1";
@@ -100,7 +100,7 @@
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button2.ForeColor = System.Drawing.Color.Black;
+            this.button2.ForeColor = System.Drawing.Color.White;
             this.button2.Location = new System.Drawing.Point(3, 261);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
             this.button2.Name = "button2";
@@ -118,7 +118,7 @@
             this.panelSidebar.ForeColor = System.Drawing.Color.White;
             this.panelSidebar.Location = new System.Drawing.Point(0, 0);
             this.panelSidebar.Name = "panelSidebar";
-            this.panelSidebar.Size = new System.Drawing.Size(274, 813);
+            this.panelSidebar.Size = new System.Drawing.Size(274, 935);
             this.panelSidebar.TabIndex = 0;
             // 
             // panelContainer
@@ -126,14 +126,14 @@
             this.panelContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContainer.Location = new System.Drawing.Point(274, 0);
             this.panelContainer.Name = "panelContainer";
-            this.panelContainer.Size = new System.Drawing.Size(1101, 813);
+            this.panelContainer.Size = new System.Drawing.Size(1238, 935);
             this.panelContainer.TabIndex = 8;
             // 
             // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1375, 813);
+            this.ClientSize = new System.Drawing.Size(1512, 935);
             this.Controls.Add(this.panelContainer);
             this.Controls.Add(this.panelSidebar);
             this.Name = "fMain";

@@ -52,7 +52,7 @@ namespace Desktop_app.Forms
                 if (previousBtn.GetType() == typeof(Button))
                 {
                     previousBtn.BackColor = ColorTranslator.FromHtml("75, 144, 149");
-                    previousBtn.ForeColor = Color.Black;
+                    previousBtn.ForeColor = Color.White;
                     previousBtn.Font = new System.Drawing.Font("Segoe UI", 12F);
                 }
             }

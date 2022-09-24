@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LogicClassLibrary
 {
-    public enum Catgeories 
+    public enum Categories 
     {
         Books,
         Electronics,

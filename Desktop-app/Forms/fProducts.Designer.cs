@@ -42,7 +42,7 @@
             this.lboxProductSpecs = new System.Windows.Forms.ListBox();
             this.gboxAddProduct = new System.Windows.Forms.GroupBox();
             this.btnAddProduct = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbGamePlatform = new System.Windows.Forms.TextBox();
             this.lblGamePlatform = new System.Windows.Forms.Label();
             this.tbBookIsbn = new System.Windows.Forms.TextBox();
             this.lblIsbn = new System.Windows.Forms.Label();
@@ -60,6 +60,8 @@
             this.lblProductName = new System.Windows.Forms.Label();
             this.tbProductColor = new System.Windows.Forms.TextBox();
             this.lblProductColor = new System.Windows.Forms.Label();
+            this.tbSeriaNumber = new System.Windows.Forms.TextBox();
+            this.lblSerialNumber = new System.Windows.Forms.Label();
             this.gboxSearchProduct.SuspendLayout();
             this.gboxAddProduct.SuspendLayout();
             this.SuspendLayout();
@@ -195,10 +197,12 @@
             // 
             this.gboxAddProduct.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.gboxAddProduct.Controls.Add(this.tbSeriaNumber);
+            this.gboxAddProduct.Controls.Add(this.lblSerialNumber);
             this.gboxAddProduct.Controls.Add(this.tbProductColor);
             this.gboxAddProduct.Controls.Add(this.lblProductColor);
             this.gboxAddProduct.Controls.Add(this.btnAddProduct);
-            this.gboxAddProduct.Controls.Add(this.textBox1);
+            this.gboxAddProduct.Controls.Add(this.tbGamePlatform);
             this.gboxAddProduct.Controls.Add(this.lblGamePlatform);
             this.gboxAddProduct.Controls.Add(this.tbBookIsbn);
             this.gboxAddProduct.Controls.Add(this.lblIsbn);
@@ -238,14 +242,14 @@
             this.btnAddProduct.Text = "Add";
             this.btnAddProduct.UseVisualStyleBackColor = false;
             // 
-            // textBox1
+            // tbGamePlatform
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbGamePlatform.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(153, 363);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(511, 31);
-            this.textBox1.TabIndex = 16;
+            this.tbGamePlatform.Location = new System.Drawing.Point(153, 363);
+            this.tbGamePlatform.Name = "tbGamePlatform";
+            this.tbGamePlatform.Size = new System.Drawing.Size(511, 31);
+            this.tbGamePlatform.TabIndex = 16;
             // 
             // lblGamePlatform
             // 
@@ -417,6 +421,25 @@
             this.lblProductColor.TabIndex = 17;
             this.lblProductColor.Text = "Color";
             // 
+            // tbSeriaNumber
+            // 
+            this.tbSeriaNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSeriaNumber.Location = new System.Drawing.Point(153, 437);
+            this.tbSeriaNumber.Name = "tbSeriaNumber";
+            this.tbSeriaNumber.Size = new System.Drawing.Size(511, 31);
+            this.tbSeriaNumber.TabIndex = 20;
+            // 
+            // lblSerialNumber
+            // 
+            this.lblSerialNumber.AutoSize = true;
+            this.lblSerialNumber.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblSerialNumber.Location = new System.Drawing.Point(16, 440);
+            this.lblSerialNumber.Name = "lblSerialNumber";
+            this.lblSerialNumber.Size = new System.Drawing.Size(124, 25);
+            this.lblSerialNumber.TabIndex = 19;
+            this.lblSerialNumber.Text = "Serial Number";
+            // 
             // fProducts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
@@ -467,7 +490,7 @@
         private TextBox tbProductName;
         private Label lblProductName;
         private ComboBox comboBox1;
-        private TextBox textBox1;
+        private TextBox tbGamePlatform;
         private Label lblGamePlatform;
         private TextBox tbBookIsbn;
         private Label lblIsbn;
@@ -475,5 +498,7 @@
         private Button btnAddProduct;
         private TextBox tbProductColor;
         private Label lblProductColor;
+        private TextBox tbSeriaNumber;
+        private Label lblSerialNumber;
     }
 }

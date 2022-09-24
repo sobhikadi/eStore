@@ -23,11 +23,14 @@ namespace LogicClassLibrary
             Id = id;
             Name = name;
             Description = description;
+            InStock = false;
             QuantityInStock = quantity;
             Price = price;
             SubCategory = subCategory;
             Isbn = isbn;
         }
+
+
 
     }
 

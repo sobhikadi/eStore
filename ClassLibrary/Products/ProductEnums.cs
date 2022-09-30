@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicClassLibrary
+namespace LogicClassLibrary.Products
 {
-    public enum Categories 
+    public enum Categories
     {
         Books,
         Electronics,

@@ -7,9 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eStore", "eStore.csproj", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Desktop-app", "..\Desktop-app\Desktop-app.csproj", "{E9D100E6-7449-4D50-B663-E140D1602802}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicClassLibrary", "..\ClassLibrary\LogicClassLibrary.csproj", "{F7D461A2-6027-487F-9FB5-5CF96886B5B5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataClassLibrary", "..\DataClassLibrary\DataClassLibrary.csproj", "{26ABE12A-8A81-40A6-AB0A-835479A452B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicClassLibrary", "..\ClassLibrary\LogicClassLibrary.csproj", "{F7D461A2-6027-487F-9FB5-5CF96886B5B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{F7D461A2-6027-487F-9FB5-5CF96886B5B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7D461A2-6027-487F-9FB5-5CF96886B5B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7D461A2-6027-487F-9FB5-5CF96886B5B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{26ABE12A-8A81-40A6-AB0A-835479A452B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{26ABE12A-8A81-40A6-AB0A-835479A452B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{26ABE12A-8A81-40A6-AB0A-835479A452B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{26ABE12A-8A81-40A6-AB0A-835479A452B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -32,10 +32,11 @@
             this.flpanelContainerSidebar = new System.Windows.Forms.FlowLayoutPanel();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.picboxLogo = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnProducts = new System.Windows.Forms.Button();
+            this.btnEmployees = new System.Windows.Forms.Button();
             this.panelSidebar = new System.Windows.Forms.Panel();
             this.panelContainer = new System.Windows.Forms.Panel();
+            this.brnCustomers = new System.Windows.Forms.Button();
             this.flpanelContainerSidebar.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picboxLogo)).BeginInit();
@@ -46,8 +47,9 @@
             // 
             this.flpanelContainerSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(197)))), ((int)(((byte)(200)))));
             this.flpanelContainerSidebar.Controls.Add(this.panelLogo);
-            this.flpanelContainerSidebar.Controls.Add(this.button1);
-            this.flpanelContainerSidebar.Controls.Add(this.button2);
+            this.flpanelContainerSidebar.Controls.Add(this.btnProducts);
+            this.flpanelContainerSidebar.Controls.Add(this.btnEmployees);
+            this.flpanelContainerSidebar.Controls.Add(this.brnCustomers);
             this.flpanelContainerSidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.flpanelContainerSidebar.ForeColor = System.Drawing.Color.White;
             this.flpanelContainerSidebar.Location = new System.Drawing.Point(0, 0);
@@ -76,39 +78,39 @@
             this.picboxLogo.TabIndex = 0;
             this.picboxLogo.TabStop = false;
             // 
-            // button1
+            // btnProducts
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
-            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(3, 178);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(268, 65);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "button";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnProducts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
+            this.btnProducts.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnProducts.FlatAppearance.BorderSize = 0;
+            this.btnProducts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProducts.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnProducts.ForeColor = System.Drawing.Color.White;
+            this.btnProducts.Location = new System.Drawing.Point(3, 178);
+            this.btnProducts.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
+            this.btnProducts.Name = "btnProducts";
+            this.btnProducts.Size = new System.Drawing.Size(268, 65);
+            this.btnProducts.TabIndex = 7;
+            this.btnProducts.Text = "Products";
+            this.btnProducts.UseVisualStyleBackColor = false;
+            this.btnProducts.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // btnEmployees
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
-            this.button2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(3, 261);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(268, 65);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnEmployees.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
+            this.btnEmployees.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnEmployees.FlatAppearance.BorderSize = 0;
+            this.btnEmployees.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEmployees.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnEmployees.ForeColor = System.Drawing.Color.White;
+            this.btnEmployees.Location = new System.Drawing.Point(3, 261);
+            this.btnEmployees.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
+            this.btnEmployees.Name = "btnEmployees";
+            this.btnEmployees.Size = new System.Drawing.Size(268, 65);
+            this.btnEmployees.TabIndex = 8;
+            this.btnEmployees.Text = "Employees";
+            this.btnEmployees.UseVisualStyleBackColor = false;
+            this.btnEmployees.Click += new System.EventHandler(this.button2_Click);
             // 
             // panelSidebar
             // 
@@ -128,6 +130,23 @@
             this.panelContainer.Name = "panelContainer";
             this.panelContainer.Size = new System.Drawing.Size(1238, 935);
             this.panelContainer.TabIndex = 8;
+            // 
+            // brnCustomers
+            // 
+            this.brnCustomers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
+            this.brnCustomers.Dock = System.Windows.Forms.DockStyle.Top;
+            this.brnCustomers.FlatAppearance.BorderSize = 0;
+            this.brnCustomers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.brnCustomers.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.brnCustomers.ForeColor = System.Drawing.Color.White;
+            this.brnCustomers.Location = new System.Drawing.Point(3, 344);
+            this.brnCustomers.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
+            this.brnCustomers.Name = "brnCustomers";
+            this.brnCustomers.Size = new System.Drawing.Size(268, 65);
+            this.brnCustomers.TabIndex = 9;
+            this.brnCustomers.Text = "Customers";
+            this.brnCustomers.UseVisualStyleBackColor = false;
+            this.brnCustomers.Click += new System.EventHandler(this.brnCustomers_Click);
             // 
             // fMain
             // 
@@ -152,9 +171,10 @@
         private FlowLayoutPanel flpanelContainerSidebar;
         private Panel panelLogo;
         private PictureBox picboxLogo;
-        private Button button1;
-        private Button button2;
+        private Button btnProducts;
+        private Button btnEmployees;
         private Panel panelSidebar;
         private Panel panelContainer;
+        private Button brnCustomers;
     }
 }

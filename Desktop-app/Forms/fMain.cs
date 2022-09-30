@@ -84,5 +84,9 @@ namespace Desktop_app.Forms
             OpenChildForm(new Forms.fEmployee(), sender);
         }
 
+        private void brnCustomers_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -1,0 +1,76 @@
+﻿@page
+@model eStore.Pages.SignUpModel
+@{
+    ViewData["Title"] = "eStore - SignUp";
+}
+
+    <div class="container pt-3 pb-5 mb-3">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-lg-9 col-xl-7">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-5">
+                    <h3 class="mb-4 pb-2 pb-md-0 mb-md-5" style="color: #92C5C8;">Registration Form</h3>
+                        <form method="post">
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+
+                                    <div class="form-outline">
+                                        <label class="form-label" asp-for="Customer.FirstName">First Name</label>
+                                    <input type="text" asp-for="Customer.FirstName" class="form-control form-control-lg" placeholder="Enter First Name" />
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 mb-4">
+
+                                    <div class="form-outline">
+                                        <label class="form-label" asp-for="Customer.LastName">Last Name</label>
+                                    <input type="text" asp-for="Customer.LastName" class="form-control form-control-lg" placeholder="Enter Last Name" />
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 mb-4 d-flex align-items-center">
+
+                                    <div class="form-outline datepicker w-100">
+                                        <label asp-for="Customer.Email" class="form-label">Email</label>
+                                    <input type="email" class="form-control form-control-lg" asp-for="Customer.Email" placeholder="Enter Email" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4 pb-2">
+
+                                    <div class="form-outline">
+                                        <label class="form-label" asp-for="Customer.Password">Password</label>
+                                    <input type="text" asp-for="Customer.Password" class="form-control form-control-lg" placeholder="Enter password" />
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 mb-4 pb-2">
+
+                                    <div class="form-outline">
+                                        <label class="form-label" for="reapatPassword">Repeat Password</label>
+                                    <input type="text" id="repeatPassword" class="form-control form-control-lg" placeholder="Repeat password" />
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        <div class="text-center text-lg-start d-grid col-12 col-sm-6">
+                            <button type="submit" asp-route="/UserPage" class="btn btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem; background-color: #92C5C8;">
+                                Sign Up
+                            </button>
+                        </div>
+                        <p> @ViewData["message"] </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

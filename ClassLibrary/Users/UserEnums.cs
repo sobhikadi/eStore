@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicClassLibrary
+namespace LogicClassLibrary.User
 {
-    internal class Review
+    public enum Roles
     {
-
-
+        Admin,
+        Employee
     }
 }

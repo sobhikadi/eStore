@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicClassLibrary.Users
+namespace LogicLayerEntities.Users
 {
-    public class Employee : SystemUser
+    public class Employee : Person
     {
         
         public string Role { get; private set; }

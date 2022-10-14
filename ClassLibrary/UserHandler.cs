@@ -1,6 +1,5 @@
-﻿using DataClassLibrary;
-using LogicClassLibrary.DBHandlersClassLibrary;
-using LogicClassLibrary.Users;
+﻿using DataAccessLayer;
+using LogicLayerEntities.Users;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,17 +9,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace LogicClassLibrary.User
+namespace LogicLayerHandlers
 {
     public class UserHandler
     {
         private DBHandlerUsers dbHandlerUsers = new DBHandlerUsers();
-        private List<Users.SystemUser> users;
-        public IList<Users.SystemUser> Users { get { return users.AsReadOnly(); } }
+        private List<Person> users;
+        public IList<Person> Users { get { return users.AsReadOnly(); } }
 
-        public UserHandler() 
+        public UserHandler()
         {
-            users = new List<Users.SystemUser>();
+            users = new List<Person>();
             users = dbHandlerUsers.GetAllUsers();
 
         }
@@ -33,7 +32,7 @@ namespace LogicClassLibrary.User
             users = dbHandlerUsers.GetAllUsers();
         }
 
-        public void AddCustomer(string firstName, string lastName, string email, string password) 
+        public void AddCustomer(string firstName, string lastName, string email, string password)
         {
             dbHandlerUsers.InsertCustomer(firstName, lastName, email, password);
             users = dbHandlerUsers.GetAllUsers();
@@ -44,7 +43,7 @@ namespace LogicClassLibrary.User
             Random random = new Random();
             string password = "";
             string characters = "abcdefghijklmnopqrstuvwxyz";
-            characters += (characters.ToUpper() + "1234567890,.?@#$%&*");
+            characters += characters.ToUpper() + "1234567890,.?@#$%&*";
 
             for (int x = 0; x < 10; x++)
             {

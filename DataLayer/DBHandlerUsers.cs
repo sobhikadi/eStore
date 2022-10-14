@@ -5,12 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
-using LogicClassLibrary.Products;
+using LogicLayerEntities.Products;
 using System.Net;
-using LogicClassLibrary.Users;
-using LogicClassLibrary.User;
+using LogicLayerEntities.Users;
 
-namespace LogicClassLibrary.DBHandlersClassLibrary
+namespace DataAccessLayer
 {
     public class DBHandlerUsers
     {
@@ -20,7 +19,7 @@ namespace LogicClassLibrary.DBHandlersClassLibrary
         public void InsertEmployee(string firstName, string lastName, string email, string password, string phoneNumber, string role, string streetName, string houseNumber, string postalCode)
         {
             string userType = "Employee";
-            using (SqlConnection conn = new SqlConnection(this.connectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
 
                 conn.Open();
@@ -38,7 +37,7 @@ namespace LogicClassLibrary.DBHandlersClassLibrary
 
                 if (!string.IsNullOrEmpty(role)) { cmd.Parameters.AddWithValue("@role", role); }
                 else { cmd.Parameters.AddWithValue("@role", DBNull.Value); }
-                
+
 
                 cmd.ExecuteNonQuery();
                 conn.Close();
@@ -48,7 +47,7 @@ namespace LogicClassLibrary.DBHandlersClassLibrary
         public void InsertCustomer(string firstName, string lastName, string email, string password)
         {
             string userType = "Customer";
-            using (SqlConnection conn = new SqlConnection(this.connectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
 
                 conn.Open();
@@ -65,11 +64,11 @@ namespace LogicClassLibrary.DBHandlersClassLibrary
             }
         }
 
-        public List<SystemUser> GetAllUsers()
+        public List<Person> GetAllUsers()
         {
-            List<SystemUser> users = new List<SystemUser>();
+            List<Person> users = new List<Person>();
 
-            using (SqlConnection conn = new SqlConnection(this.connectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
                 string sql = "select id, firstName, lastName,type, email, password, phoneNumber, role, streetName, houseNumber, postalCode from users order by id;";

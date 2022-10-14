@@ -1,4 +1,5 @@
-﻿using LogicClassLibrary.Products;
+﻿using LogicLayerEntities.Products;
+using LogicLayerHandlers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

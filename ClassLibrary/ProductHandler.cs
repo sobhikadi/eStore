@@ -1,6 +1,7 @@
-﻿using DataClassLibrary;
+﻿using DataAccessLayer;
+using LogicLayerEntities.Products;
 
-namespace LogicClassLibrary.Products
+namespace LogicLayerHandlers
 {
     public class ProductHandler
     {

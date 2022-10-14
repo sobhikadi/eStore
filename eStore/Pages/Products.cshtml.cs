@@ -1,4 +1,5 @@
-using LogicClassLibrary.Products;
+using LogicLayerEntities.Products;
+using LogicLayerHandlers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 

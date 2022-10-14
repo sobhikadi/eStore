@@ -1,5 +1,5 @@
 using Desktop_app.Forms;
-using LogicClassLibrary;
+using LogicLayerEntities;
 
 namespace Desktop_app
 {

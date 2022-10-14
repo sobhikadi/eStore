@@ -1,6 +1,6 @@
-﻿using LogicClassLibrary.Products;
-using LogicClassLibrary.User;
-using LogicClassLibrary.Users;
+﻿using LogicLayerEntities.Products;
+using LogicLayerEntities.Users;
+using LogicLayerHandlers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Desktop_app.Forms
-{ 
+{
     public partial class fEmployee : Form
     {
         private UserHandler userHandler;
@@ -48,7 +48,7 @@ namespace Desktop_app.Forms
                 listViewEmployees.Items.Clear();
 
                 
-                foreach (SystemUser user in userHandler.Users)
+                foreach (Person user in userHandler.Users)
                 {
                     if (user.GetType().Name == "Employee") { AddUserToListView((Employee)user); }
                         

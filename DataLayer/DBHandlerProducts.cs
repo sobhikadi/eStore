@@ -1,5 +1,5 @@
-﻿using LogicClassLibrary;
-using LogicClassLibrary.Products;
+﻿using LogicLayerEntities;
+using LogicLayerEntities.Products;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
@@ -7,18 +7,18 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Xml.Linq;
 
-namespace DataClassLibrary
+namespace DataAccessLayer
 {
     public class DBHandlerProducts
     {
-        
+
         private string connectionString = "server=mssqlstud.fhict.local;" + "database=dbi376372;" + "user id=dbi376372;" + "password=Mky3S[elWm;" + "connect timeout=30;";
-        
+
 
         public void InsertProduct(string name, int quantity, double price, string category, string subCategory, string description, string? isbn, string? platform, string? serialNumber, string? color)
         {
 
-            using (SqlConnection conn = new SqlConnection(this.connectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
 
                 conn.Open();
@@ -48,7 +48,7 @@ namespace DataClassLibrary
         {
             List<Product> products = new List<Product>();
 
-            using (SqlConnection conn = new SqlConnection(this.connectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
                 string sql = "select id, name, quantity, price, category, subcategory, description, isbn, platform, serialNumber, color from product order by id;";

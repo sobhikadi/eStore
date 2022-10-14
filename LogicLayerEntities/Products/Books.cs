@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicClassLibrary.Products
+namespace LogicLayerEntities.Products
 {
     public class Books : Product
     {

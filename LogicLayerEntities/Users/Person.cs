@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicClassLibrary.Users
+namespace LogicLayerEntities.Users
 {
-    public abstract class SystemUser
+    public abstract class Person
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -18,16 +18,16 @@ namespace LogicClassLibrary.Users
         public string? HouseNumber { get; set; }
         public string? PostalCode { get; set; }
 
-        public SystemUser() { }
+        public Person() { }
 
-        public SystemUser(string firstName, string lastName, string email, string password)
+        public Person(string firstName, string lastName, string email, string password)
         {
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             Password = password;
         }
-        public SystemUser(int id, string firstName, string lastName, string email, string password)
+        public Person(int id, string firstName, string lastName, string email, string password)
         {
             Id = id;
             FirstName = firstName;
@@ -36,7 +36,7 @@ namespace LogicClassLibrary.Users
             Password = password;
         }
 
-        public SystemUser(string firstName, string lastName, string email, string password, string phoneNumber, string streetName, string houseNumber, string postalCode)
+        public Person(string firstName, string lastName, string email, string password, string phoneNumber, string streetName, string houseNumber, string postalCode)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -48,7 +48,7 @@ namespace LogicClassLibrary.Users
             PostalCode = postalCode;
         }
 
-        public SystemUser(int id, string firstName, string lastName, string email, string password, string phoneNumber, string streetName, string houseNumber, string postalCode)
+        public Person(int id, string firstName, string lastName, string email, string password, string phoneNumber, string streetName, string houseNumber, string postalCode)
         {
             Id = id;
             FirstName = firstName;

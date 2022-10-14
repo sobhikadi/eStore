@@ -1,7 +1,9 @@
-﻿using LogicClassLibrary.Products;
+﻿using LogicLayerEntities.Products;
+using LogicLayerHandlers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -62,7 +64,6 @@ namespace Desktop_app.Forms
 
             try
             {
-                
 
                 if (string.IsNullOrEmpty(tbProductName.Text)) { MessageBox.Show("Please enter a name"); return; }
                 if (string.IsNullOrEmpty(tbProductQuantity.Text)) { MessageBox.Show("Please enter the quantity"); return; }
@@ -87,9 +88,24 @@ namespace Desktop_app.Forms
                 serialNumber = tbSeriaNumber.Text;
 
 
+                //ValidationContext context = new ValidationContext(book, null, null);
+                //List<ValidationResult> errors = new List<ValidationResult>();
+                //if (!Validator.TryValidateObject(u, context, errors, true))
+                //{
+                //    foreach (ValidationResult result in errors)
+                //    {
+                //        MessageBox.Show(result.ErrorMessage);
+                //    }
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Successfully created the object");
+                //}
+
 
                 productHandler.AddProduct(name, quantity, price, category, subCategory, description, isbn, gamePlatform, serialNumber, color);
 
+               
                 foreach (Control co in this.Controls)
                 {
                     if (co is TextBox || co is ComboBox)

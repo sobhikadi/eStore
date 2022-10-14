@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicClassLibrary.Products
+namespace LogicLayerEntities.Products
 {
     public abstract class Product
     {
         public int Id { get; private set; }
+
+        [Required(ErrorMessage ="Please enter a product name.")]
         public string Name { get; private set; }
         public string Description { get; private set; }
-        public bool InStock { get; private set; }
+        public bool InStock { get { return QuantityInStock > 0; } }
         public int QuantityInStock { get; private set; }
         public double Price { get; private set; }
 
@@ -58,6 +61,7 @@ namespace LogicClassLibrary.Products
         public void IncreaseStock(int amount)
         {
             QuantityInStock += amount;
+            
         }
 
         public bool DecreaseStock(int amount)

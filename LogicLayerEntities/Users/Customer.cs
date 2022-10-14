@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicClassLibrary.Users
+namespace LogicLayerEntities.Users
 {
-    public class Customer : SystemUser
+    public class Customer : Person
     {
         public Customer() { }
 
@@ -17,5 +17,6 @@ namespace LogicClassLibrary.Users
         public Customer(int id, string firstName, string lastName, string email, string password, string phoneNumber, string streetName, string houseNumber, string postalCode) : base(id, firstName, lastName, email, password, phoneNumber, streetName, houseNumber, postalCode)
         {
         }
+
     }
 }

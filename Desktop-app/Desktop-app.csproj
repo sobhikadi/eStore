@@ -10,7 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary\LogicClassLibrary.csproj" />
+    <ProjectReference Include="..\ClassLibrary\LogicLayerHandlers.csproj" />
+    <ProjectReference Include="..\LogicLayerEntities\LogicLayerEntities.csproj" />
   </ItemGroup>
 
   <ItemGroup>

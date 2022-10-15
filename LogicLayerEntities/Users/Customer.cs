@@ -9,14 +9,19 @@ namespace LogicLayerEntities.Users
 {
     public class Customer : Person
     {
-        public Customer() { }
+        public string? BillingAddress{ get; private set; }
+        public string? BillingPostalCode { get; private set; }
 
-        public Customer (int id, string firstName, string lastName, string email, string password) : base(id, firstName, lastName, email, password)
-        {}
-
-        public Customer(int id, string firstName, string lastName, string email, string password, string phoneNumber, string streetName, string houseNumber, string postalCode) : base(id, firstName, lastName, email, password, phoneNumber, streetName, houseNumber, postalCode)
+        public Customer(string firstName, string lastName, string email, string password, string? phoneNumber, string? address, string? postalCode, string? billingAddress, string? billingPostalCode) : base(firstName, lastName, email, password, phoneNumber, address, postalCode)
         {
+            BillingAddress = billingAddress;
+            BillingPostalCode = billingPostalCode;
         }
 
+        public Customer(int id, string firstName, string lastName, string email, string password, string? phoneNumber, string? address, string? postalCode, string? billingAddress, string? billingPostalCode) : base(id, firstName, lastName, email, password, phoneNumber, address, postalCode)
+        {
+            BillingAddress = billingAddress;
+            BillingPostalCode = billingPostalCode;
+        }
     }
 }

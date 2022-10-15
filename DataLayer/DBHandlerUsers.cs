@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Net;
 using LogicLayerEntities.Users;
+using LogicLayerEntities.Products;
 
 namespace DataAccessLayer
 {
@@ -15,52 +16,64 @@ namespace DataAccessLayer
         private string connectionString = "server=mssqlstud.fhict.local;" + "database=dbi376372;" + "user id=dbi376372;" + "password=Mky3S[elWm;" + "connect timeout=30;";
 
 
-        public void InsertEmployee(string firstName, string lastName, string email, string password, string phoneNumber, string role, string streetName, string houseNumber, string postalCode)
+        public int InsertEmployee(Employee employee)
         {
-            string userType = "Employee";
+            int employeeId;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
 
                 conn.Open();
-                string sql = "insert into Users (firstName, lastName,type, email, password, phoneNumber, role, streetName, houseNumber, postalCode) values (@firstName, @lastName,@type, @email, @password, @phoneNumber, @role, @streetName, @houseNumber, @postalCode);";
+                string sql = "insert into Users (firstName, lastName, email, password, phoneNumber, address, postalCode) values (@firstName, @lastName, @email, @password, @phoneNumber, @address, @postalCode); select SCOPE_IDENTITY(); insert into Employee (id, role) values (SCOPE_IDENTITY(), @role)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@firstName", firstName);
-                cmd.Parameters.AddWithValue("@lastName", lastName);
-                cmd.Parameters.AddWithValue("@type", userType);
-                cmd.Parameters.AddWithValue("@email", email);
-                cmd.Parameters.AddWithValue("@password", password);
-                cmd.Parameters.AddWithValue("@phoneNumber", phoneNumber);
-                cmd.Parameters.AddWithValue("@streetName", streetName);
-                cmd.Parameters.AddWithValue("@houseNumber", houseNumber);
-                cmd.Parameters.AddWithValue("@postalCode", postalCode);
+                cmd.Parameters.AddWithValue("@firstName", employee.FirstName);
+                cmd.Parameters.AddWithValue("@lastName", employee.LastName);
+                cmd.Parameters.AddWithValue("@email", employee.Email);
+                cmd.Parameters.AddWithValue("@password", employee.Password);
+                cmd.Parameters.AddWithValue("@phoneNumber", employee.PhoneNumber);
+                cmd.Parameters.AddWithValue("@address", employee.Address);
+                cmd.Parameters.AddWithValue("@postalCode", employee.PostalCode);
+                cmd.Parameters.AddWithValue("@role", employee.Role);
 
-                if (!string.IsNullOrEmpty(role)) { cmd.Parameters.AddWithValue("@role", role); }
-                else { cmd.Parameters.AddWithValue("@role", DBNull.Value); }
+                SqlDataReader dr = cmd.ExecuteReader();
+                dr.Read();
+                employeeId = Convert.ToInt32(dr[0]);
 
-
-                cmd.ExecuteNonQuery();
                 conn.Close();
             }
+            return employeeId;
         }
 
-        public void InsertCustomer(string firstName, string lastName, string email, string password)
+        public int InsertCustomer(Customer customer)
         {
-            string userType = "Customer";
+            int customerId;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-
                 conn.Open();
-                string sql = "insert into Users (firstName, lastName,type, email, password) values (@firstName, @lastName,@type, @email, @password);";
+                string sql = "insert into Users (firstName, lastName, email, password, phoneNumber, address, postalCode) values (@firstName, @lastName, @email, @password, @phoneNumber, @address, @postalCode); select SCOPE_IDENTITY(); insert into Customer (id, billingAddress, billingPostalCode) values (SCOPE_IDENTITY(), @billingAddress, @billingPostalCode)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@firstName", firstName);
-                cmd.Parameters.AddWithValue("@lastName", lastName);
-                cmd.Parameters.AddWithValue("@type", userType);
-                cmd.Parameters.AddWithValue("@email", email);
-                cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@firstName", customer.FirstName);
+                cmd.Parameters.AddWithValue("@lastName", customer.LastName);
+                cmd.Parameters.AddWithValue("@email", customer.Email);
+                cmd.Parameters.AddWithValue("@password", customer.Password);
 
-                cmd.ExecuteNonQuery();
+
+                if (!string.IsNullOrEmpty(customer.PhoneNumber)) cmd.Parameters.AddWithValue("@phoneNumber", customer.PhoneNumber);
+                else cmd.Parameters.AddWithValue("@phoneNumber", DBNull.Value);
+                if (!string.IsNullOrEmpty(customer.Address)) cmd.Parameters.AddWithValue("@address", customer.Address);
+                else cmd.Parameters.AddWithValue("@address", DBNull.Value);
+                if (!string.IsNullOrEmpty(customer.PostalCode)) cmd.Parameters.AddWithValue("@postalCode", customer.PostalCode);
+                else cmd.Parameters.AddWithValue("@postalCode", DBNull.Value);
+                if (!string.IsNullOrEmpty(customer.BillingAddress)) cmd.Parameters.AddWithValue("@billingAddress", customer.BillingAddress);
+                else cmd.Parameters.AddWithValue("@billingAddress", DBNull.Value);
+                if (!string.IsNullOrEmpty(customer.BillingPostalCode)) cmd.Parameters.AddWithValue("@billingPostalCode", customer.BillingPostalCode);
+                else cmd.Parameters.AddWithValue("@billingPostalCode", DBNull.Value);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                dr.Read();
+                customerId = Convert.ToInt32(dr[0]);
                 conn.Close();
             }
+            return customerId;
         }
 
         public List<Person> GetAllUsers()
@@ -70,25 +83,58 @@ namespace DataAccessLayer
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                string sql = "select id, firstName, lastName,type, email, password, phoneNumber, role, streetName, houseNumber, postalCode from users order by id;";
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                string sqlCus =
+                    " select users.id, firstName, lastName, email, Password, phoneNumber, Address, postalCode, BillingAddress, billingPostalCode from users inner join Customer on users.Id = Customer.Id order by users.id;";
 
-                SqlDataReader dr = cmd.ExecuteReader();
+                SqlCommand cmdCus = new SqlCommand(sqlCus, conn);
 
-                while (dr.Read())
+                SqlDataReader drCus = cmdCus.ExecuteReader();
+
+                while (drCus.Read())
                 {
-                    string type = (string)dr["type"];
+                    string? phoneNumber, address, postalCode, billingAddress, billingPostalCode;
 
-                    if (type == "Employee")
-                    {
-                        users.Add(new Employee(Convert.ToInt32(dr["id"]), (string)dr["firstName"], (string)dr["lastname"], (string)dr["email"], (string)dr["password"], (string)dr["phoneNumber"], (string)dr["streetName"], (string)dr["houseNumber"], (string)dr["postalCode"], (string)dr["role"]));
-                    }
-                    else if (type == "Customer")
-                    {
-                        users.Add(new Customer(Convert.ToInt32(dr["id"]), (string)dr["firstName"], (string)dr["lastname"], (string)dr["email"], (string)dr["password"]));
-                    }
+                    if (drCus["phoneNumber"] != DBNull.Value) phoneNumber = (string)drCus["phoneNumber"];
+                    else phoneNumber = null;
+                    if (drCus["address"] != DBNull.Value) address = (string)drCus["address"];
+                    else address = null;
+                    if (drCus["postalCode"] != DBNull.Value) postalCode = (string)drCus["postalCode"];
+                    else postalCode = null;
+                    if (drCus["billingAddress"] != DBNull.Value) billingAddress = (string)drCus["billingAddress"];
+                    else billingAddress = null;
+                    if (drCus["billingPostalCode"] != DBNull.Value) billingPostalCode = (string)drCus["billingPostalCode"];
+                    else billingPostalCode = null;
+
+                    users.Add(new Customer(Convert.ToInt32(drCus["id"]), (string)drCus["firstName"], (string)drCus["lastname"], (string)drCus["email"], (string)drCus["password"], phoneNumber, address, postalCode, billingAddress, billingPostalCode));
                 }
                 conn.Close();
+
+             
+                conn.Open();
+                string sqlEmp =
+                    " select users.Id, firstName, lastName, email, [Password], phoneNumber, [Address], postalCode, [role] from users inner join Employee on Users.Id = Employee.Id order by users.id;";
+
+                SqlCommand cmdEmp = new SqlCommand(sqlEmp, conn);
+
+                SqlDataReader drEmp = cmdEmp.ExecuteReader();
+
+                while (drEmp.Read())
+                {
+                    string? phoneNumber, address, postalCode;
+
+                    if (drEmp["phoneNumber"] != DBNull.Value) phoneNumber = (string)drEmp["phoneNumber"];
+                    else phoneNumber = null;
+                    if (drEmp["address"] != DBNull.Value) address = (string)drEmp["address"];
+                    else address = null;
+                    if (drEmp["postalCode"] != DBNull.Value) postalCode = (string)drEmp["postalCode"];
+                    else postalCode = null;
+
+                    users.Add(new Employee(Convert.ToInt32(drEmp["id"]), (string)drEmp["firstName"], (string)drEmp["lastName"], (string)drEmp["email"], (string)drEmp["Password"], (string)drEmp["phoneNumber"], (string)drEmp["address"], (string)drEmp["postalCode"], (string)drEmp["role"]));
+                   
+                }
+                conn.Close();
+               
+
             }
             return users;
         }

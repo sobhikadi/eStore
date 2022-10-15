@@ -45,6 +45,8 @@
             this.tbPostalCode = new System.Windows.Forms.TextBox();
             this.lblPostalcode = new System.Windows.Forms.Label();
             this.lblRole = new System.Windows.Forms.Label();
+            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.lblPassword = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnAddEmployee
@@ -55,7 +57,7 @@
             this.btnAddEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddEmployee.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnAddEmployee.ForeColor = System.Drawing.Color.White;
-            this.btnAddEmployee.Location = new System.Drawing.Point(598, 363);
+            this.btnAddEmployee.Location = new System.Drawing.Point(598, 403);
             this.btnAddEmployee.Name = "btnAddEmployee";
             this.btnAddEmployee.Size = new System.Drawing.Size(194, 34);
             this.btnAddEmployee.TabIndex = 54;
@@ -69,7 +71,7 @@
             this.cboxRoles.Items.AddRange(new object[] {
             "Admin",
             "Employee"});
-            this.cboxRoles.Location = new System.Drawing.Point(176, 311);
+            this.cboxRoles.Location = new System.Drawing.Point(176, 355);
             this.cboxRoles.MaximumSize = new System.Drawing.Size(731, 0);
             this.cboxRoles.Name = "cboxRoles";
             this.cboxRoles.Size = new System.Drawing.Size(615, 31);
@@ -77,7 +79,7 @@
             // 
             // tbStreetName
             // 
-            this.tbStreetName.Location = new System.Drawing.Point(176, 191);
+            this.tbStreetName.Location = new System.Drawing.Point(176, 232);
             this.tbStreetName.MaximumSize = new System.Drawing.Size(731, 32);
             this.tbStreetName.Name = "tbStreetName";
             this.tbStreetName.Size = new System.Drawing.Size(615, 30);
@@ -87,7 +89,7 @@
             // 
             this.lblStreetName.AutoSize = true;
             this.lblStreetName.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblStreetName.Location = new System.Drawing.Point(22, 195);
+            this.lblStreetName.Location = new System.Drawing.Point(22, 236);
             this.lblStreetName.Name = "lblStreetName";
             this.lblStreetName.Size = new System.Drawing.Size(102, 23);
             this.lblStreetName.TabIndex = 43;
@@ -97,7 +99,7 @@
             // 
             this.lblPhoneNumber.AutoSize = true;
             this.lblPhoneNumber.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblPhoneNumber.Location = new System.Drawing.Point(22, 150);
+            this.lblPhoneNumber.Location = new System.Drawing.Point(22, 191);
             this.lblPhoneNumber.Name = "lblPhoneNumber";
             this.lblPhoneNumber.Size = new System.Drawing.Size(124, 23);
             this.lblPhoneNumber.TabIndex = 42;
@@ -143,7 +145,7 @@
             // 
             this.lblHouseNumber.AutoSize = true;
             this.lblHouseNumber.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblHouseNumber.Location = new System.Drawing.Point(22, 234);
+            this.lblHouseNumber.Location = new System.Drawing.Point(22, 275);
             this.lblHouseNumber.Name = "lblHouseNumber";
             this.lblHouseNumber.Size = new System.Drawing.Size(123, 23);
             this.lblHouseNumber.TabIndex = 36;
@@ -169,7 +171,7 @@
             // 
             // tbPhoneNumber
             // 
-            this.tbPhoneNumber.Location = new System.Drawing.Point(176, 147);
+            this.tbPhoneNumber.Location = new System.Drawing.Point(176, 188);
             this.tbPhoneNumber.MaximumSize = new System.Drawing.Size(731, 32);
             this.tbPhoneNumber.Name = "tbPhoneNumber";
             this.tbPhoneNumber.Size = new System.Drawing.Size(615, 30);
@@ -177,7 +179,7 @@
             // 
             // tbHouseNumber
             // 
-            this.tbHouseNumber.Location = new System.Drawing.Point(176, 231);
+            this.tbHouseNumber.Location = new System.Drawing.Point(176, 272);
             this.tbHouseNumber.MaximumSize = new System.Drawing.Size(731, 32);
             this.tbHouseNumber.Name = "tbHouseNumber";
             this.tbHouseNumber.Size = new System.Drawing.Size(615, 30);
@@ -185,7 +187,7 @@
             // 
             // tbPostalCode
             // 
-            this.tbPostalCode.Location = new System.Drawing.Point(176, 272);
+            this.tbPostalCode.Location = new System.Drawing.Point(176, 313);
             this.tbPostalCode.MaximumSize = new System.Drawing.Size(731, 32);
             this.tbPostalCode.Name = "tbPostalCode";
             this.tbPostalCode.Size = new System.Drawing.Size(615, 30);
@@ -195,7 +197,7 @@
             // 
             this.lblPostalcode.AutoSize = true;
             this.lblPostalcode.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblPostalcode.Location = new System.Drawing.Point(22, 275);
+            this.lblPostalcode.Location = new System.Drawing.Point(22, 316);
             this.lblPostalcode.Name = "lblPostalcode";
             this.lblPostalcode.Size = new System.Drawing.Size(100, 23);
             this.lblPostalcode.TabIndex = 57;
@@ -205,17 +207,37 @@
             // 
             this.lblRole.AutoSize = true;
             this.lblRole.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblRole.Location = new System.Drawing.Point(22, 314);
+            this.lblRole.Location = new System.Drawing.Point(22, 355);
             this.lblRole.Name = "lblRole";
             this.lblRole.Size = new System.Drawing.Size(43, 23);
             this.lblRole.TabIndex = 59;
             this.lblRole.Text = "Role";
             // 
+            // tbPassword
+            // 
+            this.tbPassword.Location = new System.Drawing.Point(176, 146);
+            this.tbPassword.MaximumSize = new System.Drawing.Size(731, 32);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.Size = new System.Drawing.Size(615, 30);
+            this.tbPassword.TabIndex = 60;
+            // 
+            // lblPassword
+            // 
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblPassword.Location = new System.Drawing.Point(22, 149);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(80, 23);
+            this.lblPassword.TabIndex = 61;
+            this.lblPassword.Text = "Password";
+            // 
             // fAddEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(814, 414);
+            this.ClientSize = new System.Drawing.Size(814, 454);
+            this.Controls.Add(this.tbPassword);
+            this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblRole);
             this.Controls.Add(this.tbPostalCode);
             this.Controls.Add(this.lblPostalcode);
@@ -262,5 +284,7 @@
         private TextBox tbPostalCode;
         private Label lblPostalcode;
         private Label lblRole;
+        private TextBox tbPassword;
+        private Label lblPassword;
     }
 }

@@ -19,9 +19,9 @@ namespace eStore.Pages
         {
             if (Customer != null)
             {
-                UserHandler userHandler = new UserHandler();
-                userHandler.AddCustomer(Customer.FirstName, Customer.LastName, Customer.Email, Customer.Password);
-                ViewData["message"] = $"Hello {Customer.FirstName} {Customer.LastName}, Welcome to our store";
+                //UserHandler userHandler = new UserHandler();
+                //userHandler.AddCustomer(Customer.FirstName, Customer.LastName, Customer.Email, Customer.Password);
+                //ViewData["message"] = $"Hello {Customer.FirstName} {Customer.LastName}, Welcome to our store";
             }
             
         }

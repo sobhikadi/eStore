@@ -30,14 +30,14 @@ namespace DataAccessLayer
                 cmd.Parameters.AddWithValue("@category", product.Category);
                 cmd.Parameters.AddWithValue("@subCategory", product.SubCategory);
                 cmd.Parameters.AddWithValue("@description", product.Description);
-                if (!string.IsNullOrEmpty(product.Isbn)) { cmd.Parameters.AddWithValue("@isbn", product.Isbn); }
-                else { cmd.Parameters.AddWithValue("@isbn", DBNull.Value); }
-                if (!string.IsNullOrEmpty(product.Platform)) { cmd.Parameters.AddWithValue("@platform", product.Platform); }
-                else { cmd.Parameters.AddWithValue("@platform", DBNull.Value); }
+                if (!string.IsNullOrEmpty(product.Isbn)) cmd.Parameters.AddWithValue("@isbn", product.Isbn);
+                else cmd.Parameters.AddWithValue("@isbn", DBNull.Value);
+                if (!string.IsNullOrEmpty(product.Platform)) cmd.Parameters.AddWithValue("@platform", product.Platform);
+                else cmd.Parameters.AddWithValue("@platform", DBNull.Value);
                 if (!string.IsNullOrEmpty(product.SerialNumber)) { cmd.Parameters.AddWithValue("@serialNumber", product.SerialNumber); }
-                else { cmd.Parameters.AddWithValue("@serialNumber", DBNull.Value); }
-                if (!string.IsNullOrEmpty(product.Color)) { cmd.Parameters.AddWithValue("@color", product.Color); }
-                else { cmd.Parameters.AddWithValue("@color", DBNull.Value); }
+                else cmd.Parameters.AddWithValue("@serialNumber", DBNull.Value);
+                if (!string.IsNullOrEmpty(product.Color)) cmd.Parameters.AddWithValue("@color", product.Color);
+                else cmd.Parameters.AddWithValue("@color", DBNull.Value);
 
                 SqlDataReader dr = cmd.ExecuteReader();
                 dr.Read();
@@ -66,13 +66,13 @@ namespace DataAccessLayer
                     string? isbn, serialNumber, color, platform;
 
                     if (dr["isbn"] != DBNull.Value) isbn = (string)dr["isbn"];
-                    isbn = null;
+                    else isbn = null;
                     if (dr["serialNumber"] != DBNull.Value) serialNumber = (string)dr["serialNumber"];
-                    serialNumber = null;
+                    else serialNumber = null;
                     if (dr["color"] != DBNull.Value) color = (string)dr["color"];
-                    color = null;
+                    else color = null;
                     if (dr["platform"] != DBNull.Value) platform = (string)dr["platform"];
-                    platform = null;
+                    else platform = null;
 
                     products.Add(new Product(Convert.ToInt32(dr["id"]), (string)dr["name"], (string)dr["description"], Convert.ToInt32(dr["quantity"]), Convert.ToDouble(dr["price"]), (string)dr["category"], (string)dr["subCategory"], isbn, serialNumber, color, platform));
                 }

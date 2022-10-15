@@ -9,46 +9,26 @@ namespace LogicLayerEntities.Users
     public abstract class Person
     {
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string? PhoneNumber { get; set; }
-        public string? StreetName { get; set; }
-        public string? HouseNumber { get; set; }
-        public string? PostalCode { get; set; }
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
+        public string Email { get; private set; }
+        public string Password { get; private set; }
+        public string? PhoneNumber { get; private set; }
+        public string? Address { get; private set; }
+        public string? PostalCode { get; private set; }
 
-        public Person() { }
-
-        public Person(string firstName, string lastName, string email, string password)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-            Password = password;
-        }
-        public Person(int id, string firstName, string lastName, string email, string password)
-        {
-            Id = id;
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-            Password = password;
-        }
-
-        public Person(string firstName, string lastName, string email, string password, string phoneNumber, string streetName, string houseNumber, string postalCode)
+        public Person(string firstName, string lastName, string email, string password, string? phoneNumber, string? address, string? postalCode)
         {
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             Password = password;
             PhoneNumber = phoneNumber;
-            StreetName = streetName;
-            HouseNumber = houseNumber;
+            Address = address;
             PostalCode = postalCode;
         }
 
-        public Person(int id, string firstName, string lastName, string email, string password, string phoneNumber, string streetName, string houseNumber, string postalCode)
+        public Person(int id, string firstName, string lastName, string email, string password, string? phoneNumber, string? address, string? postalCode)
         {
             Id = id;
             FirstName = firstName;
@@ -56,8 +36,7 @@ namespace LogicLayerEntities.Users
             Email = email;
             Password = password;
             PhoneNumber = phoneNumber;
-            StreetName = streetName;
-            HouseNumber = houseNumber;
+            Address = address;
             PostalCode = postalCode;
         }
 

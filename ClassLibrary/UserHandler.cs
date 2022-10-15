@@ -24,32 +24,19 @@ namespace LogicLayerHandlers
 
         }
 
-        public void AddEmployee(string firstName, string lastName, string email, string phoneNumber, string role, string streetName, string houseNumber, string postalCode)
+        public void AddEmployee(Employee employee)
         {
-            string password = RandomPassword();
-            dbHandlerUsers.InsertEmployee(firstName, lastName, email, password, phoneNumber, role, streetName, houseNumber, postalCode);
-
-            users = dbHandlerUsers.GetAllUsers();
+            int id = dbHandlerUsers.InsertEmployee(employee);
+            employee.Id = id;
+            users.Add(employee);
         }
 
-        public void AddCustomer(string firstName, string lastName, string email, string password)
+        public void AddCustomer(Customer customer)
         {
-            dbHandlerUsers.InsertCustomer(firstName, lastName, email, password);
-            users = dbHandlerUsers.GetAllUsers();
+            int customerId = dbHandlerUsers.InsertCustomer(customer);
+            customer.Id = customerId;
+            users.Add(customer);
         }
 
-        private string RandomPassword()
-        {
-            Random random = new Random();
-            string password = "";
-            string characters = "abcdefghijklmnopqrstuvwxyz";
-            characters += characters.ToUpper() + "1234567890,.?@#$%&*";
-
-            for (int x = 0; x < 10; x++)
-            {
-                password += characters[random.Next(characters.Length - 1)];
-            }
-            return password;
-        }
     }
 }

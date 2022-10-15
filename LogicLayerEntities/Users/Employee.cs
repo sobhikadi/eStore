@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogicLayerEntities.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,12 @@ namespace LogicLayerEntities.Users
         
         public string Role { get; private set; }
 
-        public Employee(int id, string firstName, string lastName, string email, string password, string phoneNumber, string streetName, string houseNumber, string postalCode, string role) : base(id, firstName, lastName, email, password, phoneNumber, streetName, houseNumber, postalCode)
+        public Employee(string firstName, string lastName, string email, string password, string phoneNumber, string address, string postalCode, string role) : base(firstName, lastName, email, password, phoneNumber, address, postalCode)
+        {
+            Role = role;
+        }
+
+        public Employee(int id, string firstName, string lastName, string email, string password, string phoneNumber, string address, string postalCode, string role) : base(id, firstName, lastName, email, password, phoneNumber, address, postalCode)
         {
             Role = role;
         }

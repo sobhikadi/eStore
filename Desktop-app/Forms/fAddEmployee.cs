@@ -1,4 +1,5 @@
 ﻿using LogicLayerEntities.Products;
+using LogicLayerEntities.Users;
 using LogicLayerHandlers;
 using System;
 using System.Collections.Generic;
@@ -23,13 +24,14 @@ namespace Desktop_app.Forms
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            string firstName, lastName, email, phoneNumber, streetName, houseNumber, postalCode, role;
+            string firstName, lastName, email, phoneNumber, address, postalCode, role, password;
 
             try
             {
                 if (string.IsNullOrEmpty(tbFirstName.Text)) { MessageBox.Show("Please enter first name"); return; }
                 if (string.IsNullOrEmpty(tbLastName.Text)) { MessageBox.Show("Please enter last name"); return; }
                 if (string.IsNullOrEmpty(tbEmail.Text)) { MessageBox.Show("Please enter email"); return; }
+                if (string.IsNullOrEmpty(tbPassword.Text)) { MessageBox.Show("Please enter password"); return; }
                 if (string.IsNullOrEmpty(tbPhoneNumber.Text)) { MessageBox.Show("Please enter phone number"); return; }
                 if (string.IsNullOrEmpty(tbStreetName.Text)) { MessageBox.Show("Please enter street name"); return; }
                 if (string.IsNullOrEmpty(tbHouseNumber.Text)) { MessageBox.Show("Please enter house number"); return; }
@@ -39,13 +41,15 @@ namespace Desktop_app.Forms
                 firstName = tbFirstName.Text;
                 lastName = tbLastName.Text;
                 email = tbEmail.Text;
+                password = tbPassword.Text;
                 phoneNumber = tbPhoneNumber.Text;
-                streetName = tbStreetName.Text;
-                houseNumber = tbHouseNumber.Text;
+                address = $"{tbStreetName.Text} {tbHouseNumber.Text}";
                 postalCode = tbPostalCode.Text;
                 role = cboxRoles.Text;
 
-                userHandler.AddEmployee(firstName, lastName, email, phoneNumber, role, streetName, houseNumber, postalCode);
+                Employee employee = new Employee(firstName, lastName, email, password, phoneNumber, address, postalCode, role);
+
+                userHandler.AddEmployee(employee);
 
                 foreach (Control co in this.Controls)
                 {

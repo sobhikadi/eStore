@@ -15,11 +15,11 @@ namespace LogicLayerHandlers
             products = dbHandlerProducts.GetAllProducts();
         }
 
-        public void AddProduct(string name, int quantity, double price, string category, string subCategory, string description, string isbn, string platform, string serialNumber, string color)
+        public void AddProduct(Product product)
         {
-            dbHandlerProducts.InsertProduct(name, quantity, price, category, subCategory, description, isbn, platform, serialNumber, color);
-
-            products = dbHandlerProducts.GetAllProducts();
+            int id = dbHandlerProducts.InsertProduct(product);
+            product.Id = id;
+            products.Add(product);
         }
     }
 }

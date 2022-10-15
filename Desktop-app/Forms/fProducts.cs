@@ -46,9 +46,10 @@ namespace Desktop_app.Forms
         {
             selectedProductFromList = (Product)e.Item.Tag;
 
-            foreach (Specification specs in selectedProductFromList.Specifications) 
+            foreach (KeyValuePair<string, string> spec in selectedProductFromList.Specifications) 
             {
-                lboxProductSpecs.Items.Add(specs);
+                string specification = $"{spec.Key} - {spec.Value}";
+                lboxProductSpecs.Items.Add(specification);
             }
             tbDescription.Text = selectedProductFromList.Description;
         }

@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
-using LogicLayerEntities.Products;
 using System.Net;
 using LogicLayerEntities.Users;
 

@@ -15,33 +15,38 @@ namespace DataAccessLayer
         private string connectionString = "server=mssqlstud.fhict.local;" + "database=dbi376372;" + "user id=dbi376372;" + "password=Mky3S[elWm;" + "connect timeout=30;";
 
 
-        public void InsertProduct(string name, int quantity, double price, string category, string subCategory, string description, string? isbn, string? platform, string? serialNumber, string? color)
+        public int InsertProduct(Product product)
         {
-
+            int productId;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
 
                 conn.Open();
-                string sql = "insert into Product (name, quantity, price, category, subcategory, description, isbn, platform, serialNumber, color) values (@name, @quantity, @price, @category, @subCategory, @description, @isbn, @platform, @serialNumber, @color);";
+                string sql = "insert into Product (name, quantity, price, category, subcategory, description, isbn, platform, serialNumber, color) values (@name, @quantity, @price, @category, @subCategory, @description, @isbn, @platform, @serialNumber, @color); select SCOPE_IDENTITY()";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@name", name);
-                cmd.Parameters.AddWithValue("@quantity", quantity);
-                cmd.Parameters.AddWithValue("@price", price);
-                cmd.Parameters.AddWithValue("@category", category);
-                cmd.Parameters.AddWithValue("@subCategory", subCategory);
-                cmd.Parameters.AddWithValue("@description", description);
-                if (!string.IsNullOrEmpty(isbn)) { cmd.Parameters.AddWithValue("@isbn", isbn); }
+                cmd.Parameters.AddWithValue("@name", product.Name);
+                cmd.Parameters.AddWithValue("@quantity", product.QuantityInStock);
+                cmd.Parameters.AddWithValue("@price", product.Price);
+                cmd.Parameters.AddWithValue("@category", product.Category);
+                cmd.Parameters.AddWithValue("@subCategory", product.SubCategory);
+                cmd.Parameters.AddWithValue("@description", product.Description);
+                if (!string.IsNullOrEmpty(product.Isbn)) { cmd.Parameters.AddWithValue("@isbn", product.Isbn); }
                 else { cmd.Parameters.AddWithValue("@isbn", DBNull.Value); }
-                if (!string.IsNullOrEmpty(platform)) { cmd.Parameters.AddWithValue("@platform", platform); }
+                if (!string.IsNullOrEmpty(product.Platform)) { cmd.Parameters.AddWithValue("@platform", product.Platform); }
                 else { cmd.Parameters.AddWithValue("@platform", DBNull.Value); }
-                if (!string.IsNullOrEmpty(serialNumber)) { cmd.Parameters.AddWithValue("@serialNumber", serialNumber); }
+                if (!string.IsNullOrEmpty(product.SerialNumber)) { cmd.Parameters.AddWithValue("@serialNumber", product.SerialNumber); }
                 else { cmd.Parameters.AddWithValue("@serialNumber", DBNull.Value); }
-                if (!string.IsNullOrEmpty(color)) { cmd.Parameters.AddWithValue("@color", color); }
+                if (!string.IsNullOrEmpty(product.Color)) { cmd.Parameters.AddWithValue("@color", product.Color); }
                 else { cmd.Parameters.AddWithValue("@color", DBNull.Value); }
 
-                cmd.ExecuteNonQuery();
+                SqlDataReader dr = cmd.ExecuteReader();
+                dr.Read();
+                productId = Convert.ToInt32(dr[0]);
+
                 conn.Close();
+
             }
+            return productId;
         }
 
         public List<Product> GetAllProducts()
@@ -58,35 +63,23 @@ namespace DataAccessLayer
 
                 while (dr.Read())
                 {
-                    string category = (string)dr["category"];
+                    string? isbn, serialNumber, color, platform;
 
-                    if (category == Categories.Books.ToString())
-                    {
-                        products.Add(new Books(Convert.ToInt32(dr["id"]), (string)dr["name"], (string)dr["description"], Convert.ToInt32(dr["quantity"]), Convert.ToDouble(dr["price"]), (string)dr["subCategory"], (string)dr["isbn"]));
-                    }
-                    else if (category == Categories.Electronics.ToString())
-                    {
-                        products.Add(new Electronics(Convert.ToInt32(dr["id"]), (string)dr["name"], (string)dr["description"], Convert.ToInt32(dr["quantity"]), Convert.ToDouble(dr["price"]), (string)dr["subCategory"], (string)dr["serialNumber"], (string)dr["color"]));
-                    }
-                    else if (category == Categories.VedioGames.ToString())
-                    {
-                        products.Add(new VedioGames(Convert.ToInt32(dr["id"]), (string)dr["name"], (string)dr["description"], Convert.ToInt32(dr["quantity"]), Convert.ToDouble(dr["price"]), (string)dr["platform"]));
-                    }
-                    else if (category == Categories.Households.ToString())
-                    {
-                        products.Add(new Households(Convert.ToInt32(dr["id"]), (string)dr["name"], (string)dr["description"], Convert.ToInt32(dr["quantity"]), Convert.ToDouble(dr["price"]), (string)dr["subCategory"], (string)dr["color"]));
-                    }
+                    if (dr["isbn"] != DBNull.Value) isbn = (string)dr["isbn"];
+                    isbn = null;
+                    if (dr["serialNumber"] != DBNull.Value) serialNumber = (string)dr["serialNumber"];
+                    serialNumber = null;
+                    if (dr["color"] != DBNull.Value) color = (string)dr["color"];
+                    color = null;
+                    if (dr["platform"] != DBNull.Value) platform = (string)dr["platform"];
+                    platform = null;
 
+                    products.Add(new Product(Convert.ToInt32(dr["id"]), (string)dr["name"], (string)dr["description"], Convert.ToInt32(dr["quantity"]), Convert.ToDouble(dr["price"]), (string)dr["category"], (string)dr["subCategory"], isbn, serialNumber, color, platform));
                 }
                 conn.Close();
             }
             return products;
         }
-
-
-
-
-
 
     }
 }

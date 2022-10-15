@@ -65,16 +65,16 @@ namespace Desktop_app.Forms
             try
             {
 
-                if (string.IsNullOrEmpty(tbProductName.Text)) { MessageBox.Show("Please enter a name"); return; }
+                //if (string.IsNullOrEmpty(tbProductName.Text)) { MessageBox.Show("Please enter a name"); return; }
                 if (string.IsNullOrEmpty(tbProductQuantity.Text)) { MessageBox.Show("Please enter the quantity"); return; }
                 if (string.IsNullOrEmpty(tbProductPrice.Text)) { MessageBox.Show("Please enter a price"); return; }
                 if (string.IsNullOrEmpty(cboxCatgeory.Text)) { MessageBox.Show("Please select a category"); return; }
                 if (string.IsNullOrEmpty(tbsubCaregory.Text)) { MessageBox.Show("Please enter a subcategory"); return; }
                 if (string.IsNullOrEmpty(tbProductDescription.Text)) { MessageBox.Show("Please enter product description"); return; }
-                if (tbBookIsbn.Enabled == true && string.IsNullOrEmpty(tbBookIsbn.Text)) { MessageBox.Show("Please enter book's ISBN"); return; }
-                if (tbGamePlatform.Enabled == true && string.IsNullOrEmpty(tbGamePlatform.Text)) { MessageBox.Show("Please enter game's platform"); return; }
-                if (tbProductColor.Enabled == true && string.IsNullOrEmpty(tbProductColor.Text)) { MessageBox.Show("Please enter the color"); return; }
-                if (tbSeriaNumber.Enabled == true && string.IsNullOrEmpty(tbSeriaNumber.Text)) { MessageBox.Show("Please enter the serial number"); return; }
+                if (tbBookIsbn.Enabled && string.IsNullOrEmpty(tbBookIsbn.Text)) { MessageBox.Show("Please enter book's ISBN"); return; }
+                if (tbGamePlatform.Enabled && string.IsNullOrEmpty(tbGamePlatform.Text)) { MessageBox.Show("Please enter game's platform"); return; }
+                if (tbProductColor.Enabled && string.IsNullOrEmpty(tbProductColor.Text)) { MessageBox.Show("Please enter the color"); return; }
+                if (tbSeriaNumber.Enabled && string.IsNullOrEmpty(tbSeriaNumber.Text)) { MessageBox.Show("Please enter the serial number"); return; }
 
                 name = tbProductName.Text;
                 quantity = Convert.ToInt32(tbProductQuantity.Text);
@@ -88,24 +88,21 @@ namespace Desktop_app.Forms
                 serialNumber = tbSeriaNumber.Text;
 
 
-                //ValidationContext context = new ValidationContext(book, null, null);
-                //List<ValidationResult> errors = new List<ValidationResult>();
-                //if (!Validator.TryValidateObject(u, context, errors, true))
-                //{
-                //    foreach (ValidationResult result in errors)
-                //    {
-                //        MessageBox.Show(result.ErrorMessage);
-                //    }
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Successfully created the object");
-                //}
 
+                Product product = new Product(name, description, quantity, price, category, subCategory, isbn, serialNumber, color, gamePlatform);
 
-                productHandler.AddProduct(name, quantity, price, category, subCategory, description, isbn, gamePlatform, serialNumber, color);
+                ValidationContext context = new ValidationContext(product, null, null);
+                List<ValidationResult> errors = new List<ValidationResult>();
+                if (!Validator.TryValidateObject(product, context, errors, true))
+                {
+                    foreach (ValidationResult result in errors)
+                    {
+                        MessageBox.Show(result.ErrorMessage);
+                    }
+                }
 
-               
+                productHandler.AddProduct(product);
+
                 foreach (Control co in this.Controls)
                 {
                     if (co is TextBox || co is ComboBox)

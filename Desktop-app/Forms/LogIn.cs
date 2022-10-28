@@ -3,17 +3,17 @@ using LogicLayerEntities;
 
 namespace Desktop_app
 {
-    public partial class fLogin : Form
+    public partial class LogIn : Form
     {
         
-        public fLogin()
+        public LogIn()
         {
             InitializeComponent();
         }
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            fMain fMain = new fMain(this);
+            Main fMain = new Main(this);
             fMain.Show();
             this.Hide();
         }

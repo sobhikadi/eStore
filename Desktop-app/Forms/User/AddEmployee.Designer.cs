@@ -1,6 +1,6 @@
 ﻿namespace Desktop_app.Forms
 {
-    partial class fAddEmployee
+    partial class AddEmployee
     {
         /// <summary>
         /// Required designer variable.

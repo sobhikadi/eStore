@@ -13,13 +13,13 @@ using System.Windows.Forms;
 
 namespace Desktop_app.Forms
 {
-    public partial class fEmployee : Form
+    public partial class Employee : Form
     {
         private UserHandler userHandler;
-        private Employee? selectedEmployeeFromList; 
+        private LogicLayerEntities.Users.Employee? selectedEmployeeFromList; 
         public static bool ADD_EMPLOYEE_FORM_OPEN = false;
 
-        public fEmployee()
+        public Employee()
         {
             InitializeComponent();
             userHandler = new UserHandler();
@@ -34,7 +34,7 @@ namespace Desktop_app.Forms
             }
             else
             {
-                fAddEmployee AddEmployeeForm = new fAddEmployee(userHandler);
+                AddEmployee AddEmployeeForm = new AddEmployee(userHandler);
                 ADD_EMPLOYEE_FORM_OPEN = true;
                 AddEmployeeForm.Show();
             }
@@ -50,7 +50,7 @@ namespace Desktop_app.Forms
                 
                 foreach (Person user in userHandler.Users)
                 {
-                    if (user.GetType().Name == "Employee") { AddUserToListView((Employee)user); }
+                    if (user.GetType().Name == "Employee") { AddUserToListView((LogicLayerEntities.Users.Employee)user); }
                         
                 }
 
@@ -60,7 +60,7 @@ namespace Desktop_app.Forms
 
         private void listViewUsers_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            selectedEmployeeFromList = (Employee)e.Item.Tag;
+            selectedEmployeeFromList = (LogicLayerEntities.Users.Employee)e.Item.Tag;
         }
 
         private void listViewUsers_SelectedIndexChanged(object sender, EventArgs e)
@@ -73,7 +73,7 @@ namespace Desktop_app.Forms
 
         }
 
-        private void AddUserToListView(Employee employee)
+        private void AddUserToListView(LogicLayerEntities.Users.Employee employee)
         {
             ListViewItem item = new ListViewItem(employee.Id.ToString());
             item.Tag = employee;

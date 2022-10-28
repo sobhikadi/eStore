@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace Desktop_app.Forms
 {
-    public partial class fProducts : Form
+    public partial class Products : Form
     {
         private ProductHandler productHandler;
 
@@ -21,7 +21,7 @@ namespace Desktop_app.Forms
 
         public static bool ADD_PRODUCT_FORM_OPEN = false;
 
-        public fProducts()
+        public Products()
         {
             InitializeComponent();
             productHandler = new ProductHandler();
@@ -88,7 +88,7 @@ namespace Desktop_app.Forms
             }
             else 
             {
-                fAddProduct addProductForm = new fAddProduct(productHandler);
+                AddProduct addProductForm = new AddProduct(productHandler);
                 ADD_PRODUCT_FORM_OPEN = true;
                 addProductForm.Show();
             }

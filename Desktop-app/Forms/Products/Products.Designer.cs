@@ -1,6 +1,6 @@
 ﻿namespace Desktop_app.Forms
 {
-    partial class fProducts
+    partial class Products
     {
         /// <summary>
         /// Required designer variable.
@@ -72,7 +72,7 @@
             this.gboxSearchProduct.Controls.Add(this.lblSearchTerm);
             this.gboxSearchProduct.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.gboxSearchProduct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
-            this.gboxSearchProduct.Location = new System.Drawing.Point(0, 13);
+            this.gboxSearchProduct.Location = new System.Drawing.Point(0, 1);
             this.gboxSearchProduct.Margin = new System.Windows.Forms.Padding(4);
             this.gboxSearchProduct.Name = "gboxSearchProduct";
             this.gboxSearchProduct.Padding = new System.Windows.Forms.Padding(4);
@@ -113,7 +113,7 @@
             this.btnShowAllProducts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
             this.btnShowAllProducts.FlatAppearance.BorderSize = 0;
             this.btnShowAllProducts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowAllProducts.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnShowAllProducts.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnShowAllProducts.ForeColor = System.Drawing.Color.White;
             this.btnShowAllProducts.Location = new System.Drawing.Point(925, 62);
             this.btnShowAllProducts.Name = "btnShowAllProducts";
@@ -129,7 +129,7 @@
             this.btnSearchProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
             this.btnSearchProduct.FlatAppearance.BorderSize = 0;
             this.btnSearchProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearchProduct.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnSearchProduct.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSearchProduct.ForeColor = System.Drawing.Color.White;
             this.btnSearchProduct.Location = new System.Drawing.Point(925, 24);
             this.btnSearchProduct.Name = "btnSearchProduct";
@@ -164,7 +164,7 @@
             this.lblProducts.AutoSize = true;
             this.lblProducts.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblProducts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
-            this.lblProducts.Location = new System.Drawing.Point(5, 118);
+            this.lblProducts.Location = new System.Drawing.Point(5, 107);
             this.lblProducts.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProducts.Name = "lblProducts";
             this.lblProducts.Size = new System.Drawing.Size(77, 23);
@@ -177,7 +177,7 @@
             this.lblSepcs.AutoSize = true;
             this.lblSepcs.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblSepcs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
-            this.lblSepcs.Location = new System.Drawing.Point(987, 122);
+            this.lblSepcs.Location = new System.Drawing.Point(987, 111);
             this.lblSepcs.Name = "lblSepcs";
             this.lblSepcs.Size = new System.Drawing.Size(178, 23);
             this.lblSepcs.TabIndex = 4;
@@ -189,7 +189,7 @@
             this.lboxProductSpecs.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lboxProductSpecs.FormattingEnabled = true;
             this.lboxProductSpecs.ItemHeight = 23;
-            this.lboxProductSpecs.Location = new System.Drawing.Point(987, 150);
+            this.lboxProductSpecs.Location = new System.Drawing.Point(987, 139);
             this.lboxProductSpecs.Name = "lboxProductSpecs";
             this.lboxProductSpecs.Size = new System.Drawing.Size(239, 533);
             this.lboxProductSpecs.TabIndex = 5;
@@ -232,7 +232,7 @@
             this.listViewProducts.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listViewProducts.FullRowSelect = true;
             this.listViewProducts.GridLines = true;
-            this.listViewProducts.Location = new System.Drawing.Point(5, 150);
+            this.listViewProducts.Location = new System.Drawing.Point(5, 139);
             this.listViewProducts.Margin = new System.Windows.Forms.Padding(4);
             this.listViewProducts.Name = "listViewProducts";
             this.listViewProducts.Size = new System.Drawing.Size(975, 533);
@@ -266,7 +266,7 @@
             this.gboxProductDescription.Controls.Add(this.lblProductDescription);
             this.gboxProductDescription.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.gboxProductDescription.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
-            this.gboxProductDescription.Location = new System.Drawing.Point(5, 690);
+            this.gboxProductDescription.Location = new System.Drawing.Point(5, 676);
             this.gboxProductDescription.Name = "gboxProductDescription";
             this.gboxProductDescription.Size = new System.Drawing.Size(1221, 148);
             this.gboxProductDescription.TabIndex = 7;

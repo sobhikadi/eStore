@@ -15,11 +15,11 @@ using System.Xml.Linq;
 
 namespace Desktop_app.Forms
 {
-    public partial class fAddProduct : Form
+    public partial class AddProduct : Form
     {
         private ProductHandler productHandler;
 
-        public fAddProduct(ProductHandler productHandler)
+        public AddProduct(ProductHandler productHandler)
         {
             InitializeComponent();
             this.productHandler = productHandler;
@@ -111,7 +111,7 @@ namespace Desktop_app.Forms
                     }
                 }
                 MessageBox.Show("Product added successfully!");
-                fProducts.ADD_PRODUCT_FORM_OPEN = false;
+                Products.ADD_PRODUCT_FORM_OPEN = false;
                 this.Close();
             }
             catch (Exception ex)
@@ -122,7 +122,7 @@ namespace Desktop_app.Forms
         }
         private void fAddProduct_FormClosing(object sender, FormClosingEventArgs e)
         {
-            fProducts.ADD_PRODUCT_FORM_OPEN = false;
+            Products.ADD_PRODUCT_FORM_OPEN = false;
         }
     }
 }

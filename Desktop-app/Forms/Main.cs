@@ -11,13 +11,13 @@ using System.Windows.Forms;
 
 namespace Desktop_app.Forms
 {
-    public partial class fMain : Form
+    public partial class Main : Form
     {
         private Button currentButton;
 
-        private fLogin fLogin;
+        private LogIn fLogin;
         private Form activeForm;
-        public fMain(fLogin fLogin)
+        public Main(LogIn fLogin)
         {
             InitializeComponent();
             this.fLogin = fLogin;
@@ -76,12 +76,12 @@ namespace Desktop_app.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.fProducts(), sender);
+            OpenChildForm(new Forms.Products(), sender);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.fEmployee(), sender);
+            OpenChildForm(new Forms.Employee(), sender);
         }
 
         private void brnCustomers_Click(object sender, EventArgs e)

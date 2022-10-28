@@ -13,10 +13,10 @@ using System.Windows.Forms;
 
 namespace Desktop_app.Forms
 {
-    public partial class fAddEmployee : Form
+    public partial class AddEmployee : Form
     {
         private UserHandler userHandler;
-        public fAddEmployee(UserHandler userHandler)
+        public AddEmployee(UserHandler userHandler)
         {
             InitializeComponent();
             this.userHandler = userHandler;
@@ -47,7 +47,7 @@ namespace Desktop_app.Forms
                 postalCode = tbPostalCode.Text;
                 role = cboxRoles.Text;
 
-                Employee employee = new Employee(firstName, lastName, email, password, phoneNumber, address, postalCode, role);
+                LogicLayerEntities.Users.Employee employee = new LogicLayerEntities.Users.Employee(firstName, lastName, email, password, phoneNumber, address, postalCode, role);
 
                 userHandler.AddEmployee(employee);
 
@@ -59,7 +59,7 @@ namespace Desktop_app.Forms
                     }
                 }
                 MessageBox.Show("Employee added successfully!");
-                fEmployee.ADD_EMPLOYEE_FORM_OPEN = false;
+                Employee.ADD_EMPLOYEE_FORM_OPEN = false;
                 this.Close();
             }
             catch (Exception ex)
@@ -70,7 +70,7 @@ namespace Desktop_app.Forms
 
         private void fAddEmployee_FormClosing(object sender, FormClosingEventArgs e)
         {
-            fEmployee.ADD_EMPLOYEE_FORM_OPEN = false;
+            Employee.ADD_EMPLOYEE_FORM_OPEN = false;
         }
     }
 }

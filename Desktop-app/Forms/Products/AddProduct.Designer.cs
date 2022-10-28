@@ -1,6 +1,6 @@
 ﻿namespace Desktop_app.Forms
 {
-    partial class fAddProduct
+    partial class AddProduct
     {
         /// <summary>
         /// Required designer variable.

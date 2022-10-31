@@ -51,7 +51,6 @@ namespace Desktop_app.Forms
                 string specification = $"{spec.Key} - {spec.Value}";
                 lboxProductSpecs.Items.Add(specification);
             }
-            tbDescription.Text = selectedProductFromList.Description;
         }
 
         private void listViewProducts_SelectedIndexChanged(object sender, EventArgs e)
@@ -61,7 +60,6 @@ namespace Desktop_app.Forms
             {
                 selectedProductFromList = null;
                 lboxProductSpecs.Items.Clear();
-                tbDescription.Clear();
             }
             
         }

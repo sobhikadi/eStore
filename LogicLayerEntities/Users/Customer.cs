@@ -18,7 +18,7 @@ namespace LogicLayerEntities.Users
             BillingPostalCode = billingPostalCode;
         }
 
-        public Customer(int id, string firstName, string lastName, string email, string password, string? phoneNumber, string? address, string? postalCode, string? billingAddress, string? billingPostalCode) : base(id, firstName, lastName, email, password, phoneNumber, address, postalCode)
+        public Customer(int id, string firstName, string lastName, string email, string? phoneNumber, string? address, string? postalCode, string? billingAddress, string? billingPostalCode) : base(id, firstName, lastName, email, phoneNumber, address, postalCode)
         {
             BillingAddress = billingAddress;
             BillingPostalCode = billingPostalCode;

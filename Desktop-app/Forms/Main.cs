@@ -17,15 +17,32 @@ namespace Desktop_app.Forms
 
         private LogIn fLogin;
         private Form activeForm;
-        public Main(LogIn fLogin)
+        string role;
+        public Main(LogIn fLogin, string role)
         {
             InitializeComponent();
             this.fLogin = fLogin;
+            this.role = role;
         }
 
-        private void fMain_FormClosed(object sender, FormClosedEventArgs e)
+        private void Main_Load(object sender, EventArgs e)
         {
-            fLogin.Show();
+            Dashboard dashboard = new Dashboard();
+            activeForm = dashboard;
+            dashboard.TopLevel = false;
+            dashboard.FormBorderStyle = FormBorderStyle.None;
+            dashboard.Dock = DockStyle.Fill;
+            this.panelContainer.Controls.Add(dashboard);
+            this.panelContainer.Tag = dashboard;
+            dashboard.BringToFront();
+            dashboard.Show();
+
+            currentButton = btnDashboard;
+            currentButton.BackColor = Color.FromArgb(35, 40, 45);
+            currentButton.ForeColor = Color.White;
+            currentButton.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.Text = $"eStore - {currentButton.Text}";
+
         }
 
         private void ActivateButton(object btnSender)
@@ -40,6 +57,7 @@ namespace Desktop_app.Forms
                     currentButton.BackColor = ColorTranslator.FromHtml("35, 40, 45");
                     currentButton.ForeColor = Color.White;
                     currentButton.Font = new System.Drawing.Font("Segoe UI", 14F);
+                    this.Text = $"eStore - {currentButton.Text}";
                     
                 }
             }
@@ -74,12 +92,17 @@ namespace Desktop_app.Forms
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnDashboard_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.Dashboard(), sender);
+        }
+
+        private void btnProducts_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.Products(), sender);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnEmployees_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.Employee(), sender);
         }
@@ -88,5 +111,18 @@ namespace Desktop_app.Forms
         {
 
         }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            fLogin.Show();
+        }
+
+        private void fMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            fLogin.Show();
+        }
+
+        
     }
 }

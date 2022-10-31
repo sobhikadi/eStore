@@ -109,6 +109,7 @@
             this.tbPassword.Size = new System.Drawing.Size(466, 38);
             this.tbPassword.TabIndex = 1;
             this.tbPassword.UseSystemPasswordChar = true;
+            this.tbPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPassword_KeyPress);
             // 
             // lblPassword
             // 
@@ -131,6 +132,7 @@
             this.tbEmail.PlaceholderText = "example@email.com";
             this.tbEmail.Size = new System.Drawing.Size(466, 38);
             this.tbEmail.TabIndex = 0;
+            this.tbEmail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbEmail_KeyPress);
             // 
             // lblEmail
             // 
@@ -165,7 +167,7 @@
             this.pbocLogo.TabIndex = 5;
             this.pbocLogo.TabStop = false;
             // 
-            // fLogin
+            // LogIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -174,10 +176,11 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "fLogin";
+            this.Name = "LogIn";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form";
+            this.Text = "eStore - LogIn";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

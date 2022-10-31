@@ -45,19 +45,10 @@
             this.Price = new System.Windows.Forms.ColumnHeader();
             this.listViewProducts = new System.Windows.Forms.ListView();
             this.btnAddProduct = new System.Windows.Forms.Button();
-            this.gboxProductDescription = new System.Windows.Forms.GroupBox();
-            this.tbDescription = new System.Windows.Forms.TextBox();
-            this.lblProductDescription = new System.Windows.Forms.Label();
-            this.gboxEditProduct = new System.Windows.Forms.GroupBox();
-            this.lblOpenEditProduct = new System.Windows.Forms.Label();
             this.btnOpenEditProduct = new System.Windows.Forms.Button();
-            this.gboxAddSpecifications = new System.Windows.Forms.GroupBox();
-            this.lblOpenAddSpecs = new System.Windows.Forms.Label();
             this.btnAddSpecifications = new System.Windows.Forms.Button();
+            this.btnProductDescription = new System.Windows.Forms.Button();
             this.gboxSearchProduct.SuspendLayout();
-            this.gboxProductDescription.SuspendLayout();
-            this.gboxEditProduct.SuspendLayout();
-            this.gboxAddSpecifications.SuspendLayout();
             this.SuspendLayout();
             // 
             // gboxSearchProduct
@@ -177,7 +168,7 @@
             this.lblSepcs.AutoSize = true;
             this.lblSepcs.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblSepcs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
-            this.lblSepcs.Location = new System.Drawing.Point(987, 111);
+            this.lblSepcs.Location = new System.Drawing.Point(914, 110);
             this.lblSepcs.Name = "lblSepcs";
             this.lblSepcs.Size = new System.Drawing.Size(178, 23);
             this.lblSepcs.TabIndex = 4;
@@ -185,13 +176,14 @@
             // 
             // lboxProductSpecs
             // 
-            this.lboxProductSpecs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lboxProductSpecs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lboxProductSpecs.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lboxProductSpecs.FormattingEnabled = true;
             this.lboxProductSpecs.ItemHeight = 23;
-            this.lboxProductSpecs.Location = new System.Drawing.Point(987, 139);
+            this.lboxProductSpecs.Location = new System.Drawing.Point(914, 139);
             this.lboxProductSpecs.Name = "lboxProductSpecs";
-            this.lboxProductSpecs.Size = new System.Drawing.Size(239, 533);
+            this.lboxProductSpecs.Size = new System.Drawing.Size(312, 740);
             this.lboxProductSpecs.TabIndex = 5;
             // 
             // ID
@@ -221,7 +213,8 @@
             // listViewProducts
             // 
             this.listViewProducts.AllowColumnReorder = true;
-            this.listViewProducts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.listViewProducts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewProducts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ID,
@@ -232,10 +225,10 @@
             this.listViewProducts.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listViewProducts.FullRowSelect = true;
             this.listViewProducts.GridLines = true;
-            this.listViewProducts.Location = new System.Drawing.Point(5, 139);
+            this.listViewProducts.Location = new System.Drawing.Point(5, 137);
             this.listViewProducts.Margin = new System.Windows.Forms.Padding(4);
             this.listViewProducts.Name = "listViewProducts";
-            this.listViewProducts.Size = new System.Drawing.Size(975, 533);
+            this.listViewProducts.Size = new System.Drawing.Size(902, 742);
             this.listViewProducts.TabIndex = 2;
             this.listViewProducts.UseCompatibleStateImageBehavior = false;
             this.listViewProducts.View = System.Windows.Forms.View.Details;
@@ -248,146 +241,70 @@
             this.btnAddProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
             this.btnAddProduct.FlatAppearance.BorderSize = 0;
             this.btnAddProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddProduct.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnAddProduct.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnAddProduct.ForeColor = System.Drawing.Color.White;
-            this.btnAddProduct.Location = new System.Drawing.Point(5, 861);
+            this.btnAddProduct.Location = new System.Drawing.Point(5, 885);
             this.btnAddProduct.Name = "btnAddProduct";
-            this.btnAddProduct.Size = new System.Drawing.Size(246, 52);
+            this.btnAddProduct.Size = new System.Drawing.Size(195, 42);
             this.btnAddProduct.TabIndex = 34;
             this.btnAddProduct.Text = "Add Product";
             this.btnAddProduct.UseVisualStyleBackColor = false;
             this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
             // 
-            // gboxProductDescription
-            // 
-            this.gboxProductDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gboxProductDescription.Controls.Add(this.tbDescription);
-            this.gboxProductDescription.Controls.Add(this.lblProductDescription);
-            this.gboxProductDescription.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.gboxProductDescription.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
-            this.gboxProductDescription.Location = new System.Drawing.Point(5, 676);
-            this.gboxProductDescription.Name = "gboxProductDescription";
-            this.gboxProductDescription.Size = new System.Drawing.Size(1221, 148);
-            this.gboxProductDescription.TabIndex = 7;
-            this.gboxProductDescription.TabStop = false;
-            this.gboxProductDescription.Text = "Product Description";
-            // 
-            // tbDescription
-            // 
-            this.tbDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbDescription.Location = new System.Drawing.Point(191, 26);
-            this.tbDescription.Margin = new System.Windows.Forms.Padding(4);
-            this.tbDescription.Multiline = true;
-            this.tbDescription.Name = "tbDescription";
-            this.tbDescription.ReadOnly = true;
-            this.tbDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbDescription.Size = new System.Drawing.Size(1023, 107);
-            this.tbDescription.TabIndex = 36;
-            // 
-            // lblProductDescription
-            // 
-            this.lblProductDescription.AutoSize = true;
-            this.lblProductDescription.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblProductDescription.Location = new System.Drawing.Point(8, 26);
-            this.lblProductDescription.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblProductDescription.Name = "lblProductDescription";
-            this.lblProductDescription.Size = new System.Drawing.Size(162, 46);
-            this.lblProductDescription.TabIndex = 35;
-            this.lblProductDescription.Text = "Select Product to \r\nview the description";
-            // 
-            // gboxEditProduct
-            // 
-            this.gboxEditProduct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.gboxEditProduct.Controls.Add(this.lblOpenEditProduct);
-            this.gboxEditProduct.Controls.Add(this.btnOpenEditProduct);
-            this.gboxEditProduct.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.gboxEditProduct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
-            this.gboxEditProduct.Location = new System.Drawing.Point(268, 844);
-            this.gboxEditProduct.Name = "gboxEditProduct";
-            this.gboxEditProduct.Size = new System.Drawing.Size(358, 79);
-            this.gboxEditProduct.TabIndex = 36;
-            this.gboxEditProduct.TabStop = false;
-            this.gboxEditProduct.Text = "Edit Product";
-            // 
-            // lblOpenEditProduct
-            // 
-            this.lblOpenEditProduct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblOpenEditProduct.AutoSize = true;
-            this.lblOpenEditProduct.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblOpenEditProduct.Location = new System.Drawing.Point(3, 35);
-            this.lblOpenEditProduct.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblOpenEditProduct.Name = "lblOpenEditProduct";
-            this.lblOpenEditProduct.Size = new System.Drawing.Size(189, 23);
-            this.lblOpenEditProduct.TabIndex = 37;
-            this.lblOpenEditProduct.Text = "Select a product to edit";
-            // 
             // btnOpenEditProduct
             // 
-            this.btnOpenEditProduct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOpenEditProduct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOpenEditProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
             this.btnOpenEditProduct.FlatAppearance.BorderSize = 0;
             this.btnOpenEditProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenEditProduct.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnOpenEditProduct.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnOpenEditProduct.ForeColor = System.Drawing.Color.White;
-            this.btnOpenEditProduct.Location = new System.Drawing.Point(197, 31);
+            this.btnOpenEditProduct.Location = new System.Drawing.Point(216, 885);
             this.btnOpenEditProduct.Name = "btnOpenEditProduct";
-            this.btnOpenEditProduct.Size = new System.Drawing.Size(155, 30);
+            this.btnOpenEditProduct.Size = new System.Drawing.Size(195, 42);
             this.btnOpenEditProduct.TabIndex = 36;
             this.btnOpenEditProduct.Text = "Edit Product";
             this.btnOpenEditProduct.UseVisualStyleBackColor = false;
             // 
-            // gboxAddSpecifications
-            // 
-            this.gboxAddSpecifications.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.gboxAddSpecifications.Controls.Add(this.lblOpenAddSpecs);
-            this.gboxAddSpecifications.Controls.Add(this.btnAddSpecifications);
-            this.gboxAddSpecifications.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.gboxAddSpecifications.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
-            this.gboxAddSpecifications.Location = new System.Drawing.Point(642, 844);
-            this.gboxAddSpecifications.Name = "gboxAddSpecifications";
-            this.gboxAddSpecifications.Size = new System.Drawing.Size(584, 79);
-            this.gboxAddSpecifications.TabIndex = 38;
-            this.gboxAddSpecifications.TabStop = false;
-            this.gboxAddSpecifications.Text = "Add Product";
-            // 
-            // lblOpenAddSpecs
-            // 
-            this.lblOpenAddSpecs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblOpenAddSpecs.AutoSize = true;
-            this.lblOpenAddSpecs.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblOpenAddSpecs.Location = new System.Drawing.Point(7, 34);
-            this.lblOpenAddSpecs.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblOpenAddSpecs.Name = "lblOpenAddSpecs";
-            this.lblOpenAddSpecs.Size = new System.Drawing.Size(285, 23);
-            this.lblOpenAddSpecs.TabIndex = 39;
-            this.lblOpenAddSpecs.Text = "Select Product to Add Specifications";
-            // 
             // btnAddSpecifications
             // 
-            this.btnAddSpecifications.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddSpecifications.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAddSpecifications.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
             this.btnAddSpecifications.FlatAppearance.BorderSize = 0;
             this.btnAddSpecifications.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddSpecifications.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnAddSpecifications.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnAddSpecifications.ForeColor = System.Drawing.Color.White;
-            this.btnAddSpecifications.Location = new System.Drawing.Point(310, 31);
+            this.btnAddSpecifications.Location = new System.Drawing.Point(429, 885);
             this.btnAddSpecifications.Name = "btnAddSpecifications";
-            this.btnAddSpecifications.Size = new System.Drawing.Size(268, 30);
+            this.btnAddSpecifications.Size = new System.Drawing.Size(195, 42);
             this.btnAddSpecifications.TabIndex = 38;
             this.btnAddSpecifications.Text = "Add Specifications";
             this.btnAddSpecifications.UseVisualStyleBackColor = false;
             // 
-            // fProducts
+            // btnProductDescription
+            // 
+            this.btnProductDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnProductDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
+            this.btnProductDescription.FlatAppearance.BorderSize = 0;
+            this.btnProductDescription.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProductDescription.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnProductDescription.ForeColor = System.Drawing.Color.White;
+            this.btnProductDescription.Location = new System.Drawing.Point(642, 885);
+            this.btnProductDescription.Name = "btnProductDescription";
+            this.btnProductDescription.Size = new System.Drawing.Size(195, 42);
+            this.btnProductDescription.TabIndex = 39;
+            this.btnProductDescription.Text = "Product Description";
+            this.btnProductDescription.UseVisualStyleBackColor = false;
+            // 
+            // Products
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1238, 935);
+            this.Controls.Add(this.btnProductDescription);
             this.Controls.Add(this.btnAddProduct);
-            this.Controls.Add(this.gboxAddSpecifications);
-            this.Controls.Add(this.gboxEditProduct);
-            this.Controls.Add(this.gboxProductDescription);
+            this.Controls.Add(this.btnAddSpecifications);
+            this.Controls.Add(this.btnOpenEditProduct);
             this.Controls.Add(this.lboxProductSpecs);
             this.Controls.Add(this.lblSepcs);
             this.Controls.Add(this.lblProducts);
@@ -396,15 +313,9 @@
             this.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "fProducts";
+            this.Name = "Products";
             this.gboxSearchProduct.ResumeLayout(false);
             this.gboxSearchProduct.PerformLayout();
-            this.gboxProductDescription.ResumeLayout(false);
-            this.gboxProductDescription.PerformLayout();
-            this.gboxEditProduct.ResumeLayout(false);
-            this.gboxEditProduct.PerformLayout();
-            this.gboxAddSpecifications.ResumeLayout(false);
-            this.gboxAddSpecifications.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -429,14 +340,8 @@
         private ColumnHeader Price;
         private ListView listViewProducts;
         private Button btnAddProduct;
-        private GroupBox gboxProductDescription;
-        private Label lblProductDescription;
-        private TextBox tbDescription;
-        private GroupBox gboxEditProduct;
-        private Label lblOpenEditProduct;
         private Button btnOpenEditProduct;
-        private GroupBox gboxAddSpecifications;
-        private Label lblOpenAddSpecs;
         private Button btnAddSpecifications;
+        private Button btnProductDescription;
     }
 }

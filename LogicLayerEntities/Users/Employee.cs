@@ -17,7 +17,7 @@ namespace LogicLayerEntities.Users
             Role = role;
         }
 
-        public Employee(int id, string firstName, string lastName, string email, string password, string phoneNumber, string address, string postalCode, string role) : base(id, firstName, lastName, email, password, phoneNumber, address, postalCode)
+        public Employee(int id, string firstName, string lastName, string email, string phoneNumber, string address, string postalCode, string role) : base(id, firstName, lastName, email, phoneNumber, address, postalCode)
         {
             Role = role;
         }

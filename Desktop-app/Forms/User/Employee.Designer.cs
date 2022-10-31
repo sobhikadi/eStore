@@ -43,6 +43,8 @@
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.lblEmployees = new System.Windows.Forms.Label();
             this.btnAddEmployee = new System.Windows.Forms.Button();
+            this.btnUpdateEmployee = new System.Windows.Forms.Button();
+            this.btnDeleteEmployee = new System.Windows.Forms.Button();
             this.gboxSearchUsers.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -150,7 +152,8 @@
             // listViewEmployees
             // 
             this.listViewEmployees.AllowColumnReorder = true;
-            this.listViewEmployees.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.listViewEmployees.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewEmployees.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ID,
@@ -164,7 +167,7 @@
             this.listViewEmployees.Location = new System.Drawing.Point(4, 140);
             this.listViewEmployees.Margin = new System.Windows.Forms.Padding(4);
             this.listViewEmployees.Name = "listViewEmployees";
-            this.listViewEmployees.Size = new System.Drawing.Size(1230, 612);
+            this.listViewEmployees.Size = new System.Drawing.Size(1230, 734);
             this.listViewEmployees.TabIndex = 3;
             this.listViewEmployees.UseCompatibleStateImageBehavior = false;
             this.listViewEmployees.View = System.Windows.Forms.View.Details;
@@ -214,27 +217,59 @@
             this.btnAddEmployee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
             this.btnAddEmployee.FlatAppearance.BorderSize = 0;
             this.btnAddEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddEmployee.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnAddEmployee.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnAddEmployee.ForeColor = System.Drawing.Color.White;
-            this.btnAddEmployee.Location = new System.Drawing.Point(12, 871);
+            this.btnAddEmployee.Location = new System.Drawing.Point(4, 881);
             this.btnAddEmployee.Name = "btnAddEmployee";
-            this.btnAddEmployee.Size = new System.Drawing.Size(246, 52);
+            this.btnAddEmployee.Size = new System.Drawing.Size(195, 42);
             this.btnAddEmployee.TabIndex = 35;
             this.btnAddEmployee.Text = "Add Employee";
             this.btnAddEmployee.UseVisualStyleBackColor = false;
             this.btnAddEmployee.Click += new System.EventHandler(this.btnAddEmployee_Click);
             // 
-            // fEmployee
+            // btnUpdateEmployee
+            // 
+            this.btnUpdateEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnUpdateEmployee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
+            this.btnUpdateEmployee.FlatAppearance.BorderSize = 0;
+            this.btnUpdateEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdateEmployee.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnUpdateEmployee.ForeColor = System.Drawing.Color.White;
+            this.btnUpdateEmployee.Location = new System.Drawing.Point(214, 881);
+            this.btnUpdateEmployee.Name = "btnUpdateEmployee";
+            this.btnUpdateEmployee.Size = new System.Drawing.Size(195, 42);
+            this.btnUpdateEmployee.TabIndex = 36;
+            this.btnUpdateEmployee.Text = "Update Employee";
+            this.btnUpdateEmployee.UseVisualStyleBackColor = false;
+            // 
+            // btnDeleteEmployee
+            // 
+            this.btnDeleteEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteEmployee.BackColor = System.Drawing.Color.DarkRed;
+            this.btnDeleteEmployee.FlatAppearance.BorderSize = 0;
+            this.btnDeleteEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteEmployee.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnDeleteEmployee.ForeColor = System.Drawing.Color.White;
+            this.btnDeleteEmployee.Location = new System.Drawing.Point(1039, 881);
+            this.btnDeleteEmployee.Name = "btnDeleteEmployee";
+            this.btnDeleteEmployee.Size = new System.Drawing.Size(195, 42);
+            this.btnDeleteEmployee.TabIndex = 37;
+            this.btnDeleteEmployee.Text = "Delete Employee";
+            this.btnDeleteEmployee.UseVisualStyleBackColor = false;
+            // 
+            // Employee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1238, 935);
+            this.Controls.Add(this.btnDeleteEmployee);
+            this.Controls.Add(this.btnUpdateEmployee);
             this.Controls.Add(this.btnAddEmployee);
             this.Controls.Add(this.lblEmployees);
             this.Controls.Add(this.listViewEmployees);
             this.Controls.Add(this.gboxSearchUsers);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "fEmployee";
+            this.Name = "Employee";
             this.Text = "TestForm2";
             this.gboxSearchUsers.ResumeLayout(false);
             this.gboxSearchUsers.PerformLayout();
@@ -260,5 +295,7 @@
         private Button btnAddEmployee;
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
+        private Button btnUpdateEmployee;
+        private Button btnDeleteEmployee;
     }
 }

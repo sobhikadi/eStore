@@ -16,36 +16,32 @@ namespace DataAccessLayer
         private string connectionString = "server=mssqlstud.fhict.local;" + "database=dbi376372;" + "user id=dbi376372;" + "password=Mky3S[elWm;" + "connect timeout=30;";
 
 
-        public int InsertEmployee(Employee employee)
+        public void InsertEmployee(Employee employee)
         {
-            int employeeId;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
 
                 conn.Open();
-                string sql = "insert into Users (firstName, lastName, email, password, phoneNumber, address, postalCode) values (@firstName, @lastName, @email, @password, @phoneNumber, @address, @postalCode); select SCOPE_IDENTITY(); insert into Employee (id, role) values (SCOPE_IDENTITY(), @role)";
+                string sql = "insert into Users (firstName, lastName, email,salt, password, phoneNumber, address, postalCode) values (@firstName, @lastName, @email, @salt, @password, @phoneNumber, @address, @postalCode); select SCOPE_IDENTITY(); insert into Employee (id, role) values (SCOPE_IDENTITY(), @role)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@firstName", employee.FirstName);
                 cmd.Parameters.AddWithValue("@lastName", employee.LastName);
                 cmd.Parameters.AddWithValue("@email", employee.Email);
+                cmd.Parameters.AddWithValue("@salt", employee.SaltPassword);
                 cmd.Parameters.AddWithValue("@password", employee.Password);
                 cmd.Parameters.AddWithValue("@phoneNumber", employee.PhoneNumber);
                 cmd.Parameters.AddWithValue("@address", employee.Address);
                 cmd.Parameters.AddWithValue("@postalCode", employee.PostalCode);
                 cmd.Parameters.AddWithValue("@role", employee.Role);
 
-                SqlDataReader dr = cmd.ExecuteReader();
-                dr.Read();
-                employeeId = Convert.ToInt32(dr[0]);
+                cmd.ExecuteNonQuery();
 
                 conn.Close();
             }
-            return employeeId;
         }
 
-        public int InsertCustomer(Customer customer)
+        public void InsertCustomer(Customer customer)
         {
-            int customerId;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -68,12 +64,9 @@ namespace DataAccessLayer
                 if (!string.IsNullOrEmpty(customer.BillingPostalCode)) cmd.Parameters.AddWithValue("@billingPostalCode", customer.BillingPostalCode);
                 else cmd.Parameters.AddWithValue("@billingPostalCode", DBNull.Value);
 
-                SqlDataReader dr = cmd.ExecuteReader();
-                dr.Read();
-                customerId = Convert.ToInt32(dr[0]);
+                cmd.ExecuteNonQuery();
                 conn.Close();
             }
-            return customerId;
         }
 
         public List<Person> GetAllUsers()
@@ -105,11 +98,10 @@ namespace DataAccessLayer
                     if (drCus["billingPostalCode"] != DBNull.Value) billingPostalCode = (string)drCus["billingPostalCode"];
                     else billingPostalCode = null;
 
-                    users.Add(new Customer(Convert.ToInt32(drCus["id"]), (string)drCus["firstName"], (string)drCus["lastname"], (string)drCus["email"], (string)drCus["password"], phoneNumber, address, postalCode, billingAddress, billingPostalCode));
+                    users.Add(new Customer(Convert.ToInt32(drCus["id"]), (string)drCus["firstName"], (string)drCus["lastname"], (string)drCus["email"], phoneNumber, address, postalCode, billingAddress, billingPostalCode));
                 }
                 conn.Close();
 
-             
                 conn.Open();
                 string sqlEmp =
                     " select users.Id, firstName, lastName, email, [Password], phoneNumber, [Address], postalCode, [role] from users inner join Employee on Users.Id = Employee.Id order by users.id;";
@@ -129,14 +121,56 @@ namespace DataAccessLayer
                     if (drEmp["postalCode"] != DBNull.Value) postalCode = (string)drEmp["postalCode"];
                     else postalCode = null;
 
-                    users.Add(new Employee(Convert.ToInt32(drEmp["id"]), (string)drEmp["firstName"], (string)drEmp["lastName"], (string)drEmp["email"], (string)drEmp["Password"], (string)drEmp["phoneNumber"], (string)drEmp["address"], (string)drEmp["postalCode"], (string)drEmp["role"]));
+                    users.Add(new Employee(Convert.ToInt32(drEmp["id"]), (string)drEmp["firstName"], (string)drEmp["lastName"], (string)drEmp["email"], (string)drEmp["phoneNumber"], (string)drEmp["address"], (string)drEmp["postalCode"], (string)drEmp["role"]));
                    
                 }
                 conn.Close();
-               
-
             }
             return users;
+        }
+
+
+        public byte[] GetSalt(string email) 
+        {
+            byte[] salt = null;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql ="select salt from users where email = @email;";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@email", email);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read()) 
+                {
+                   salt = (byte[])dr["salt"];
+                }
+            }
+            return salt;
+        }
+
+        public string ComaparePassword(string email, byte[] password) 
+        {
+            string role = "";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "select role from Employee inner join users on employee.id = users.id where users.email = @email AND users.password = @password;";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@password", password);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                   role = (string)dr["role"];
+                }
+            }
+            return role;
         }
 
     }

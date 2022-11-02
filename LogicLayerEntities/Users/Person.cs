@@ -12,7 +12,7 @@ namespace LogicLayerEntities.Users
 {
     public abstract class Person
     {
-        string firstName, lastName, email, phoneNumber, address, postalCode;
+        private string firstName, lastName, email, phoneNumber, address, postalCode;
 
         public int Id { get; private set; }
         public string FirstName 

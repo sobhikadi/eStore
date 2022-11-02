@@ -99,7 +99,7 @@ namespace Desktop_app.Forms
 
         private void btnProducts_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.Products(), sender);
+            OpenChildForm(new Forms.fProducts(), sender);
         }
 
         private void btnEmployees_Click(object sender, EventArgs e)

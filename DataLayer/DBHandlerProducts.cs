@@ -15,14 +15,13 @@ namespace DataAccessLayer
         private string connectionString = "server=mssqlstud.fhict.local;" + "database=dbi376372;" + "user id=dbi376372;" + "password=Mky3S[elWm;" + "connect timeout=30;";
 
 
-        public int InsertProduct(Product product)
+        public void InsertProduct(Product product)
         {
-            int productId;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
 
                 conn.Open();
-                string sql = "insert into Product (name, quantity, price, category, subcategory, description, isbn, platform, serialNumber, color) values (@name, @quantity, @price, @category, @subCategory, @description, @isbn, @platform, @serialNumber, @color); select SCOPE_IDENTITY()";
+                string sql = "insert into Product (name, quantity, price, category, subcategory, description, isbn, platform, serialNumber, color) values (@name, @quantity, @price, @category, @subCategory, @description, @isbn, @platform, @serialNumber, @color);";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@name", product.Name);
                 cmd.Parameters.AddWithValue("@quantity", product.QuantityInStock);
@@ -39,14 +38,11 @@ namespace DataAccessLayer
                 if (!string.IsNullOrEmpty(product.Color)) cmd.Parameters.AddWithValue("@color", product.Color);
                 else cmd.Parameters.AddWithValue("@color", DBNull.Value);
 
-                SqlDataReader dr = cmd.ExecuteReader();
-                dr.Read();
-                productId = Convert.ToInt32(dr[0]);
+                cmd.ExecuteNonQuery();
 
                 conn.Close();
-
             }
-            return productId;
+
         }
 
         public List<Product> GetAllProducts()

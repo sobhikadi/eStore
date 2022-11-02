@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace Desktop_app.Forms
 {
-    public partial class Products : Form
+    public partial class fProducts : Form
     {
         private ProductHandler productHandler;
 
@@ -21,7 +21,7 @@ namespace Desktop_app.Forms
 
         public static bool ADD_PRODUCT_FORM_OPEN = false;
 
-        public Products()
+        public fProducts()
         {
             InitializeComponent();
             productHandler = new ProductHandler();
@@ -70,7 +70,8 @@ namespace Desktop_app.Forms
             item.Tag = product;
             item.SubItems.Add(product.Name);
             item.SubItems.Add(product.QuantityInStock.ToString());
-            item.SubItems.Add(product.GetType().Name);
+            item.SubItems.Add(product.Category);
+            item.SubItems.Add(product.SubCategory);
             item.SubItems.Add(product.Price.ToString());
 
             listViewProducts.Items.Add(item);
@@ -90,6 +91,11 @@ namespace Desktop_app.Forms
                 ADD_PRODUCT_FORM_OPEN = true;
                 addProductForm.Show();
             }
+        }
+
+        private void btnComboProducts_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

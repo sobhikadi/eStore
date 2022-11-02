@@ -23,6 +23,9 @@ namespace Desktop_app.Forms
         {
             InitializeComponent();
             this.productHandler = productHandler;
+
+            cboxCatgeory.DataSource = null;
+            cboxCatgeory.DataSource = Enum.GetValues(typeof(Categories));
         }
 
         private void cboxCatgeory_SelectedIndexChanged(object sender, EventArgs e)
@@ -30,51 +33,49 @@ namespace Desktop_app.Forms
             if (cboxCatgeory.Text == Categories.Households.ToString())
             {
                 tbProductColor.Enabled = true;
-                tbSeriaNumber.Enabled = false;
+                tbSerialNumber.Enabled = false;
                 tbGamePlatform.Enabled = false;
                 tbBookIsbn.Enabled = false;
             }
             if (cboxCatgeory.Text == Categories.Electronics.ToString())
             {
                 tbProductColor.Enabled = true;
-                tbSeriaNumber.Enabled = true;
+                tbSerialNumber.Enabled = true;
                 tbGamePlatform.Enabled = false;
                 tbBookIsbn.Enabled = false;
             }
             if (cboxCatgeory.Text == Categories.Books.ToString())
             {
                 tbProductColor.Enabled = false;
-                tbSeriaNumber.Enabled = false;
+                tbSerialNumber.Enabled = false;
                 tbGamePlatform.Enabled = false;
                 tbBookIsbn.Enabled = true;
             }
             if (cboxCatgeory.Text == Categories.VedioGames.ToString())
             {
                 tbProductColor.Enabled = false;
-                tbSeriaNumber.Enabled = false;
+                tbSerialNumber.Enabled = false;
                 tbGamePlatform.Enabled = true;
                 tbBookIsbn.Enabled = false;
             }
         }
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
-            string name, category, subCategory, description, isbn, gamePlatform, serialNumber, color;
+            string name, category, subCategory, description;
+            string? isbn, gamePlatform, serialNumber, color;
             int quantity;
             double price;
 
             try
             {
+ 
+                if (string.IsNullOrEmpty(tbProductQuantity.Text)) { throw new ArgumentException("Please enter the quantity"); }
+                if (string.IsNullOrEmpty(tbProductPrice.Text)) { throw new ArgumentException("Please enter a price"); }
 
-                //if (string.IsNullOrEmpty(tbProductName.Text)) { MessageBox.Show("Please enter a name"); return; }
-                if (string.IsNullOrEmpty(tbProductQuantity.Text)) { MessageBox.Show("Please enter the quantity"); return; }
-                if (string.IsNullOrEmpty(tbProductPrice.Text)) { MessageBox.Show("Please enter a price"); return; }
-                if (string.IsNullOrEmpty(cboxCatgeory.Text)) { MessageBox.Show("Please select a category"); return; }
-                if (string.IsNullOrEmpty(tbsubCaregory.Text)) { MessageBox.Show("Please enter a subcategory"); return; }
-                if (string.IsNullOrEmpty(tbProductDescription.Text)) { MessageBox.Show("Please enter product description"); return; }
-                if (tbBookIsbn.Enabled && string.IsNullOrEmpty(tbBookIsbn.Text)) { MessageBox.Show("Please enter book's ISBN"); return; }
-                if (tbGamePlatform.Enabled && string.IsNullOrEmpty(tbGamePlatform.Text)) { MessageBox.Show("Please enter game's platform"); return; }
-                if (tbProductColor.Enabled && string.IsNullOrEmpty(tbProductColor.Text)) { MessageBox.Show("Please enter the color"); return; }
-                if (tbSeriaNumber.Enabled && string.IsNullOrEmpty(tbSeriaNumber.Text)) { MessageBox.Show("Please enter the serial number"); return; }
+                if (tbBookIsbn.Enabled && string.IsNullOrEmpty(tbBookIsbn.Text)) { throw new ArgumentException("Book Isbn msut be entered"); }
+                if (tbGamePlatform.Enabled && string.IsNullOrEmpty(tbGamePlatform.Text)) { throw new ArgumentException("game platform msut be entered"); }
+                if (tbProductColor.Enabled && string.IsNullOrEmpty(tbProductColor.Text)) { throw new ArgumentException("Color msut be entered"); }
+                if (tbSerialNumber.Enabled && string.IsNullOrEmpty(tbSerialNumber.Text)) { throw new ArgumentException("serial number msut be entered"); }
 
                 name = tbProductName.Text;
                 quantity = Convert.ToInt32(tbProductQuantity.Text);
@@ -85,22 +86,12 @@ namespace Desktop_app.Forms
                 isbn = tbBookIsbn.Text;
                 gamePlatform = tbGamePlatform.Text;
                 color = tbProductColor.Text;
-                serialNumber = tbSeriaNumber.Text;
+                serialNumber = tbSerialNumber.Text;
 
-
+                
 
                 Product product = new Product(name, description, quantity, price, category, subCategory, isbn, serialNumber, color, gamePlatform);
-
-                ValidationContext context = new ValidationContext(product, null, null);
-                List<ValidationResult> errors = new List<ValidationResult>();
-                if (!Validator.TryValidateObject(product, context, errors, true))
-                {
-                    foreach (ValidationResult result in errors)
-                    {
-                        MessageBox.Show(result.ErrorMessage);
-                    }
-                }
-
+            
                 productHandler.AddProduct(product);
 
                 foreach (Control co in this.Controls)
@@ -111,7 +102,7 @@ namespace Desktop_app.Forms
                     }
                 }
                 MessageBox.Show("Product added successfully!");
-                Products.ADD_PRODUCT_FORM_OPEN = false;
+                fProducts.ADD_PRODUCT_FORM_OPEN = false;
                 this.Close();
             }
             catch (Exception ex)
@@ -122,7 +113,7 @@ namespace Desktop_app.Forms
         }
         private void fAddProduct_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Products.ADD_PRODUCT_FORM_OPEN = false;
+            fProducts.ADD_PRODUCT_FORM_OPEN = false;
         }
     }
 }

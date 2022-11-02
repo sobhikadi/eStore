@@ -40,7 +40,7 @@
             this.lblProductDescription = new System.Windows.Forms.Label();
             this.tbProductName = new System.Windows.Forms.TextBox();
             this.lblProductName = new System.Windows.Forms.Label();
-            this.tbSeriaNumber = new System.Windows.Forms.TextBox();
+            this.tbSerialNumber = new System.Windows.Forms.TextBox();
             this.lblSerialNumber = new System.Windows.Forms.Label();
             this.tbProductColor = new System.Windows.Forms.TextBox();
             this.lblProductColor = new System.Windows.Forms.Label();
@@ -53,17 +53,13 @@
             // 
             // cboxCatgeory
             // 
+            this.cboxCatgeory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxCatgeory.FormattingEnabled = true;
-            this.cboxCatgeory.Items.AddRange(new object[] {
-            "Books",
-            "Electronics",
-            "VedioGames",
-            "Households"});
             this.cboxCatgeory.Location = new System.Drawing.Point(173, 150);
             this.cboxCatgeory.MaximumSize = new System.Drawing.Size(731, 0);
             this.cboxCatgeory.Name = "cboxCatgeory";
             this.cboxCatgeory.Size = new System.Drawing.Size(615, 31);
-            this.cboxCatgeory.TabIndex = 24;
+            this.cboxCatgeory.TabIndex = 3;
             this.cboxCatgeory.SelectedIndexChanged += new System.EventHandler(this.cboxCatgeory_SelectedIndexChanged);
             // 
             // tbsubCaregory
@@ -72,7 +68,7 @@
             this.tbsubCaregory.MaximumSize = new System.Drawing.Size(731, 32);
             this.tbsubCaregory.Name = "tbsubCaregory";
             this.tbsubCaregory.Size = new System.Drawing.Size(615, 30);
-            this.tbsubCaregory.TabIndex = 23;
+            this.tbsubCaregory.TabIndex = 4;
             // 
             // label4
             // 
@@ -100,7 +96,7 @@
             this.tbProductPrice.MaximumSize = new System.Drawing.Size(731, 32);
             this.tbProductPrice.Name = "tbProductPrice";
             this.tbProductPrice.Size = new System.Drawing.Size(615, 30);
-            this.tbProductPrice.TabIndex = 20;
+            this.tbProductPrice.TabIndex = 2;
             // 
             // lblProductPrice
             // 
@@ -118,7 +114,7 @@
             this.tbProductQuantity.MaximumSize = new System.Drawing.Size(731, 32);
             this.tbProductQuantity.Name = "tbProductQuantity";
             this.tbProductQuantity.Size = new System.Drawing.Size(615, 30);
-            this.tbProductQuantity.TabIndex = 18;
+            this.tbProductQuantity.TabIndex = 1;
             // 
             // lblQuantity
             // 
@@ -138,7 +134,7 @@
             this.tbProductDescription.Name = "tbProductDescription";
             this.tbProductDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbProductDescription.Size = new System.Drawing.Size(615, 114);
-            this.tbProductDescription.TabIndex = 16;
+            this.tbProductDescription.TabIndex = 5;
             // 
             // lblProductDescription
             // 
@@ -156,7 +152,7 @@
             this.tbProductName.MaximumSize = new System.Drawing.Size(731, 32);
             this.tbProductName.Name = "tbProductName";
             this.tbProductName.Size = new System.Drawing.Size(615, 30);
-            this.tbProductName.TabIndex = 14;
+            this.tbProductName.TabIndex = 0;
             // 
             // lblProductName
             // 
@@ -168,14 +164,14 @@
             this.lblProductName.TabIndex = 13;
             this.lblProductName.Text = "Name";
             // 
-            // tbSeriaNumber
+            // tbSerialNumber
             // 
-            this.tbSeriaNumber.Enabled = false;
-            this.tbSeriaNumber.Location = new System.Drawing.Point(173, 497);
-            this.tbSeriaNumber.MaximumSize = new System.Drawing.Size(618, 31);
-            this.tbSeriaNumber.Name = "tbSeriaNumber";
-            this.tbSeriaNumber.Size = new System.Drawing.Size(615, 30);
-            this.tbSeriaNumber.TabIndex = 32;
+            this.tbSerialNumber.Enabled = false;
+            this.tbSerialNumber.Location = new System.Drawing.Point(173, 497);
+            this.tbSerialNumber.MaximumSize = new System.Drawing.Size(618, 31);
+            this.tbSerialNumber.Name = "tbSerialNumber";
+            this.tbSerialNumber.Size = new System.Drawing.Size(615, 30);
+            this.tbSerialNumber.TabIndex = 9;
             // 
             // lblSerialNumber
             // 
@@ -194,7 +190,7 @@
             this.tbProductColor.MaximumSize = new System.Drawing.Size(618, 31);
             this.tbProductColor.Name = "tbProductColor";
             this.tbProductColor.Size = new System.Drawing.Size(615, 30);
-            this.tbProductColor.TabIndex = 30;
+            this.tbProductColor.TabIndex = 8;
             // 
             // lblProductColor
             // 
@@ -213,7 +209,7 @@
             this.tbGamePlatform.MaximumSize = new System.Drawing.Size(618, 31);
             this.tbGamePlatform.Name = "tbGamePlatform";
             this.tbGamePlatform.Size = new System.Drawing.Size(615, 30);
-            this.tbGamePlatform.TabIndex = 28;
+            this.tbGamePlatform.TabIndex = 7;
             // 
             // lblGamePlatform
             // 
@@ -232,7 +228,7 @@
             this.tbBookIsbn.MaximumSize = new System.Drawing.Size(618, 31);
             this.tbBookIsbn.Name = "tbBookIsbn";
             this.tbBookIsbn.Size = new System.Drawing.Size(615, 30);
-            this.tbBookIsbn.TabIndex = 26;
+            this.tbBookIsbn.TabIndex = 6;
             // 
             // lblIsbn
             // 
@@ -255,18 +251,18 @@
             this.btnAddProduct.Location = new System.Drawing.Point(595, 551);
             this.btnAddProduct.Name = "btnAddProduct";
             this.btnAddProduct.Size = new System.Drawing.Size(194, 34);
-            this.btnAddProduct.TabIndex = 33;
+            this.btnAddProduct.TabIndex = 10;
             this.btnAddProduct.Text = "Add";
             this.btnAddProduct.UseVisualStyleBackColor = false;
             this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
             // 
-            // fAddProduct
+            // AddProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(814, 599);
             this.Controls.Add(this.btnAddProduct);
-            this.Controls.Add(this.tbSeriaNumber);
+            this.Controls.Add(this.tbSerialNumber);
             this.Controls.Add(this.lblSerialNumber);
             this.Controls.Add(this.tbProductColor);
             this.Controls.Add(this.lblProductColor);
@@ -287,7 +283,7 @@
             this.Controls.Add(this.tbProductName);
             this.Controls.Add(this.lblProductName);
             this.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Name = "fAddProduct";
+            this.Name = "AddProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddProduct";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fAddProduct_FormClosing);
@@ -310,7 +306,7 @@
         private Label lblProductDescription;
         private TextBox tbProductName;
         private Label lblProductName;
-        private TextBox tbSeriaNumber;
+        private TextBox tbSerialNumber;
         private Label lblSerialNumber;
         private TextBox tbProductColor;
         private Label lblProductColor;

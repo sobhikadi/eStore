@@ -6,20 +6,25 @@ namespace LogicLayerHandlers
     public class ProductHandler
     {
         private DBHandlerProducts dbHandlerProducts = new DBHandlerProducts();
-        private List<Product> products;
-        public IList<Product> Products { get { return products.AsReadOnly(); } }
+
+        private List<ComboProduct> comboProducts;
 
         public ProductHandler()
         {
-            products = new List<Product>();
-            products = dbHandlerProducts.GetAllProducts();
+            comboProducts = new List<ComboProduct>();
         }
+        public IList<Product> Products { get { return dbHandlerProducts.GetAllProducts().AsReadOnly(); } }
+        public IList<ComboProduct> ComboProducts { get { return comboProducts.AsReadOnly(); } }
 
         public void AddProduct(Product product)
         {
-            int id = dbHandlerProducts.InsertProduct(product);
-            product.Id = id;
-            products.Add(product);
+           dbHandlerProducts.InsertProduct(product); 
         }
+
+        public void AddComboProduct(ComboProduct comboProduct) 
+        {
+            this.comboProducts.Add(comboProduct);
+        }
+
     }
 }

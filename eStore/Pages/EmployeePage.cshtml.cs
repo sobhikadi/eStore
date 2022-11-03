@@ -1,18 +1,16 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace eStore.Pages
 {
-    [Authorize]
-    public class UserPageModel : PageModel
+    public class EmployeePageModel : PageModel
     {
         public void OnGet()
         {
-            if(HttpContext.Session.GetString("user") != null) 
+            if (HttpContext.Session.GetString("user") != null)
             {
                 string[] sessionValue = HttpContext.Session.GetString("user").Split("-");
-                if (sessionValue[1] != "Customer")
+                if (sessionValue[1] != "Employee")
                 {
                     Response.Redirect("LogIn");
                 }

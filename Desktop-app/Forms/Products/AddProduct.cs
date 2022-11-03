@@ -90,7 +90,7 @@ namespace Desktop_app.Forms
 
                 
 
-                Product product = new Product(name, description, quantity, price, category, subCategory, isbn, serialNumber, color, gamePlatform);
+                SingleProduct product = new SingleProduct(name, description, quantity, price, category, subCategory, isbn, serialNumber, color, gamePlatform);
             
                 productHandler.AddProduct(product);
 

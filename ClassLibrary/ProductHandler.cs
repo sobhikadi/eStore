@@ -13,10 +13,10 @@ namespace LogicLayerHandlers
         {
             comboProducts = new List<ComboProduct>();
         }
-        public IList<Product> Products { get { return dbHandlerProducts.GetAllProducts().AsReadOnly(); } }
+        public IList<SingleProduct> Products { get { return dbHandlerProducts.GetAllProducts().AsReadOnly(); } }
         public IList<ComboProduct> ComboProducts { get { return comboProducts.AsReadOnly(); } }
 
-        public void AddProduct(Product product)
+        public void AddProduct(SingleProduct product)
         {
            dbHandlerProducts.InsertProduct(product); 
         }

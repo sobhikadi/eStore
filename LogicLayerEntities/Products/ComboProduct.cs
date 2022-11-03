@@ -6,39 +6,53 @@ using System.Threading.Tasks;
 
 namespace LogicLayerEntities.Products
 {
-    public class ComboProduct
+    public class ComboProduct : Product
     {
-        private List<Product> products;
-        private double price;
-        private int quantity;
-        private string name;
+        private ProductStockComparer productStockComparer;
+        private List<SingleProduct> products;
+        private double discount;
 
-        public int Id { get; private set; }
-        public string Name { get { return name; } set { name = value; } }
-        public double Price { get { return price; } private set { price = value; } }
-        public int Quantity { get { return quantity; } private set { quantity = value; } }
+        public double Discount { get { return discount; } private set { discount = value; } }
 
-        public ComboProduct(string name, List<Product> products, double discount, int quantity) 
+
+        public ComboProduct(string name, List<SingleProduct> products, double discount) : base(name)
         {
-            Name = name;
-            this.products = new List<Product>();
+            this.products = new List<SingleProduct>();
             this.products = products;
-            Price = (((products.Sum(p => p.Price) / 100) - discount) * 100);
-            Quantity = quantity;
+            Discount = discount;
         }
-        public ComboProduct(int id, string name, List<Product> products, double discount, int quantity)
+        public ComboProduct(int id, string name, List<SingleProduct> products, double discount, int quantity) : base(id, name)
         {
-            Id = id;
-            Name = name;
-            this.products = new List<Product>();
+            this.products = new List<SingleProduct>();
             this.products = products;
-            Price = (((products.Sum(p => p.Price) / 100) - discount) * 100);
-            Quantity = quantity;
+            Discount = discount;
         }
 
-        public IList<Product> Products { get { return products.AsReadOnly(); } }
+        public IList<SingleProduct> Products { get { return products.AsReadOnly(); } }
 
+        public override double GetPrice()
+        {  
+            return ((products.Sum(p => p.Price) / 100) - Discount) * 100;
+        }
 
-      
+        public override int GetQuantity()
+        {
+            SortByQuantity();
+            return products[-1].GetQuantity();
+        }
+
+        public void SortByQuantity()
+        {
+            // Ensure creation of at most one instance
+            if (this.productStockComparer == null)
+                this.productStockComparer = new ProductStockComparer();
+
+            this.products.Sort(this.productStockComparer);
+        }
+
+        public override bool InStock()
+        {
+            return GetQuantity() > 0;
+        }
     }
 }

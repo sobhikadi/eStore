@@ -1,5 +1,6 @@
 ﻿using LogicLayerEntities;
 using LogicLayerEntities.Products;
+using LogicLayerEntities.Users;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
@@ -15,7 +16,7 @@ namespace DataAccessLayer
         private string connectionString = "server=mssqlstud.fhict.local;" + "database=dbi376372;" + "user id=dbi376372;" + "password=Mky3S[elWm;" + "connect timeout=30;";
 
 
-        public void InsertProduct(Product product)
+        public void InsertProduct(SingleProduct product)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -45,9 +46,9 @@ namespace DataAccessLayer
 
         }
 
-        public List<Product> GetAllProducts()
+        public List<SingleProduct> GetAllProducts()
         {
-            List<Product> products = new List<Product>();
+            List<SingleProduct> products = new List<SingleProduct>();
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -70,12 +71,64 @@ namespace DataAccessLayer
                     if (dr["platform"] != DBNull.Value) platform = (string)dr["platform"];
                     else platform = null;
 
-                    products.Add(new Product(Convert.ToInt32(dr["id"]), (string)dr["name"], (string)dr["description"], Convert.ToInt32(dr["quantity"]), Convert.ToDouble(dr["price"]), (string)dr["category"], (string)dr["subCategory"], isbn, serialNumber, color, platform));
+                    products.Add(new SingleProduct(Convert.ToInt32(dr["id"]), (string)dr["name"], (string)dr["description"], Convert.ToInt32(dr["quantity"]), Convert.ToDouble(dr["price"]), (string)dr["category"], (string)dr["subCategory"], isbn, serialNumber, color, platform));
                 }
                 conn.Close();
             }
             return products;
         }
+
+        //public static IList<Product> SearchProduct(string term, SearchTypeProduct type)
+        //{
+        //    IList<Animal> animals = new List<Animal>();
+        //    string query;
+        //    int int_search_term;
+        //    if (type == SearchTypeAnimal.Type)
+        //    {
+        //        query = $"SELECT id, nickname, species, type, gender, alive, date_of_birth, date_of_entry, location FROM Animal WHERE {type.ToString().ToLower()} = {(int)(AnimalType)Enum.Parse(typeof(AnimalType), term)} ORDER BY id;";
+
+        //    }
+        //    else if (type == SearchTypeAnimal.Gender)
+        //    {
+        //        query = $"SELECT id, nickname, species, type, gender, alive, date_of_birth, date_of_entry, location FROM Animal WHERE {type.ToString().ToLower()} = {(int)(AnimalGender)Enum.Parse(typeof(AnimalGender), term)} ORDER BY id;";
+
+        //    }
+        //    else
+        //    {
+        //        query = $"SELECT id, nickname, species, type, gender, alive, date_of_birth, date_of_entry, location FROM Animal WHERE LOWER({type.ToString()}) LIKE '%{term}%' ORDER BY id;";
+        //    }
+        //    using (SqlConnection conn = new SqlConnection(adress))
+        //    {
+        //        using (SqlCommand cmd = new SqlCommand(query, conn))
+        //        {
+        //            conn.Open();
+        //            SqlDataReader reader = cmd.ExecuteReader();
+        //            if (reader.HasRows)
+        //            {
+        //                while (reader.Read())
+        //                {
+        //                    int id = reader.GetInt32(0);
+        //                    string nickName = reader.GetString(1);
+        //                    string species = reader.GetString(2);
+        //                    int typ = reader.GetInt32(3);
+        //                    int gender = reader.GetInt32(4);
+        //                    bool alive = reader.GetBoolean(5);
+        //                    DateTime dateOfBirth = reader.GetDateTime(6);
+        //                    DateTime dateOfEntry = reader.GetDateTime(7);
+        //                    string location = reader.GetString(8);
+        //                    animals.Add(new(id, nickName, species, typ, gender, alive, dateOfBirth, dateOfEntry, location));
+        //                }
+        //            }
+        //            else
+        //            {
+        //                throw new Exception("No results found");
+        //            }
+        //        }
+        //    }
+        //    return animals;
+        //}
+
+        
 
     }
 }

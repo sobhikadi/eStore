@@ -114,8 +114,22 @@ namespace Desktop_app.Forms
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            this.Close();
-            fLogin.Show();
+            DialogResult dr = MessageBox.Show("All the open windowswill be closed and unsaved data will be lost! Do you still want to procceed ?", "LogOut?", MessageBoxButtons.YesNo);
+            if (dr == DialogResult.Yes)
+            {
+                List<Form> openForms = new List<Form>();
+
+                foreach (Form f in Application.OpenForms)
+                    openForms.Add(f);
+
+                foreach (Form f in openForms)
+                {
+                    if (f.Name != "LogIn")
+                        f.Close();
+                }
+                fLogin.Show();
+            }
+            else return;
         }
 
         private void fMain_FormClosed(object sender, FormClosedEventArgs e)

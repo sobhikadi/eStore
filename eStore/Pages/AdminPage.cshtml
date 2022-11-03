@@ -1,0 +1,11 @@
+﻿@page
+@model eStore.Pages.AdminPageModel
+@{
+	ViewData["Title"] = "Admin";
+}
+<div><p>User page</p>
+	@if (User.FindFirst("id") != null)
+	{
+		<p>your id is : @User.FindFirst("id").Value</p>
+	}
+<p>your name is : @User.Identity.Name</p></div>

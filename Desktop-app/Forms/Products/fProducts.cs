@@ -17,7 +17,7 @@ namespace Desktop_app.Forms
     {
         private ProductHandler productHandler;
 
-        private Product? selectedProductFromList;
+        private SingleProduct? selectedProductFromList;
 
         public static bool ADD_PRODUCT_FORM_OPEN = false;
 
@@ -33,7 +33,7 @@ namespace Desktop_app.Forms
             {
                 listViewProducts.Items.Clear();
 
-                foreach (Product product in productHandler.Products)
+                foreach (SingleProduct product in productHandler.Products)
                 {
                     AddProductToListView(product);
                 }
@@ -44,7 +44,7 @@ namespace Desktop_app.Forms
 
         private void listViewProducts_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            selectedProductFromList = (Product)e.Item.Tag;
+            selectedProductFromList = (SingleProduct)e.Item.Tag;
 
             foreach (KeyValuePair<string, string> spec in selectedProductFromList.Specifications) 
             {
@@ -64,7 +64,7 @@ namespace Desktop_app.Forms
             
         }
 
-        private void AddProductToListView(Product product)
+        private void AddProductToListView(SingleProduct product)
         {
             ListViewItem item = new ListViewItem(product.Id.ToString());
             item.Tag = product;

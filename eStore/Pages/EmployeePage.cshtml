@@ -1,9 +1,8 @@
 ﻿@page
-@model eStore.Pages.UserPageModel
+@model eStore.Pages.EmployeePageModel
 @{
-	ViewData["Title"] = "Customer";
+	ViewData["Title"] = "eStore - Employee";
 }
-<p>User page</p>
 @if (User.FindFirst("id") != null)
 {
 	<p>your id is : @User.FindFirst("id").Value</p>

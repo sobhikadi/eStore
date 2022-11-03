@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Desktop-app", "..\Desktop-a
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicLayerHandlers", "..\ClassLibrary\LogicLayerHandlers.csproj", "{F7D461A2-6027-487F-9FB5-5CF96886B5B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicLayerEntities", "..\LogicLayerEntities\LogicLayerEntities.csproj", "{23C7F37D-AEA7-468D-9D6F-20682E097DE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicLayerEntities", "..\LogicLayerEntities\LogicLayerEntities.csproj", "{23C7F37D-AEA7-468D-9D6F-20682E097DE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "..\DataLayer\DataAccessLayer.csproj", "{627A0329-1070-462C-9C39-953CA8BAC39B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "..\DataLayer\DataAccessLayer.csproj", "{627A0329-1070-462C-9C39-953CA8BAC39B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

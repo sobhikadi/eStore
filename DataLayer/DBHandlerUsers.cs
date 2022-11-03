@@ -173,5 +173,63 @@ namespace DataAccessLayer
             return role;
         }
 
+        //public static SearchEmployee(string term, SearchType type)
+        //{
+        //    Employee emp = null;
+        //    string qsrt = "id=0";
+        //    switch ((int)type)
+        //    {
+        //        case 0:
+        //            qsrt = $"id={term}";
+        //            break;
+        //        case 1:
+        //            qsrt = $"username='{term}'";
+        //            break;
+        //        case 2:
+        //            qsrt = $"first_name='{term}'";
+        //            break;
+        //        case 3:
+        //            qsrt = $"last_name='{term}'";
+        //            break;
+        //    }
+
+        //    using (SqlConnection conn = new SqlConnection(adress))
+        //    {
+        //        string quary = $"SELECT id, username, first_name, last_name, employee_status, phone_number, street, house_number, zipcode, city, email, bsn, d_o_b, emergency_contact FROM employee WHERE {qsrt} ORDER BY id;";
+        //        using (SqlCommand cmd = new SqlCommand(quary, conn))
+        //        {
+        //            conn.Open();
+        //            SqlDataReader result = cmd.ExecuteReader();
+        //            if (result.HasRows)
+        //            {
+        //                while (result.Read())
+        //                {
+        //                    int id = result.GetInt32(0);
+        //                    string uname = result.GetString(1);
+        //                    string fname = result.GetString(2);
+        //                    string lname = result.GetString(3);
+        //                    EmployeeStatus status = (EmployeeStatus)Enum.Parse(typeof(EmployeeStatus), result.GetString(4));
+        //                    string phnmb = result.GetString(5);
+        //                    string str = result.GetString(6);
+        //                    string hsnbr = result.GetString(7);
+        //                    string zcde = result.GetString(8);
+        //                    string city = result.GetString(9);
+        //                    string email = result.GetString(10);
+        //                    string bsn = result.GetString(11);
+        //                    DateTime dob = result.GetDateTime(12);
+        //                    string[] emc = result.GetString(13).Split("%");
+        //                    emp = new(id, uname, fname, lname, status, phnmb, str, hsnbr, zcde, city, email, bsn, dob, emc);
+        //                }
+        //            }
+        //            else
+        //            {
+        //                throw new Exception("No results found");
+        //            }
+        //        }
+        //    }
+
+        //    return emp;
+        //}
+
     }
 }

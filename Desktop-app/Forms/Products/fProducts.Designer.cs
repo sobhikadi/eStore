@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.gboxSearchProduct = new System.Windows.Forms.GroupBox();
+            this.cboxSearchTerm = new System.Windows.Forms.ComboBox();
             this.cboxSearchCriteria = new System.Windows.Forms.ComboBox();
             this.lblSearchCriteria = new System.Windows.Forms.Label();
             this.btnShowAllProducts = new System.Windows.Forms.Button();
@@ -46,9 +47,8 @@
             this.listViewProducts = new System.Windows.Forms.ListView();
             this.subCategory = new System.Windows.Forms.ColumnHeader();
             this.btnAddProduct = new System.Windows.Forms.Button();
-            this.btnOpenEditProduct = new System.Windows.Forms.Button();
+            this.btnOpenUpdateProduct = new System.Windows.Forms.Button();
             this.btnSpecifications = new System.Windows.Forms.Button();
-            this.btnProductDescription = new System.Windows.Forms.Button();
             this.btnProductReviews = new System.Windows.Forms.Button();
             this.btnDeleteProduct = new System.Windows.Forms.Button();
             this.btnComboProducts = new System.Windows.Forms.Button();
@@ -59,6 +59,7 @@
             // 
             this.gboxSearchProduct.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gboxSearchProduct.Controls.Add(this.cboxSearchTerm);
             this.gboxSearchProduct.Controls.Add(this.cboxSearchCriteria);
             this.gboxSearchProduct.Controls.Add(this.lblSearchCriteria);
             this.gboxSearchProduct.Controls.Add(this.btnShowAllProducts);
@@ -76,19 +77,28 @@
             this.gboxSearchProduct.TabStop = false;
             this.gboxSearchProduct.Text = "Search Product Or Show All Products";
             // 
+            // cboxSearchTerm
+            // 
+            this.cboxSearchTerm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboxSearchTerm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxSearchTerm.FormattingEnabled = true;
+            this.cboxSearchTerm.Location = new System.Drawing.Point(153, 23);
+            this.cboxSearchTerm.Name = "cboxSearchTerm";
+            this.cboxSearchTerm.Size = new System.Drawing.Size(754, 31);
+            this.cboxSearchTerm.TabIndex = 14;
+            // 
             // cboxSearchCriteria
             // 
             this.cboxSearchCriteria.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboxSearchCriteria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxSearchCriteria.FormattingEnabled = true;
-            this.cboxSearchCriteria.Items.AddRange(new object[] {
-            "Name",
-            "Category",
-            "Subcategory"});
             this.cboxSearchCriteria.Location = new System.Drawing.Point(153, 62);
             this.cboxSearchCriteria.Name = "cboxSearchCriteria";
             this.cboxSearchCriteria.Size = new System.Drawing.Size(754, 31);
             this.cboxSearchCriteria.TabIndex = 13;
+            this.cboxSearchCriteria.SelectedIndexChanged += new System.EventHandler(this.cboxSearchCriteria_SelectedIndexChanged);
             // 
             // lblSearchCriteria
             // 
@@ -132,6 +142,7 @@
             this.btnSearchProduct.TabIndex = 7;
             this.btnSearchProduct.Text = "Search";
             this.btnSearchProduct.UseVisualStyleBackColor = false;
+            this.btnSearchProduct.Click += new System.EventHandler(this.btnSearchProduct_Click);
             // 
             // tbSearchTerm
             // 
@@ -261,20 +272,21 @@
             this.btnAddProduct.UseVisualStyleBackColor = false;
             this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
             // 
-            // btnOpenEditProduct
+            // btnOpenUpdateProduct
             // 
-            this.btnOpenEditProduct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOpenEditProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
-            this.btnOpenEditProduct.FlatAppearance.BorderSize = 0;
-            this.btnOpenEditProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenEditProduct.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnOpenEditProduct.ForeColor = System.Drawing.Color.White;
-            this.btnOpenEditProduct.Location = new System.Drawing.Point(171, 886);
-            this.btnOpenEditProduct.Name = "btnOpenEditProduct";
-            this.btnOpenEditProduct.Size = new System.Drawing.Size(160, 42);
-            this.btnOpenEditProduct.TabIndex = 36;
-            this.btnOpenEditProduct.Text = "Edit Product";
-            this.btnOpenEditProduct.UseVisualStyleBackColor = false;
+            this.btnOpenUpdateProduct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnOpenUpdateProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
+            this.btnOpenUpdateProduct.FlatAppearance.BorderSize = 0;
+            this.btnOpenUpdateProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpenUpdateProduct.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnOpenUpdateProduct.ForeColor = System.Drawing.Color.White;
+            this.btnOpenUpdateProduct.Location = new System.Drawing.Point(171, 886);
+            this.btnOpenUpdateProduct.Name = "btnOpenUpdateProduct";
+            this.btnOpenUpdateProduct.Size = new System.Drawing.Size(160, 42);
+            this.btnOpenUpdateProduct.TabIndex = 36;
+            this.btnOpenUpdateProduct.Text = "Update Product";
+            this.btnOpenUpdateProduct.UseVisualStyleBackColor = false;
+            this.btnOpenUpdateProduct.Click += new System.EventHandler(this.btnOpenUpdateProduct_Click);
             // 
             // btnSpecifications
             // 
@@ -291,21 +303,6 @@
             this.btnSpecifications.Text = "Specifications";
             this.btnSpecifications.UseVisualStyleBackColor = false;
             // 
-            // btnProductDescription
-            // 
-            this.btnProductDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnProductDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
-            this.btnProductDescription.FlatAppearance.BorderSize = 0;
-            this.btnProductDescription.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnProductDescription.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnProductDescription.ForeColor = System.Drawing.Color.White;
-            this.btnProductDescription.Location = new System.Drawing.Point(503, 886);
-            this.btnProductDescription.Name = "btnProductDescription";
-            this.btnProductDescription.Size = new System.Drawing.Size(160, 42);
-            this.btnProductDescription.TabIndex = 39;
-            this.btnProductDescription.Text = "Description";
-            this.btnProductDescription.UseVisualStyleBackColor = false;
-            // 
             // btnProductReviews
             // 
             this.btnProductReviews.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -314,7 +311,7 @@
             this.btnProductReviews.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProductReviews.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnProductReviews.ForeColor = System.Drawing.Color.White;
-            this.btnProductReviews.Location = new System.Drawing.Point(669, 886);
+            this.btnProductReviews.Location = new System.Drawing.Point(503, 886);
             this.btnProductReviews.Name = "btnProductReviews";
             this.btnProductReviews.Size = new System.Drawing.Size(160, 42);
             this.btnProductReviews.TabIndex = 40;
@@ -344,7 +341,7 @@
             this.btnComboProducts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnComboProducts.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnComboProducts.ForeColor = System.Drawing.Color.White;
-            this.btnComboProducts.Location = new System.Drawing.Point(835, 886);
+            this.btnComboProducts.Location = new System.Drawing.Point(669, 886);
             this.btnComboProducts.Name = "btnComboProducts";
             this.btnComboProducts.Size = new System.Drawing.Size(160, 42);
             this.btnComboProducts.TabIndex = 42;
@@ -352,7 +349,7 @@
             this.btnComboProducts.UseVisualStyleBackColor = false;
             this.btnComboProducts.Click += new System.EventHandler(this.btnComboProducts_Click);
             // 
-            // Products
+            // fProducts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -360,10 +357,9 @@
             this.Controls.Add(this.btnComboProducts);
             this.Controls.Add(this.btnDeleteProduct);
             this.Controls.Add(this.btnProductReviews);
-            this.Controls.Add(this.btnProductDescription);
             this.Controls.Add(this.btnAddProduct);
             this.Controls.Add(this.btnSpecifications);
-            this.Controls.Add(this.btnOpenEditProduct);
+            this.Controls.Add(this.btnOpenUpdateProduct);
             this.Controls.Add(this.lboxProductSpecs);
             this.Controls.Add(this.lblSepcs);
             this.Controls.Add(this.lblProducts);
@@ -372,7 +368,8 @@
             this.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "Products";
+            this.Name = "fProducts";
+            this.Load += new System.EventHandler(this.fProducts_Load);
             this.gboxSearchProduct.ResumeLayout(false);
             this.gboxSearchProduct.PerformLayout();
             this.ResumeLayout(false);
@@ -399,12 +396,12 @@
         private ColumnHeader Price;
         private ListView listViewProducts;
         private Button btnAddProduct;
-        private Button btnOpenEditProduct;
+        private Button btnOpenUpdateProduct;
         private Button btnSpecifications;
-        private Button btnProductDescription;
         private Button btnProductReviews;
         private Button btnDeleteProduct;
         private ColumnHeader subCategory;
         private Button btnComboProducts;
+        private ComboBox cboxSearchTerm;
     }
 }

@@ -36,7 +36,7 @@ namespace eStore.Pages
             }
             else if (HttpContext.Session.GetString("user") != null) 
             {
-                string[] sessionValue = HttpContext.Session.GetString("user").Split();
+                string[] sessionValue = HttpContext.Session.GetString("user").Split("-");
                 role = sessionValue[1];
                 UserName = sessionValue[0];
             }
@@ -59,7 +59,7 @@ namespace eStore.Pages
            
             string role = userHandler.ValidateUser(UserName, Password);
 
-            if (role != "Employee" && role != "Admin")
+            if (role != "Employee" && role != "Admin" && role != "Customer")
             {
                 ViewData["LoginMessage"] = "Email or Passwrod is incorrect";
                 return Page();
@@ -67,7 +67,6 @@ namespace eStore.Pages
             //set a coockie to keep logged in 
             if (RememberMe)
             {
-                byte[] hshedUserName = HashUserName(UserName);
                 // set a coockie with a username
                 CookieOptions cookieOptions = new CookieOptions();
                 cookieOptions.Expires = DateTime.Now.AddDays(3);
@@ -92,17 +91,12 @@ namespace eStore.Pages
 
                 return new RedirectToPageResult("AdminPage");
             }
+            if (role == "Customer")
+            {
+
+                return new RedirectToPageResult("UserPage");
+            }
             return new RedirectToPageResult("LogIn");
         }
-
-        private byte[] HashUserName(string username)
-        {
-            Argon2id argon2 = new Argon2id(Encoding.UTF8.GetBytes(username));
-            argon2.DegreeOfParallelism = 2; // 4 cores of cpu
-            argon2.Iterations = 1;
-            argon2.MemorySize = 512; // 1 GB RAM
-            return argon2.GetBytes(16);
-        }
-
     }
 }

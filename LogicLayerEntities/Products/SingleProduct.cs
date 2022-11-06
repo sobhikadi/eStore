@@ -15,6 +15,7 @@ namespace LogicLayerEntities.Products
         private string? isbn, serialNumber, color, platform;
         private int quantity;
         private double price;
+        private byte[]? image;
 
         public string Description 
         {
@@ -104,6 +105,7 @@ namespace LogicLayerEntities.Products
                 platform = value;
             }
         }
+        public byte[]? Image { get { return image; } set { image = value; } }
 
         private List<Review> reviews;
         private Dictionary<string, string> specifications;
@@ -112,7 +114,7 @@ namespace LogicLayerEntities.Products
         public Dictionary<string, string> Specifications { get { return specifications; } }
 
 
-        public SingleProduct(string name, string description, int quantity, double price, string category, string subCategory, string? isbn, string? serialNumber, string? color, string? platform) : base(name)
+        public SingleProduct(string name, string description, int quantity, double price, string category, string subCategory, string? isbn, string? serialNumber, string? color, string? platform, byte[]? image, DateTime? lastModified) : base(name, lastModified)
         {
             Description = description;
             QuantityInStock = quantity;
@@ -123,11 +125,12 @@ namespace LogicLayerEntities.Products
             SerialNumber = serialNumber;
             Color = color;
             Platform = platform;
+            Image = image;
             reviews = new List<Review>();
             specifications = new Dictionary<string, string>();
         }
 
-        public SingleProduct(int id, string name, string description, int quantity, double price, string category, string subCategory, string? isbn, string? serialNumber, string? color, string? platform) : base(id, name)
+        public SingleProduct(int id, string name, string description, int quantity, double price, string category, string subCategory, string? isbn, string? serialNumber, string? color, string? platform, byte[]? image, DateTime? lastModified) : base(id, name, lastModified)
         {
             Description = description;
             QuantityInStock = quantity;
@@ -138,34 +141,25 @@ namespace LogicLayerEntities.Products
             SerialNumber = serialNumber;
             Color = color;
             Platform = platform;
+            Image = image;
             reviews = new List<Review>();
             specifications = new Dictionary<string, string>();
         }
 
-        public void ChangeDescription(string description)
+        public void ChangeInformation(SingleProduct product) 
         {
-            Description = description.Trim();
-        }
+            product.ChangeName(product.Name);
+            Description = product.Description;
+            QuantityInStock = product.QuantityInStock;
+            Price = product.Price;
+            Category = product.Category;
+            SubCategory = product.subCategory;
+            Isbn = product.Isbn;
+            SerialNumber = product.SerialNumber;
+            Color = product.Color;
+            Platform = product.Platform;
+            Image = product.Image;
 
-        public void IncreaseStock(int amount)
-        {
-            QuantityInStock += amount;  
-        }
-
-        public bool DecreaseStock(int amount)
-        {
-            if (QuantityInStock - amount < 0)
-            {
-                return false;
-            }
-            QuantityInStock -= amount;
-            return true;
-        }
-
-        public bool ChangePrice(double price) 
-        {
-            Price = price;
-            return true;
         }
 
         public override double GetPrice()

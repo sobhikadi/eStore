@@ -13,4 +13,11 @@ namespace LogicLayerEntities.Products
         VedioGames,
         Households
     }
+
+    public enum SearchTypeProduct 
+    {
+        Name,
+        Category,
+        Subcategory
+    }
 }

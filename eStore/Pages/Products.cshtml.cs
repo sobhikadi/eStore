@@ -7,14 +7,17 @@ namespace eStore.Pages
 {
     public class ProductsModel : PageModel
     {
-        public ProductHandler Handler { get; set; }
+        private ProductHandler Handler;
 
         public List<SingleProduct> Products { get; set; }
 
         public void OnGet()
         {
             Handler = new ProductHandler();
-            Products = Handler.Products.ToList<SingleProduct>();
+            foreach (SingleProduct product in Handler.Products) 
+            {
+                Products.Add(product);
+            }
         }
     }
 }

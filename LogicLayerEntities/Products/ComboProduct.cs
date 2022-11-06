@@ -15,13 +15,13 @@ namespace LogicLayerEntities.Products
         public double Discount { get { return discount; } private set { discount = value; } }
 
 
-        public ComboProduct(string name, List<SingleProduct> products, double discount) : base(name)
+        public ComboProduct(string name, List<SingleProduct> products, double discount, DateTime lastModified) : base(name, lastModified)
         {
             this.products = new List<SingleProduct>();
             this.products = products;
             Discount = discount;
         }
-        public ComboProduct(int id, string name, List<SingleProduct> products, double discount, int quantity) : base(id, name)
+        public ComboProduct(int id, string name, List<SingleProduct> products, double discount, int quantity, DateTime lastModified) : base(id, name, lastModified)
         {
             this.products = new List<SingleProduct>();
             this.products = products;

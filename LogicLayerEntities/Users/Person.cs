@@ -14,7 +14,7 @@ namespace LogicLayerEntities.Users
     {
         private string firstName, lastName, email, phoneNumber, address, postalCode;
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
         public string FirstName 
         {
             get { return firstName; }
@@ -66,9 +66,12 @@ namespace LogicLayerEntities.Users
             get { return address; }
             private set
             {
-                if (string.IsNullOrEmpty(value)) throw new ArgumentException("The field address cannot be empty");
-                Regex regex = new Regex(@"^\A(.*?)\s+(\d+[a-zA-Z]{0,1}\s{0,1}[-]{1}\s{0,1}\d*[a-zA-Z]{0,1}|\d+[a-zA-Z-]{0,1}\d*[a-zA-Z]{0,1})");
-                if (!regex.IsMatch(value)) throw new ArgumentException("Address has been entered in an incorrect format");
+                if (!string.IsNullOrEmpty(value))
+                {
+                    if (string.IsNullOrEmpty(value)) throw new ArgumentException("The field address cannot be empty");
+                    Regex regex = new Regex(@"^\A(.*?)\s+(\d+[a-zA-Z]{0,1}\s{0,1}[-]{1}\s{0,1}\d*[a-zA-Z]{0,1}|\d+[a-zA-Z-]{0,1}\d*[a-zA-Z]{0,1})");
+                    if (!regex.IsMatch(value)) throw new ArgumentException("Address has been entered in an incorrect format");
+                }
                 address = value;
             }
         }
@@ -78,9 +81,12 @@ namespace LogicLayerEntities.Users
             get { return postalCode; }
             private set
             {
-                if (string.IsNullOrEmpty(value)) throw new ArgumentException("The field zipcode cannot be empty");
+                if (!string.IsNullOrEmpty(value))
+                {
+                    if (string.IsNullOrEmpty(value)) throw new ArgumentException("The field zipcode cannot be empty");
                 Regex regex = new Regex(@"([0-9]{4})(\s?)([a-zA-Z]{2})");
                 if (!regex.IsMatch(value)) throw new ArgumentException("Zipcode has been entered in an incorrect format");
+                }
                 postalCode = value;
             }
         }

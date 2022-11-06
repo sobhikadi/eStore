@@ -16,33 +16,40 @@ namespace LogicLayerHandlers
     public class UserHandler
     {
         private DBHandlerUsers dbHandlerUsers = new DBHandlerUsers();
-        
+
+        private List<Person> users;
 
         public UserHandler()
         {
+            users = new List<Person>();
+            users = dbHandlerUsers.GetAllUsers();
         }
 
-        public IList<Person> Users { get { return dbHandlerUsers.GetAllUsers(); } }
+        public IList<Person> Users { get { return users.AsReadOnly(); } }
 
         public void AddEmployee(Employee employee)
         {
-            dbHandlerUsers.InsertEmployee(employee);
+            if (GetEmployeeName(employee)) throw new Exception($"Employee with the name {employee.FirstName} already exists in database");
+            int id = dbHandlerUsers.InsertEmployee(employee);
+            if (id == 0) throw new ArgumentException("Employee has not been added");
+            employee.Id = id;
+            users.Add(employee);
         }
 
         public void AddCustomer(Customer customer)
         {
-            dbHandlerUsers.InsertCustomer(customer);
+            int id = dbHandlerUsers.InsertCustomer(customer);
+            customer.Id = id;
+            users.Add(customer);
         }
 
-        public string ValidateUser(string email, string password) 
+        public string ValidateUser(string email, string enteredPassword) 
         {
-            
             string role = "";
             byte[] salt = dbHandlerUsers.GetSalt(email);
-            if (salt == null) throw new Exception("Email or Password is incorrect");
-            byte[] newPassword = HashPassword(password, salt);
-            role = dbHandlerUsers.ComaparePassword(email, newPassword);
-            if (string.IsNullOrEmpty(role)) throw new Exception("Email or Password is incorrect");
+            if (salt == null) return role;
+            byte[] enteredPasswordHashed = HashPassword(enteredPassword, salt);
+            role = dbHandlerUsers.ComaparePassword(email, enteredPasswordHashed) ;
             return role;
         }
 
@@ -55,6 +62,15 @@ namespace LogicLayerHandlers
             argon2.MemorySize = 1024 * 1024; // 1 GB RAM
 
             return argon2.GetBytes(16);
+        }
+
+        private bool GetEmployeeName(Employee employee) 
+        {
+            foreach (Employee emp in users) 
+            {
+                if (emp.FirstName == employee.FirstName) return true;
+            }
+            return false;
         }
     }
 }

@@ -9,6 +9,7 @@ namespace LogicLayerEntities.Products
     public abstract class Product
     {
         private string name;
+        private DateTime? lastModified;
         public string Name
         {
             get { return name; }
@@ -19,16 +20,19 @@ namespace LogicLayerEntities.Products
                 name = value;
             }
         }
-        public int Id { get; private set; }
+        public int Id { get; set; }
+        public DateTime? LastModified { get { return lastModified; } set { lastModified = value; } }
 
-        public Product(string name) 
+        public Product(string name, DateTime? lastModified) 
         {
             Name = name;
+            LastModified = lastModified;
         }
-        public Product(int id, string name)
+        public Product(int id, string name, DateTime? lastModified)
         {
             Name = name;
             Id = id;
+            LastModified = lastModified;
         }
 
         public void ChangeName(string name) 

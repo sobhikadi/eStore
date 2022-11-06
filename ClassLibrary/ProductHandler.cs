@@ -7,24 +7,70 @@ namespace LogicLayerHandlers
     {
         private DBHandlerProducts dbHandlerProducts = new DBHandlerProducts();
 
-        private List<ComboProduct> comboProducts;
+        private List<Product> products;
 
         public ProductHandler()
         {
-            comboProducts = new List<ComboProduct>();
+            products = new List<Product>();
+            UpdateListOfProducts();
         }
-        public IList<SingleProduct> Products { get { return dbHandlerProducts.GetAllProducts().AsReadOnly(); } }
-        public IList<ComboProduct> ComboProducts { get { return comboProducts.AsReadOnly(); } }
+
+        public IList<Product> Products { get 
+            {
+                UpdateListOfProducts();
+                return products.AsReadOnly(); 
+            } }
 
         public void AddProduct(SingleProduct product)
         {
-           dbHandlerProducts.InsertProduct(product); 
+            if (GetProductName(product)) throw new Exception($"Product with the name {product.Name} already exist in database");
+           int id = dbHandlerProducts.InsertProduct(product);
+            if (id == 0) throw new Exception("Product has not been added");
+            product.Id = id;
+            products.Add(product);
+
+            UpdateListOfProducts();
+        }
+
+        public void UpdateProduct(SingleProduct newProduct, SingleProduct currentProduct) 
+        {
+            bool success = dbHandlerProducts.UpdateProduct(newProduct, currentProduct);
+
+            if (!success) throw new ArgumentException("");
+
+            if (!products.Contains(currentProduct)) throw new ArgumentException("");
+
+            currentProduct.ChangeInformation(newProduct);
+
+           UpdateListOfProducts();
         }
 
         public void AddComboProduct(ComboProduct comboProduct) 
         {
-            this.comboProducts.Add(comboProduct);
+            this.products.Add(comboProduct);
         }
+
+        public IList<Product> SearchProduct(string term, SearchTypeProduct type)
+        {
+            return dbHandlerProducts.SearchProduct(term, type);
+        }
+
+        private bool GetProductName(Product product) 
+        {
+            foreach (Product prod in products) 
+            {
+                if (prod.Name == product.Name) return true;
+            }
+            return false;
+        }
+
+        private void UpdateListOfProducts() 
+        {
+            products.Clear();
+            products.AddRange(dbHandlerProducts.GetSingleProducts());
+        }
+
+        
 
     }
 }

@@ -16,8 +16,9 @@ namespace DataAccessLayer
         private string connectionString = "server=mssqlstud.fhict.local;" + "database=dbi376372;" + "user id=dbi376372;" + "password=Mky3S[elWm;" + "connect timeout=30;";
 
 
-        public void InsertEmployee(Employee employee)
+        public int InsertEmployee(Employee employee)
         {
+            int id = 0;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
 
@@ -34,14 +35,17 @@ namespace DataAccessLayer
                 cmd.Parameters.AddWithValue("@postalCode", employee.PostalCode);
                 cmd.Parameters.AddWithValue("@role", employee.Role);
 
-                cmd.ExecuteNonQuery();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if(dr.Read()) id = Convert.ToInt32(dr[0]);
 
                 conn.Close();
             }
+            return id;
         }
 
-        public void InsertCustomer(Customer customer)
+        public int InsertCustomer(Customer customer)
         {
+            int id = 0;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -64,9 +68,11 @@ namespace DataAccessLayer
                 if (!string.IsNullOrEmpty(customer.BillingPostalCode)) cmd.Parameters.AddWithValue("@billingPostalCode", customer.BillingPostalCode);
                 else cmd.Parameters.AddWithValue("@billingPostalCode", DBNull.Value);
 
-                cmd.ExecuteNonQuery();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read()) id = Convert.ToInt32(dr[0]);
                 conn.Close();
             }
+            return id;
         }
 
         public List<Person> GetAllUsers()
@@ -147,6 +153,7 @@ namespace DataAccessLayer
                 {
                    salt = (byte[])dr["salt"];
                 }
+                conn.Close();
             }
             return salt;
         }
@@ -169,6 +176,23 @@ namespace DataAccessLayer
                 {
                    role = (string)dr["role"];
                 }
+                conn.Close();
+                if (role != "") return role;
+                conn.Open();
+                string sqlCus = "select Customer.Id from Customer inner join Users on Customer.Id = Users.Id where users.email = @email AND users.password = @password;";
+
+                SqlCommand cmdCus = new SqlCommand(sqlCus, conn);
+                cmdCus.Parameters.AddWithValue("@email", email);
+                cmdCus.Parameters.AddWithValue("@password", password);
+
+                SqlDataReader drCus = cmdCus.ExecuteReader();
+
+                while (drCus.Read())
+                {
+                    if (Convert.ToInt32(drCus["id"]) != 0) role = "Customer"; break;
+                    role = "";
+                }
+                conn.Close();
             }
             return role;
         }

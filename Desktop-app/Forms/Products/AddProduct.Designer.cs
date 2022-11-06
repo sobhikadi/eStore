@@ -49,6 +49,12 @@
             this.tbBookIsbn = new System.Windows.Forms.TextBox();
             this.lblIsbn = new System.Windows.Forms.Label();
             this.btnAddProduct = new System.Windows.Forms.Button();
+            this.ofdImage = new System.Windows.Forms.OpenFileDialog();
+            this.pboxImage = new System.Windows.Forms.PictureBox();
+            this.btnSelectImage = new System.Windows.Forms.Button();
+            this.lblImage = new System.Windows.Forms.Label();
+            this.btnDeleteImage = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxImage)).BeginInit();
             this.SuspendLayout();
             // 
             // cboxCatgeory
@@ -177,7 +183,7 @@
             // 
             this.lblSerialNumber.AutoSize = true;
             this.lblSerialNumber.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblSerialNumber.Location = new System.Drawing.Point(25, 500);
+            this.lblSerialNumber.Location = new System.Drawing.Point(19, 500);
             this.lblSerialNumber.Name = "lblSerialNumber";
             this.lblSerialNumber.Size = new System.Drawing.Size(119, 23);
             this.lblSerialNumber.TabIndex = 31;
@@ -196,7 +202,7 @@
             // 
             this.lblProductColor.AutoSize = true;
             this.lblProductColor.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblProductColor.Location = new System.Drawing.Point(25, 452);
+            this.lblProductColor.Location = new System.Drawing.Point(19, 452);
             this.lblProductColor.Name = "lblProductColor";
             this.lblProductColor.Size = new System.Drawing.Size(51, 23);
             this.lblProductColor.TabIndex = 29;
@@ -215,7 +221,7 @@
             // 
             this.lblGamePlatform.AutoSize = true;
             this.lblGamePlatform.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblGamePlatform.Location = new System.Drawing.Point(25, 415);
+            this.lblGamePlatform.Location = new System.Drawing.Point(19, 415);
             this.lblGamePlatform.Name = "lblGamePlatform";
             this.lblGamePlatform.Size = new System.Drawing.Size(125, 23);
             this.lblGamePlatform.TabIndex = 27;
@@ -234,7 +240,7 @@
             // 
             this.lblIsbn.AutoSize = true;
             this.lblIsbn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblIsbn.Location = new System.Drawing.Point(25, 373);
+            this.lblIsbn.Location = new System.Drawing.Point(19, 373);
             this.lblIsbn.Name = "lblIsbn";
             this.lblIsbn.Size = new System.Drawing.Size(90, 23);
             this.lblIsbn.TabIndex = 25;
@@ -248,7 +254,7 @@
             this.btnAddProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddProduct.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnAddProduct.ForeColor = System.Drawing.Color.White;
-            this.btnAddProduct.Location = new System.Drawing.Point(595, 551);
+            this.btnAddProduct.Location = new System.Drawing.Point(594, 747);
             this.btnAddProduct.Name = "btnAddProduct";
             this.btnAddProduct.Size = new System.Drawing.Size(194, 34);
             this.btnAddProduct.TabIndex = 10;
@@ -256,11 +262,69 @@
             this.btnAddProduct.UseVisualStyleBackColor = false;
             this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
             // 
+            // ofdImage
+            // 
+            this.ofdImage.FileName = "Image";
+            // 
+            // pboxImage
+            // 
+            this.pboxImage.Location = new System.Drawing.Point(173, 547);
+            this.pboxImage.Name = "pboxImage";
+            this.pboxImage.Size = new System.Drawing.Size(391, 173);
+            this.pboxImage.TabIndex = 32;
+            this.pboxImage.TabStop = false;
+            // 
+            // btnSelectImage
+            // 
+            this.btnSelectImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelectImage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
+            this.btnSelectImage.FlatAppearance.BorderSize = 0;
+            this.btnSelectImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelectImage.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnSelectImage.ForeColor = System.Drawing.Color.White;
+            this.btnSelectImage.Location = new System.Drawing.Point(594, 547);
+            this.btnSelectImage.Name = "btnSelectImage";
+            this.btnSelectImage.Size = new System.Drawing.Size(194, 34);
+            this.btnSelectImage.TabIndex = 33;
+            this.btnSelectImage.Text = "Select Image";
+            this.btnSelectImage.UseVisualStyleBackColor = false;
+            this.btnSelectImage.Click += new System.EventHandler(this.btnSelectImage_Click);
+            // 
+            // lblImage
+            // 
+            this.lblImage.AutoSize = true;
+            this.lblImage.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblImage.Location = new System.Drawing.Point(19, 547);
+            this.lblImage.Name = "lblImage";
+            this.lblImage.Size = new System.Drawing.Size(58, 23);
+            this.lblImage.TabIndex = 34;
+            this.lblImage.Text = "Image";
+            // 
+            // btnDeleteImage
+            // 
+            this.btnDeleteImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteImage.BackColor = System.Drawing.Color.DarkRed;
+            this.btnDeleteImage.FlatAppearance.BorderSize = 0;
+            this.btnDeleteImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteImage.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnDeleteImage.ForeColor = System.Drawing.Color.White;
+            this.btnDeleteImage.Location = new System.Drawing.Point(594, 598);
+            this.btnDeleteImage.Name = "btnDeleteImage";
+            this.btnDeleteImage.Size = new System.Drawing.Size(194, 34);
+            this.btnDeleteImage.TabIndex = 35;
+            this.btnDeleteImage.Text = "Delete Image";
+            this.btnDeleteImage.UseVisualStyleBackColor = false;
+            this.btnDeleteImage.Click += new System.EventHandler(this.btnDeleteImage_Click);
+            // 
             // AddProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(814, 599);
+            this.ClientSize = new System.Drawing.Size(814, 793);
+            this.Controls.Add(this.btnDeleteImage);
+            this.Controls.Add(this.lblImage);
+            this.Controls.Add(this.btnSelectImage);
+            this.Controls.Add(this.pboxImage);
             this.Controls.Add(this.btnAddProduct);
             this.Controls.Add(this.tbSerialNumber);
             this.Controls.Add(this.lblSerialNumber);
@@ -287,6 +351,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddProduct";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fAddProduct_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.pboxImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -315,5 +380,11 @@
         private TextBox tbBookIsbn;
         private Label lblIsbn;
         private Button btnAddProduct;
+        private OpenFileDialog openFileDialog1;
+        private PictureBox pboxImage;
+        private Button btnSelectImage;
+        private Label lblImage;
+        private OpenFileDialog ofdImage;
+        private Button btnDeleteImage;
     }
 }

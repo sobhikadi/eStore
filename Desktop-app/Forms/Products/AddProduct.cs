@@ -18,11 +18,13 @@ namespace Desktop_app.Forms
     public partial class AddProduct : Form
     {
         private ProductHandler productHandler;
+        private Button showProducts;
 
-        public AddProduct(ProductHandler productHandler)
+        public AddProduct(ProductHandler productHandler, Button showProducts)
         {
             InitializeComponent();
             this.productHandler = productHandler;
+            this.showProducts = showProducts;
 
             cboxCatgeory.DataSource = null;
             cboxCatgeory.DataSource = Enum.GetValues(typeof(Categories));
@@ -65,6 +67,8 @@ namespace Desktop_app.Forms
             string? isbn, gamePlatform, serialNumber, color;
             int quantity;
             double price;
+            byte[]? image;
+
 
             try
             {
@@ -76,6 +80,8 @@ namespace Desktop_app.Forms
                 if (tbGamePlatform.Enabled && string.IsNullOrEmpty(tbGamePlatform.Text)) { throw new ArgumentException("game platform msut be entered"); }
                 if (tbProductColor.Enabled && string.IsNullOrEmpty(tbProductColor.Text)) { throw new ArgumentException("Color msut be entered"); }
                 if (tbSerialNumber.Enabled && string.IsNullOrEmpty(tbSerialNumber.Text)) { throw new ArgumentException("serial number msut be entered"); }
+                if (pboxImage.Image != null) image = ConvertImageToByteArray(pboxImage.Image);
+                else image = null;
 
                 name = tbProductName.Text;
                 quantity = Convert.ToInt32(tbProductQuantity.Text);
@@ -90,17 +96,11 @@ namespace Desktop_app.Forms
 
                 
 
-                SingleProduct product = new SingleProduct(name, description, quantity, price, category, subCategory, isbn, serialNumber, color, gamePlatform);
+                SingleProduct product = new SingleProduct(name, description, quantity, price, category, subCategory, isbn, serialNumber, color, gamePlatform, image, null);
             
                 productHandler.AddProduct(product);
 
-                foreach (Control co in this.Controls)
-                {
-                    if (co is TextBox || co is ComboBox)
-                    {
-                        co.ResetText();
-                    }
-                }
+                
                 MessageBox.Show("Product added successfully!");
                 fProducts.ADD_PRODUCT_FORM_OPEN = false;
                 this.Close();
@@ -114,6 +114,36 @@ namespace Desktop_app.Forms
         private void fAddProduct_FormClosing(object sender, FormClosingEventArgs e)
         {
             fProducts.ADD_PRODUCT_FORM_OPEN = false;
+            showProducts.PerformClick();
         }
+
+        private void btnSelectImage_Click(object sender, EventArgs e)
+        {
+            ofdImage.ShowDialog();
+            ofdImage.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
+            Image? img = null;
+            if (ofdImage.ShowDialog() == DialogResult.OK)
+            {
+                img = new Bitmap(ofdImage.FileName);
+                pboxImage.Image = img.GetThumbnailImage(340, 165, null, new IntPtr());
+            }
+            else return;
+        }
+
+        private void btnDeleteImage_Click(object sender, EventArgs e)
+        {
+            pboxImage.Image = null;
+        }
+
+        public static byte[] ConvertImageToByteArray(Image img) 
+        {
+            using (MemoryStream ms = new MemoryStream()) 
+            {
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                return ms.ToArray();
+            }
+        }
+
+       
     }
 }

@@ -30,7 +30,8 @@ namespace Desktop_app
                 password = tbPassword.Text;
 
                 role = userHandler.ValidateUser(email, password);
-
+                if (string.IsNullOrEmpty(role)) throw new Exception("Email or passowrd is incorrect");
+                if (role != "Employee" && role != "Admin") throw new Exception("Email or passowrd is incorrect");
                 fMain = new Main(this, role);
                 fMain.Show();
                 this.Hide();

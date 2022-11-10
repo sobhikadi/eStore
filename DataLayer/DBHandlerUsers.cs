@@ -11,7 +11,7 @@ using LogicLayerEntities.Products;
 
 namespace DataAccessLayer
 {
-    public class DBHandlerUsers
+    public class DBHandlerUsers : IDBMediatorUser
     {
         private string connectionString = "server=mssqlstud.fhict.local;" + "database=dbi376372;" + "user id=dbi376372;" + "password=Mky3S[elWm;" + "connect timeout=30;";
 

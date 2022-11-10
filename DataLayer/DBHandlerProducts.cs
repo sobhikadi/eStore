@@ -11,7 +11,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace DataAccessLayer
 {
-    public class DBHandlerProducts
+    public class DBHandlerProducts : IDBMediatorProduct
     {
 
         private string connectionString = "server=mssqlstud.fhict.local;" + "database=dbi376372;" + "user id=dbi376372;" + "password=Mky3S[elWm;" + "connect timeout=30;";
@@ -186,7 +186,7 @@ namespace DataAccessLayer
             return products;
         }
 
-        private bool CheckIfProductModified(SingleProduct currentProduct)
+        public bool CheckIfProductModified(SingleProduct currentProduct)
         {
             bool modified = false;
             using (SqlConnection conn = new SqlConnection(connectionString))

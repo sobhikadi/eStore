@@ -5,12 +5,19 @@ namespace LogicLayerHandlers
 {
     public class ProductHandler
     {
-        private DBHandlerProducts dbHandlerProducts = new DBHandlerProducts();
+        private IDBMediatorProduct dbHandlerProducts;
 
         private List<Product> products;
 
         public ProductHandler()
         {
+            dbHandlerProducts = new DBHandlerProducts();
+            products = new List<Product>();
+            UpdateListOfProducts();
+        }
+        public ProductHandler(IDBMediatorProduct dBMediatorProduct)
+        {
+            dbHandlerProducts = dBMediatorProduct;
             products = new List<Product>();
             UpdateListOfProducts();
         }
@@ -21,15 +28,15 @@ namespace LogicLayerHandlers
                 return products.AsReadOnly(); 
             } }
 
-        public void AddProduct(SingleProduct product)
+        public bool AddProduct(SingleProduct product)
         {
             if (CheckProductExist(product)) throw new Exception($"Product with the name {product.Name} already exist in database");
            int id = dbHandlerProducts.InsertProduct(product);
             if (id == 0) throw new Exception("Product has not been added");
             product.Id = id;
             products.Add(product);
-
             UpdateListOfProducts();
+            return true;
         }
 
         public void UpdateProduct(SingleProduct newProduct, SingleProduct currentProduct) 

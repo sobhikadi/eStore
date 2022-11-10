@@ -19,6 +19,7 @@ namespace DataAccessLayer
 
         public int InsertProduct(SingleProduct product)
         {
+            if (CheckIfProductExist(product.Name)) throw new ArgumentException("Product already exist");
             int id = 0;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -188,7 +189,7 @@ namespace DataAccessLayer
 
         public bool CheckIfProductModified(SingleProduct currentProduct)
         {
-            bool modified = false;
+            bool notModified = false;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -202,12 +203,12 @@ namespace DataAccessLayer
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
                 {
-                    if ((int)dr["id"] == currentProduct.Id) modified = true;
+                    if ((int)dr["id"] == currentProduct.Id) notModified = true;
                 }
 
                 conn.Close();
             }
-            return modified;
+            return notModified;
         }
 
         public bool DeleteProduct(SingleProduct product) 
@@ -288,6 +289,28 @@ namespace DataAccessLayer
                 conn.Close();
             }
             return deleted;
+        }
+
+        public bool CheckIfProductExist(string name) 
+        {
+            bool exist = false;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "select id from Product where name=@name";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@name", name);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    exist = true;
+                }
+
+                conn.Close();
+            }
+            return exist;
         }
 
     }

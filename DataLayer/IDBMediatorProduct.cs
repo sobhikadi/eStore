@@ -26,5 +26,7 @@ namespace DataAccessLayer
         public Dictionary<string, string> GetProductSpecifications(int productId);
 
         public bool DeleteSpecFromDB(int productId, string specName);
+
+        public bool CheckIfProductExist(string name);
     }
 }

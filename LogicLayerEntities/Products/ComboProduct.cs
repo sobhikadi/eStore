@@ -15,37 +15,44 @@ namespace LogicLayerEntities.Products
         public double Discount { get { return discount; } private set { discount = value; } }
 
 
-        public ComboProduct(string name, List<SingleProduct> products, double discount, DateTime lastModified) : base(name, lastModified)
+        public ComboProduct(string name, List<SingleProduct> products, double discount, DateTime? lastModified) : base(name, lastModified)
         {
             this.products = new List<SingleProduct>();
-            this.products = products;
+            Products = products;
             Discount = discount;
         }
-        public ComboProduct(int id, string name, List<SingleProduct> products, double discount, int quantity, DateTime lastModified) : base(id, name, lastModified)
+        public ComboProduct(int id, string name, List<SingleProduct> products, double discount, int quantity, DateTime? lastModified) : base(id, name, lastModified)
         {
             this.products = new List<SingleProduct>();
-            this.products = products;
+            Products = products;
             Discount = discount;
         }
 
-        public IList<SingleProduct> Products { get { return products.AsReadOnly(); } }
+        public List<SingleProduct> Products { get { return products; } 
+            private set 
+            {
+                if (value.Count == 0) throw new ArgumentException("ComboProduct must at least have one product");
+                if (value.Count > 5) throw new ArgumentException("ComboProduct can have at max 5 products");
+                products = value;
+            }
+        }
 
         public override double GetPrice()
-        {  
-            return ((products.Sum(p => p.Price) / 100) - Discount) * 100;
+        {
+            double sum = (products.Sum(p => p.Price) * Discount);
+            return products.Sum(p => p.Price) - sum;
         }
 
         public override int GetQuantity()
         {
             SortByQuantity();
-            return products[-1].GetQuantity();
+            return products[0].GetQuantity();
         }
 
         public void SortByQuantity()
         {
             // Ensure creation of at most one instance
-            if (this.productStockComparer == null)
-                this.productStockComparer = new ProductStockComparer();
+            if (this.productStockComparer == null) this.productStockComparer = new ProductStockComparer();
 
             this.products.Sort(this.productStockComparer);
         }

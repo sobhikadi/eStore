@@ -83,7 +83,11 @@ namespace DataAccessLayer
                     if (dr["lastModified"] != DBNull.Value) lastModified = (DateTime)dr["lastModified"];
                     else lastModified = null;
 
-                    products.Add(new SingleProduct(Convert.ToInt32(dr["id"]), (string)dr["name"], (string)dr["description"], Convert.ToInt32(dr["quantity"]), Convert.ToDouble(dr["price"]), (string)dr["category"], (string)dr["subCategory"], isbn, serialNumber, color, platform, image, lastModified));
+                    SingleProduct product = new SingleProduct(Convert.ToInt32(dr["id"]), (string)dr["name"], (string)dr["description"], Convert.ToInt32(dr["quantity"]), Convert.ToDouble(dr["price"]), (string)dr["category"], (string)dr["subCategory"], isbn, serialNumber, color, platform, image, lastModified);
+
+                    product.GetSpecsFromDB(GetProductSpecifications(Convert.ToInt32(dr["id"])));
+
+                    products.Add(product);
                 }
                 conn.Close();
             }
@@ -204,6 +208,86 @@ namespace DataAccessLayer
                 conn.Close();
             }
             return modified;
+        }
+
+        public bool DeleteProduct(SingleProduct product) 
+        {
+            bool deleted = false;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "Delete from Product where id = @id";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@id", product.Id);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected == 0) return deleted;
+                deleted = true;
+                conn.Close();
+            }
+            return deleted;
+        }
+
+        public bool AddSpecification(SingleProduct product, string name, string value) 
+        {
+            bool added = false;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "insert into ProductSpecification(SpecsName, SpecsValue, ProductId) values(@SpecsName, @SepcsValue, @ProductId)";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@SpecsName", name);
+                cmd.Parameters.AddWithValue("@SepcsValue", value);
+                cmd.Parameters.AddWithValue("@ProductId", product.Id);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected == 0) return added;
+                added = true;
+                conn.Close();
+            }
+            return added;
+        }
+
+        public Dictionary<string, string> GetProductSpecifications(int  productId) 
+        {
+            Dictionary<string, string> specifications = new Dictionary<string, string>();
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "select SpecsName, SpecsValue from ProductSpecification where ProductId = @productId";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@ProductId", productId);
+
+                SqlDataReader dr = cmd.ExecuteReader(); 
+
+                if (!dr.HasRows) return specifications;
+                while (dr.Read()) 
+                {
+                    specifications.Add((string)dr["SpecsName"], (string)dr["SpecsValue"]);
+                }
+                conn.Close();
+            }
+            return specifications;
+        }
+
+        public bool DeleteSpecFromDB(int productId, string specName)
+        {
+            bool deleted = false;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "Delete from ProductSpecification where ProductId = @id AND SpecsName = @specName";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@id", productId);
+                cmd.Parameters.AddWithValue("@specName", specName);
+
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected == 0) return deleted;
+                deleted = true;
+                conn.Close();
+            }
+            return deleted;
         }
 
     }

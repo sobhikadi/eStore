@@ -2,6 +2,7 @@
 using LogicLayerEntities.Products;
 using LogicLayerHandlers;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,6 +24,10 @@ namespace Desktop_app.Forms
 
         public static bool ADD_PRODUCT_FORM_OPEN = false;
         public static bool UPDATE_PRODUCT_FORM_OPEN = false;
+        public static bool PRODUCT_SPECIFICATIONS_FORM_OPEN = false;
+        public static bool COMBO_PRODUCT_FORM_OPEN = false;
+
+
 
 
         public fProducts()
@@ -49,10 +54,11 @@ namespace Desktop_app.Forms
             {
                 listViewProducts.Items.Clear();
 
-                foreach (SingleProduct product in productHandler.Products)
+                foreach (Product product in productHandler.Products)
                 {
-                    AddProductToListView(product);
+                    if (product is SingleProduct)  AddProductToListView((SingleProduct)product);
                 }
+                selectedProductFromList = null;
           
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -62,11 +68,6 @@ namespace Desktop_app.Forms
         {
             selectedProductFromList = (SingleProduct)e.Item.Tag;
 
-            foreach (KeyValuePair<string, string> spec in selectedProductFromList.Specifications) 
-            {
-                string specification = $"{spec.Key} - {spec.Value}";
-                lboxProductSpecs.Items.Add(specification);
-            }
         }
 
         private void listViewProducts_SelectedIndexChanged(object sender, EventArgs e)
@@ -75,7 +76,6 @@ namespace Desktop_app.Forms
             if (listViewProducts.SelectedItems.Count == 0)
             {
                 selectedProductFromList = null;
-                lboxProductSpecs.Items.Clear();
             }
             
         }
@@ -111,7 +111,18 @@ namespace Desktop_app.Forms
 
         private void btnComboProducts_Click(object sender, EventArgs e)
         {
-
+            if (COMBO_PRODUCT_FORM_OPEN != false)
+            {
+                MessageBox.Show("There is already a window open");
+                return;
+            }
+            else
+            {
+                Forms.Products.fComboProduct comboProduct = new Forms.Products.fComboProduct(productHandler);
+                COMBO_PRODUCT_FORM_OPEN = true;
+                comboProduct.Text = "eStore - Combo Products";
+                comboProduct.Show();
+            }
         }
 
         private void cboxSearchCriteria_SelectedIndexChanged(object sender, EventArgs e)
@@ -179,6 +190,49 @@ namespace Desktop_app.Forms
                 updateProductForm.Show();
             }
         }
-       
+
+        private void btnDeleteProduct_Click(object sender, EventArgs e)
+        {
+            if (selectedProductFromList == null)
+            {
+                MessageBox.Show("Please select a product first"); 
+                return;
+            }
+            DialogResult dr = MessageBox.Show($"Are You sure you want to Delete this Product ({selectedProductFromList.Name}) ?", "Delete Product?", MessageBoxButtons.OKCancel);
+            if (dr == DialogResult.OK)
+            {
+                try
+                {
+                    productHandler.DeleteProduct(selectedProductFromList);
+                    MessageBox.Show("Product has successfully been deleted");
+                    btnShowAllProducts.PerformClick();
+                }
+                catch (SqlException) { MessageBox.Show("Something went wrong with database connection"); }
+                catch (Exception ex ) { MessageBox.Show(ex.Message); }
+
+            }
+            else return;
+        }
+
+        private void btnSpecifications_Click(object sender, EventArgs e)
+        {
+            if (selectedProductFromList == null)
+            {
+                MessageBox.Show("Please select a product first");
+                return;
+            }
+            if (PRODUCT_SPECIFICATIONS_FORM_OPEN != false)
+            {
+                MessageBox.Show("There is already a window open");
+                return;
+            }
+            else
+            {
+                ProductSpecifications productSpecifications = new ProductSpecifications(productHandler, selectedProductFromList, btnShowAllProducts);
+                PRODUCT_SPECIFICATIONS_FORM_OPEN = true;
+                productSpecifications.Text = $"Specifications of ({selectedProductFromList.Name})";
+                productSpecifications.Show();
+            }
+        }
     }
 }

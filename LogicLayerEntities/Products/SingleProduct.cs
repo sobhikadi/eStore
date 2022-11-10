@@ -181,5 +181,24 @@ namespace LogicLayerEntities.Products
         {
             return QuantityInStock > 0;
         }
+
+        public bool AddSpecifications(string name, string value)
+        {
+
+            foreach (KeyValuePair<string, string> kvp in specifications) 
+            {
+                if (kvp.Key == name) throw new ArgumentException($"Specfications with the name ({name}) already exists");
+            }
+            specifications.Add(name, value);
+            return true;
+        }
+
+        public void GetSpecsFromDB(Dictionary<string, string> specs) 
+        {
+            specifications.Clear();
+            specifications = specs;
+        }
+        
+        
     }
 }

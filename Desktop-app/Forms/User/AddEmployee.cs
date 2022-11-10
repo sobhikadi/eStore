@@ -32,23 +32,24 @@ namespace Desktop_app.Forms
         {
             string firstName, lastName, email, phoneNumber, address, postalCode, role, password, confirmPaswd;
 
+            firstName = tbFirstName.Text;
+            lastName = tbLastName.Text;
+            email = tbEmail.Text;
+            password = tbPassword.Text;
+            confirmPaswd = tbRepeatPassword.Text;
+            phoneNumber = tbPhoneNumber.Text;
+            address = tbAddress.Text;
+            postalCode = tbPostalCode.Text;
+            role = cboxRoles.Text;
 
-            DialogResult dr = MessageBox.Show("Are You sure you want to add this animal?", "Add Animal?", MessageBoxButtons.OKCancel);
+            DialogResult dr = MessageBox.Show($"Are You sure you want to add this mployee ({firstName})?", "Add Employee?", MessageBoxButtons.OKCancel);
             if (dr == DialogResult.OK)
             {
                 try
                 {
-                    if (string.IsNullOrEmpty(tbRepeatPassword.Text)) { throw new ArgumentException("password or password confirmation field is empty"); }
+                    if (string.IsNullOrEmpty(confirmPaswd)) { throw new ArgumentException("password confirmation field is empty"); }
 
-                    firstName = tbFirstName.Text;
-                    lastName = tbLastName.Text;
-                    email = tbEmail.Text;
-                    password = tbPassword.Text;
-                    confirmPaswd = tbRepeatPassword.Text;
-                    phoneNumber = tbPhoneNumber.Text;
-                    address = tbAddress.Text;
-                    postalCode = tbPostalCode.Text;
-                    role = cboxRoles.Text;
+                   
 
                     if (password != confirmPaswd) throw new ArgumentException("Password and confirmation does not match");
 

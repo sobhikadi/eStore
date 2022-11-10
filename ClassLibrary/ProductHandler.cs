@@ -17,13 +17,13 @@ namespace LogicLayerHandlers
 
         public IList<Product> Products { get 
             {
-                UpdateListOfProducts();
+                //UpdateListOfProducts();
                 return products.AsReadOnly(); 
             } }
 
         public void AddProduct(SingleProduct product)
         {
-            if (GetProductName(product)) throw new Exception($"Product with the name {product.Name} already exist in database");
+            if (CheckProductExist(product)) throw new Exception($"Product with the name {product.Name} already exist in database");
            int id = dbHandlerProducts.InsertProduct(product);
             if (id == 0) throw new Exception("Product has not been added");
             product.Id = id;
@@ -45,9 +45,20 @@ namespace LogicLayerHandlers
            UpdateListOfProducts();
         }
 
+        public void DeleteProduct(SingleProduct product) 
+        {
+            bool deleted = dbHandlerProducts.DeleteProduct(product);
+            if (!deleted) throw new ArgumentException("Product has not been deleted successfully");
+            products.Remove(product);
+        }
+
         public void AddComboProduct(ComboProduct comboProduct) 
         {
-            this.products.Add(comboProduct);
+            if (CheckProductExist(comboProduct)) throw new Exception($"Product with the name {comboProduct.Name} already exist in database");
+            //int id = dbHandlerProducts.InsertProduct(product);
+            //if (id == 0) throw new Exception("Product has not been added");
+            //product.Id = id;
+            products.Add(comboProduct);
         }
 
         public IList<Product> SearchProduct(string term, SearchTypeProduct type)
@@ -55,7 +66,7 @@ namespace LogicLayerHandlers
             return dbHandlerProducts.SearchProduct(term, type);
         }
 
-        private bool GetProductName(Product product) 
+        private bool CheckProductExist(Product product) 
         {
             foreach (Product prod in products) 
             {
@@ -68,6 +79,27 @@ namespace LogicLayerHandlers
         {
             products.Clear();
             products.AddRange(dbHandlerProducts.GetSingleProducts());
+        }
+
+        public void AddSpecificationToProduct(SingleProduct product, string name, string value) 
+        {
+
+            if (string.IsNullOrEmpty(name)) throw new ArgumentException("Specification name cannot be empty");
+            if (string.IsNullOrEmpty(value)) throw new ArgumentException("Specification value cannot be empty");
+
+            bool added = dbHandlerProducts.AddSpecification(product, name, value);
+            if (!added) throw new ArgumentException("Specification has Not successfully been added");
+
+            if (!CheckProductExist(product)) throw new ArgumentException("The product you are trying to edit has been altered while you are working please refresh the information and try again");
+            product.AddSpecifications(name, value);
+        }
+
+        public void DeleteSpecification(SingleProduct product, int productId, string specsName) 
+        {
+            bool deleted = dbHandlerProducts.DeleteSpecFromDB(productId, specsName);
+            if (!deleted) throw new ArgumentException("Specification has not been deleted successfully");
+            product.GetSpecsFromDB(dbHandlerProducts.GetProductSpecifications(productId));
+
         }
 
         

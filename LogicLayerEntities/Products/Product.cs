@@ -44,5 +44,7 @@ namespace LogicLayerEntities.Products
         public abstract double GetPrice();
         public abstract int GetQuantity();
 
+        
+
     }
 }

@@ -63,52 +63,57 @@ namespace Desktop_app.Forms
         }
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
-            string name, category, subCategory, description;
-            string? isbn, gamePlatform, serialNumber, color;
-            int quantity;
-            double price;
-            byte[]? image;
-
-
-            try
+            DialogResult dr = MessageBox.Show("Are You sure you want to add this Product?", "Add Product?", MessageBoxButtons.OKCancel);
+            if (dr == DialogResult.OK)
             {
- 
-                if (string.IsNullOrEmpty(tbProductQuantity.Text)) { throw new ArgumentException("Please enter the quantity"); }
-                if (string.IsNullOrEmpty(tbProductPrice.Text)) { throw new ArgumentException("Please enter a price"); }
+                string name, category, subCategory, description;
+                string? isbn, gamePlatform, serialNumber, color;
+                int quantity;
+                double price;
+                byte[]? image;
 
-                if (tbBookIsbn.Enabled && string.IsNullOrEmpty(tbBookIsbn.Text)) { throw new ArgumentException("Book Isbn msut be entered"); }
-                if (tbGamePlatform.Enabled && string.IsNullOrEmpty(tbGamePlatform.Text)) { throw new ArgumentException("game platform msut be entered"); }
-                if (tbProductColor.Enabled && string.IsNullOrEmpty(tbProductColor.Text)) { throw new ArgumentException("Color msut be entered"); }
-                if (tbSerialNumber.Enabled && string.IsNullOrEmpty(tbSerialNumber.Text)) { throw new ArgumentException("serial number msut be entered"); }
-                if (pboxImage.Image != null) image = ConvertImageToByteArray(pboxImage.Image);
-                else image = null;
 
-                name = tbProductName.Text;
-                quantity = Convert.ToInt32(tbProductQuantity.Text);
-                price = Convert.ToDouble(tbProductPrice.Text);
-                category = cboxCatgeory.Text;
-                subCategory = tbsubCaregory.Text;
-                description = tbProductDescription.Text;
-                isbn = tbBookIsbn.Text;
-                gamePlatform = tbGamePlatform.Text;
-                color = tbProductColor.Text;
-                serialNumber = tbSerialNumber.Text;
+                try
+                {
 
-                
+                    if (string.IsNullOrEmpty(tbProductQuantity.Text)) { throw new ArgumentException("Please enter the quantity"); }
+                    if (string.IsNullOrEmpty(tbProductPrice.Text)) { throw new ArgumentException("Please enter a price"); }
 
-                SingleProduct product = new SingleProduct(name, description, quantity, price, category, subCategory, isbn, serialNumber, color, gamePlatform, image, null);
-            
-                productHandler.AddProduct(product);
+                    if (tbBookIsbn.Enabled && string.IsNullOrEmpty(tbBookIsbn.Text)) { throw new ArgumentException("Book Isbn msut be entered"); }
+                    if (tbGamePlatform.Enabled && string.IsNullOrEmpty(tbGamePlatform.Text)) { throw new ArgumentException("game platform msut be entered"); }
+                    if (tbProductColor.Enabled && string.IsNullOrEmpty(tbProductColor.Text)) { throw new ArgumentException("Color msut be entered"); }
+                    if (tbSerialNumber.Enabled && string.IsNullOrEmpty(tbSerialNumber.Text)) { throw new ArgumentException("serial number msut be entered"); }
+                    if (pboxImage.Image != null) image = ConvertImageToByteArray(pboxImage.Image);
+                    else image = null;
 
-                
-                MessageBox.Show("Product added successfully!");
-                fProducts.ADD_PRODUCT_FORM_OPEN = false;
-                this.Close();
+                    name = tbProductName.Text;
+                    quantity = Convert.ToInt32(tbProductQuantity.Text);
+                    price = Convert.ToDouble(tbProductPrice.Text);
+                    category = cboxCatgeory.Text;
+                    subCategory = tbsubCaregory.Text;
+                    description = tbProductDescription.Text;
+                    isbn = tbBookIsbn.Text;
+                    gamePlatform = tbGamePlatform.Text;
+                    color = tbProductColor.Text;
+                    serialNumber = tbSerialNumber.Text;
+
+
+
+                    SingleProduct product = new SingleProduct(name, description, quantity, price, category, subCategory, isbn, serialNumber, color, gamePlatform, image, null);
+
+                    productHandler.AddProduct(product);
+
+
+                    MessageBox.Show("Product added successfully!");
+                    fProducts.ADD_PRODUCT_FORM_OPEN = false;
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            else return;
             
         }
         private void fAddProduct_FormClosing(object sender, FormClosingEventArgs e)
@@ -139,7 +144,7 @@ namespace Desktop_app.Forms
         {
             using (MemoryStream ms = new MemoryStream()) 
             {
-                img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                 return ms.ToArray();
             }
         }

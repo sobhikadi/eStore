@@ -125,7 +125,10 @@ namespace Desktop_app.Forms
                 foreach (Form f in openForms)
                 {
                     if (f.Name != "LogIn")
+                    {
                         f.Close();
+                        f.Dispose();
+                    }
                 }
                 fLogin.Show();
             }

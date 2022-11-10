@@ -37,8 +37,6 @@
             this.tbSearchTerm = new System.Windows.Forms.TextBox();
             this.lblSearchTerm = new System.Windows.Forms.Label();
             this.lblProducts = new System.Windows.Forms.Label();
-            this.lblSepcs = new System.Windows.Forms.Label();
-            this.lboxProductSpecs = new System.Windows.Forms.ListBox();
             this.ID = new System.Windows.Forms.ColumnHeader();
             this.Product = new System.Windows.Forms.ColumnHeader();
             this.Quantity = new System.Windows.Forms.ColumnHeader();
@@ -177,30 +175,6 @@
             this.lblProducts.TabIndex = 3;
             this.lblProducts.Text = "Products";
             // 
-            // lblSepcs
-            // 
-            this.lblSepcs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSepcs.AutoSize = true;
-            this.lblSepcs.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblSepcs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
-            this.lblSepcs.Location = new System.Drawing.Point(914, 110);
-            this.lblSepcs.Name = "lblSepcs";
-            this.lblSepcs.Size = new System.Drawing.Size(178, 23);
-            this.lblSepcs.TabIndex = 4;
-            this.lblSepcs.Text = "Product Specifications";
-            // 
-            // lboxProductSpecs
-            // 
-            this.lboxProductSpecs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lboxProductSpecs.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lboxProductSpecs.FormattingEnabled = true;
-            this.lboxProductSpecs.ItemHeight = 23;
-            this.lboxProductSpecs.Location = new System.Drawing.Point(914, 139);
-            this.lboxProductSpecs.Name = "lboxProductSpecs";
-            this.lboxProductSpecs.Size = new System.Drawing.Size(312, 740);
-            this.lboxProductSpecs.TabIndex = 5;
-            // 
             // ID
             // 
             this.ID.Text = "ID";
@@ -244,7 +218,7 @@
             this.listViewProducts.Location = new System.Drawing.Point(5, 137);
             this.listViewProducts.Margin = new System.Windows.Forms.Padding(4);
             this.listViewProducts.Name = "listViewProducts";
-            this.listViewProducts.Size = new System.Drawing.Size(902, 742);
+            this.listViewProducts.Size = new System.Drawing.Size(1228, 742);
             this.listViewProducts.TabIndex = 2;
             this.listViewProducts.UseCompatibleStateImageBehavior = false;
             this.listViewProducts.View = System.Windows.Forms.View.Details;
@@ -302,6 +276,7 @@
             this.btnSpecifications.TabIndex = 38;
             this.btnSpecifications.Text = "Specifications";
             this.btnSpecifications.UseVisualStyleBackColor = false;
+            this.btnSpecifications.Click += new System.EventHandler(this.btnSpecifications_Click);
             // 
             // btnProductReviews
             // 
@@ -332,6 +307,7 @@
             this.btnDeleteProduct.TabIndex = 41;
             this.btnDeleteProduct.Text = "Delete Product";
             this.btnDeleteProduct.UseVisualStyleBackColor = false;
+            this.btnDeleteProduct.Click += new System.EventHandler(this.btnDeleteProduct_Click);
             // 
             // btnComboProducts
             // 
@@ -360,8 +336,6 @@
             this.Controls.Add(this.btnAddProduct);
             this.Controls.Add(this.btnSpecifications);
             this.Controls.Add(this.btnOpenUpdateProduct);
-            this.Controls.Add(this.lboxProductSpecs);
-            this.Controls.Add(this.lblSepcs);
             this.Controls.Add(this.lblProducts);
             this.Controls.Add(this.listViewProducts);
             this.Controls.Add(this.gboxSearchProduct);
@@ -383,8 +357,6 @@
         private TextBox tbSearchTerm;
         private Label lblSearchTerm;
         private Label lblProducts;
-        private Label lblSepcs;
-        private ListBox lboxProductSpecs;
         private Button btnSearchProduct;
         private Button btnShowAllProducts;
         private ComboBox cboxSearchCriteria;

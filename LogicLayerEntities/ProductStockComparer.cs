@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LogicLayerEntities
 {
-    internal class ProductStockComparer : IComparer<SingleProduct>
+    public class ProductStockComparer : IComparer<SingleProduct>
     {
         public int Compare(SingleProduct one, SingleProduct two)
         {

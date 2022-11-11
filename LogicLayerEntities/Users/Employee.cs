@@ -12,12 +12,16 @@ namespace LogicLayerEntities.Users
         
         public string Role { get; private set; }
 
-        public Employee(string firstName, string lastName, string email, string password, string phoneNumber, string address, string postalCode, string role) : base(firstName, lastName, email, password, phoneNumber, address, postalCode)
+        public Employee(string firstName, string lastName, string email, string password, string phoneNumber, string address, string postalCode, string role, DateTime? lastModified) : base(firstName, lastName, email, password, phoneNumber, address, postalCode, lastModified)
         {
             Role = role;
         }
 
-        public Employee(int id, string firstName, string lastName, string email, string phoneNumber, string address, string postalCode, string role) : base(id, firstName, lastName, email, phoneNumber, address, postalCode)
+        public Employee(int id, string firstName, string lastName, string email, byte[] salt, byte[] password, string phoneNumber, string address, string postalCode, string role, DateTime? lastModified) : base(id, firstName, lastName, email,salt, password, phoneNumber, address, postalCode, lastModified)
+        {
+            Role = role;
+        }
+        public void ChangeRole(string role) 
         {
             Role = role;
         }

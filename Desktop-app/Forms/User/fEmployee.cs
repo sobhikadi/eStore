@@ -1,4 +1,5 @@
-﻿using LogicLayerEntities.Products;
+﻿using Desktop_app.Forms.User;
+using LogicLayerEntities.Products;
 using LogicLayerEntities.User;
 using LogicLayerEntities.Users;
 using LogicLayerHandlers;
@@ -7,6 +8,7 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,8 +20,10 @@ namespace Desktop_app.Forms
     public partial class fEmployee : Form
     {
         private UserHandler userHandler;
-        private LogicLayerEntities.Users.Employee? selectedEmployeeFromList; 
+        private Employee? selectedEmployeeFromList; 
         public static bool ADD_EMPLOYEE_FORM_OPEN = false;
+        public static bool UPDATE_EMPLOYEE_FORM_OPEN = false;
+
 
         public fEmployee()
         {
@@ -137,6 +141,49 @@ namespace Desktop_app.Forms
                 cboxSearchTerm.Visible = false;
             }
 
+        }
+
+        private void btnUpdateEmployee_Click(object sender, EventArgs e)
+        {
+            if (selectedEmployeeFromList == null) 
+            {
+                MessageBox.Show("Please select an employee first");
+                return;
+            }
+            if (UPDATE_EMPLOYEE_FORM_OPEN != false)
+            {
+                MessageBox.Show("There is already a window open");
+                return;
+            }
+            else
+            {
+                UpdateEmployee updateEmployeeForm = new UpdateEmployee(userHandler, selectedEmployeeFromList, btnShowAllUsers);
+                UPDATE_EMPLOYEE_FORM_OPEN = true;
+                updateEmployeeForm.Show();
+            }
+        }
+
+        private void btnDeleteEmployee_Click(object sender, EventArgs e)
+        {
+            if (selectedEmployeeFromList == null)
+            {
+                MessageBox.Show("Please select an Employee first");
+                return;
+            }
+            DialogResult dr = MessageBox.Show($"Are You sure you want to Delete this Employee ({selectedEmployeeFromList.FirstName} {selectedEmployeeFromList.LastName}) ?", "Delete Employee?", MessageBoxButtons.OKCancel);
+            if (dr == DialogResult.OK)
+            {
+                try
+                {
+                    userHandler.DeleteEmployee(selectedEmployeeFromList);
+                    MessageBox.Show("Employee has successfully been deleted");
+                    btnShowAllUsers.PerformClick();
+                }
+                catch (SqlException) { MessageBox.Show("Something went wrong with database connection"); }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+            }
+            else return;
         }
     }
 }

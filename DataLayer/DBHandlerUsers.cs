@@ -9,6 +9,7 @@ using System.Net;
 using LogicLayerEntities.Users;
 using LogicLayerEntities.Products;
 using LogicLayerEntities.User;
+using System.Data;
 
 namespace DataAccessLayer
 {
@@ -24,7 +25,7 @@ namespace DataAccessLayer
             {
 
                 conn.Open();
-                string sql = "insert into Users (firstName, lastName, email,salt, password, phoneNumber, address, postalCode) values (@firstName, @lastName, @email, @salt, @password, @phoneNumber, @address, @postalCode); select SCOPE_IDENTITY(); insert into Employee (id, role) values (SCOPE_IDENTITY(), @role)";
+                string sql = "insert into Users (firstName, lastName, email, salt, password, phoneNumber, address, postalCode, LastModified) values (@firstName, @lastName, @email, @salt, @password, @phoneNumber, @address, @postalCode, @LastModified); select SCOPE_IDENTITY(); insert into Employee (id, role) values (SCOPE_IDENTITY(), @role)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@firstName", employee.FirstName);
                 cmd.Parameters.AddWithValue("@lastName", employee.LastName);
@@ -35,6 +36,8 @@ namespace DataAccessLayer
                 cmd.Parameters.AddWithValue("@address", employee.Address);
                 cmd.Parameters.AddWithValue("@postalCode", employee.PostalCode);
                 cmd.Parameters.AddWithValue("@role", employee.Role);
+                cmd.Parameters.AddWithValue("@LastModified", DBNull.Value);
+
 
                 SqlDataReader dr = cmd.ExecuteReader();
                 if(dr.Read()) id = Convert.ToInt32(dr[0]);
@@ -82,9 +85,10 @@ namespace DataAccessLayer
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
+                
                 conn.Open();
                 string sqlCus =
-                    " select users.id, firstName, lastName, email, Password, phoneNumber, Address, postalCode, BillingAddress, billingPostalCode from users inner join Customer on users.Id = Customer.Id order by users.id;";
+                    " select users.id, firstName, lastName, email, salt, Password, phoneNumber, Address, postalCode, LastModified, BillingAddress, billingPostalCode from users inner join Customer on users.Id = Customer.Id order by users.id;";
 
                 SqlCommand cmdCus = new SqlCommand(sqlCus, conn);
 
@@ -93,7 +97,7 @@ namespace DataAccessLayer
                 while (drCus.Read())
                 {
                     string? phoneNumber, address, postalCode, billingAddress, billingPostalCode;
-
+                    DateTime? lastModified;
                     if (drCus["phoneNumber"] != DBNull.Value) phoneNumber = (string)drCus["phoneNumber"];
                     else phoneNumber = null;
                     if (drCus["address"] != DBNull.Value) address = (string)drCus["address"];
@@ -104,14 +108,16 @@ namespace DataAccessLayer
                     else billingAddress = null;
                     if (drCus["billingPostalCode"] != DBNull.Value) billingPostalCode = (string)drCus["billingPostalCode"];
                     else billingPostalCode = null;
+                    if (drCus["LastModified"] != DBNull.Value) lastModified = (DateTime)drCus["LastModified"];
+                    else lastModified = null;
 
-                    users.Add(new Customer(Convert.ToInt32(drCus["id"]), (string)drCus["firstName"], (string)drCus["lastname"], (string)drCus["email"], phoneNumber, address, postalCode, billingAddress, billingPostalCode));
+                    users.Add(new Customer(Convert.ToInt32(drCus["id"]), (string)drCus["firstName"], (string)drCus["lastname"], (string)drCus["email"],(byte[])drCus["salt"], (byte[])drCus["password"], phoneNumber, address, postalCode, billingAddress, billingPostalCode, lastModified));
                 }
                 conn.Close();
 
                 conn.Open();
                 string sqlEmp =
-                    " select users.Id, firstName, lastName, email, phoneNumber, [Address], postalCode, [role] from users inner join Employee on Users.Id = Employee.Id order by users.id;";
+                    " select users.Id, firstName, lastName, email, salt, password, phoneNumber, [Address], postalCode, LastModified, [role] from users inner join Employee on Users.Id = Employee.Id order by users.id;";
 
                 SqlCommand cmdEmp = new SqlCommand(sqlEmp, conn);
 
@@ -120,15 +126,16 @@ namespace DataAccessLayer
                 while (drEmp.Read())
                 {
                     string? phoneNumber, address, postalCode;
-
+                    DateTime? lastModified;
                     if (drEmp["phoneNumber"] != DBNull.Value) phoneNumber = (string)drEmp["phoneNumber"];
                     else phoneNumber = null;
                     if (drEmp["address"] != DBNull.Value) address = (string)drEmp["address"];
                     else address = null;
                     if (drEmp["postalCode"] != DBNull.Value) postalCode = (string)drEmp["postalCode"];
                     else postalCode = null;
-
-                    users.Add(new Employee(Convert.ToInt32(drEmp["id"]), (string)drEmp["firstName"], (string)drEmp["lastName"], (string)drEmp["email"], (string)drEmp["phoneNumber"], (string)drEmp["address"], (string)drEmp["postalCode"], (string)drEmp["role"]));
+                    if (drEmp["LastModified"] != DBNull.Value) lastModified = (DateTime)drEmp["LastModified"];
+                    else lastModified = null;
+                    users.Add(new Employee(Convert.ToInt32(drEmp["id"]), (string)drEmp["firstName"], (string)drEmp["lastName"], (string)drEmp["email"], (byte[])drEmp["salt"], (byte[])drEmp["password"], (string)drEmp["phoneNumber"], (string)drEmp["address"], (string)drEmp["postalCode"], (string)drEmp["role"], lastModified));
                    
                 }
                 conn.Close();
@@ -209,12 +216,12 @@ namespace DataAccessLayer
 
                 if (type == SearchTypeEmployee.Role)
                 {
-                    query = $"select users.Id, firstName, lastName, email, phoneNumber, [Address], postalCode, [role] from users inner join Employee on Users.Id = Employee.Id WHERE Role = '{term}' ORDER BY id;";
+                    query = $"select users.Id, firstName, lastName, email, salt, password, phoneNumber, [Address], postalCode, LastModified, [role] from users inner join Employee on Users.Id = Employee.Id WHERE Role = '{term}' ORDER BY id;";
 
                 }
                 else
                 {
-                    query = $"select users.Id, firstName, lastName, email, phoneNumber, [Address], postalCode, [role] from users inner join Employee on Users.Id = Employee.Id WHERE {type} LIKE '%{term}%' ORDER BY id;";
+                    query = $"select users.Id, firstName, lastName, email, salt, password, phoneNumber, [Address], postalCode, LastModified, [role] from users inner join Employee on Users.Id = Employee.Id WHERE {type} LIKE '%{term}%' ORDER BY id;";
                 }
 
                 SqlCommand cmd = new SqlCommand(query, conn);
@@ -225,6 +232,7 @@ namespace DataAccessLayer
                     while (dr.Read())
                     {
                         string? phoneNumber, address, postalCode;
+                        DateTime? lastModified;
 
                         if (dr["phoneNumber"] != DBNull.Value) phoneNumber = (string)dr["phoneNumber"];
                         else phoneNumber = null;
@@ -232,8 +240,10 @@ namespace DataAccessLayer
                         else address = null;
                         if (dr["postalCode"] != DBNull.Value) postalCode = (string)dr["postalCode"];
                         else postalCode = null;
+                        if (dr["LastModified"] != DBNull.Value) lastModified = (DateTime)dr["LastModified"];
+                        else lastModified = null;
 
-                        employees.Add(new Employee(Convert.ToInt32(dr["id"]), (string)dr["firstName"], (string)dr["lastName"], (string)dr["email"], (string)dr["phoneNumber"], (string)dr["address"], (string)dr["postalCode"], (string)dr["role"]));
+                        employees.Add(new Employee(Convert.ToInt32(dr["id"]), (string)dr["firstName"], (string)dr["lastName"], (string)dr["email"], (byte[])dr["salt"], (byte[])dr["password"], (string)dr["phoneNumber"], (string)dr["address"], (string)dr["postalCode"], (string)dr["role"], lastModified));
                     }
                 }
                 else
@@ -243,6 +253,85 @@ namespace DataAccessLayer
                 conn.Close();
             }
             return employees;
+        }
+
+        public bool UpdateEmployee(Employee newEmployee, Employee currentEmployee)
+        {
+            bool updated = false;
+            if (!CheckIfEmployeeModified(currentEmployee)) throw new ArgumentException("Employee information has been modified while you were changing the information");
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "Update Users set firstName = @firstName, lastName = @lastName, email = @email, salt = @salt, password = @password, phoneNumber = @phoneNumber, address = @address, postalCode = @postalCode, LastModified = @LastModified where Users.id = @employeeId; Update Employee set role = @role where Employee.id = @employeeId";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@employeeId", currentEmployee.Id);
+                cmd.Parameters.AddWithValue("@firstName", newEmployee.FirstName);
+                cmd.Parameters.AddWithValue("@lastName", newEmployee.LastName);
+                cmd.Parameters.AddWithValue("@email", newEmployee.Email);
+                if (Encoding.Default.GetString(newEmployee.Password) == "DoNoTUPdaTePassWord!@#HHGTR")
+                {
+                    cmd.Parameters.AddWithValue("@salt", currentEmployee.SaltPassword);
+                    cmd.Parameters.AddWithValue("@password", currentEmployee.Password);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@salt", newEmployee.SaltPassword);
+                    cmd.Parameters.AddWithValue("@password", newEmployee.Password);
+                }
+                cmd.Parameters.AddWithValue("@phoneNumber", newEmployee.PhoneNumber);
+                cmd.Parameters.AddWithValue("@address", newEmployee.Address);
+                cmd.Parameters.AddWithValue("@postalCode", newEmployee.PostalCode);
+                cmd.Parameters.AddWithValue("@role", newEmployee.Role);
+                cmd.Parameters.AddWithValue("@LastModified", DateTime.Now);
+
+                cmd.ExecuteNonQuery();
+                if (cmd.ExecuteNonQuery() > 0) updated = true;
+                conn.Close();
+            }
+            return updated;
+        }
+
+        public bool CheckIfEmployeeModified(Employee currentEmployee)
+        {
+            bool notModified = false;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "select id from users where (id = @employeeId) AND (lastModified is null OR lastmodified = @lastModifiedCurrent)";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@employeeId", currentEmployee.Id);
+                if (currentEmployee.LastModified != null) cmd.Parameters.AddWithValue("@lastModifiedCurrent", currentEmployee.LastModified);
+                else cmd.Parameters.AddWithValue("@lastModifiedCurrent", DBNull.Value);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    if ((int)dr["id"] == currentEmployee.Id) notModified = true;
+                }
+
+                conn.Close();
+            }
+            return notModified;
+        }
+
+        public bool DeleteEmployee(Employee employee)
+        {
+            bool deleted = false;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "Delete from Users where id = @id";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@id", employee.Id);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected == 0) return deleted;
+                deleted = true;
+                conn.Close();
+            }
+            return deleted;
         }
 
     }

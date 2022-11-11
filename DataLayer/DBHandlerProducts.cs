@@ -97,6 +97,7 @@ namespace DataAccessLayer
 
         public bool UpdateProduct(SingleProduct newProduct, SingleProduct currentProduct) 
         {
+            bool update = false;
             if(!CheckIfProductModified(currentProduct)) throw new ArgumentException("Product has been modified while you were changing the information");
 
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -123,11 +124,11 @@ namespace DataAccessLayer
                 if (newProduct.Image != null) cmd.Parameters.AddWithValue("@image", newProduct.Image);
                 else cmd.Parameters.Add("@image", SqlDbType.VarBinary).Value = DBNull.Value;
 
-                cmd.ExecuteNonQuery();                
-
+                cmd.ExecuteNonQuery();
+                if (cmd.ExecuteNonQuery() > 0) update = true;
                 conn.Close();
             }
-            return true;
+            return update;
         }
 
         public IList<Product> SearchProduct(string term, SearchTypeProduct type)

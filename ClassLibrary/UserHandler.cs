@@ -24,10 +24,14 @@ namespace LogicLayerHandlers
         public UserHandler()
         {
             users = new List<Person>();
-            users = dbHandlerUsers.GetAllUsers();
+            UpdateListOfUsers();
         }
 
-        public IList<Person> Users { get { return users.AsReadOnly(); } }
+        public IList<Person> Users { get 
+            {
+                UpdateListOfUsers();
+                return users.AsReadOnly(); 
+            } }
 
         public void AddEmployee(Employee employee)
         {
@@ -78,6 +82,32 @@ namespace LogicLayerHandlers
         public IList<Employee> SearchEmployee(string term, SearchTypeEmployee type)
         {
             return dbHandlerUsers.SearchEmployee(term, type);
+        }
+
+        public void UpdateEmployee(Employee newEmployee, Employee currentEmployee)
+        {
+            bool success = dbHandlerUsers.UpdateEmployee(newEmployee, currentEmployee);
+
+            if (!success) throw new ArgumentException("");
+
+            if (!users.Contains(currentEmployee)) throw new ArgumentException("");
+
+            currentEmployee.ChangeInformation(newEmployee, currentEmployee);
+
+            UpdateListOfUsers();
+        }
+
+        private void UpdateListOfUsers()
+        {
+            users.Clear();
+            users = dbHandlerUsers.GetAllUsers();
+        }
+
+        public void DeleteEmployee(Employee employee)
+        {
+            bool deleted = dbHandlerUsers.DeleteEmployee(employee);
+            if (!deleted) throw new ArgumentException("Employee has not been deleted successfully");
+            users.Remove(employee);
         }
     }
 }

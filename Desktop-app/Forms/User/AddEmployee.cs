@@ -47,23 +47,15 @@ namespace Desktop_app.Forms
             {
                 try
                 {
+
+                    if (string.IsNullOrEmpty(password)) throw new ArgumentException("The field password cannot be empty");
                     if (string.IsNullOrEmpty(confirmPaswd)) { throw new ArgumentException("password confirmation field is empty"); }
-
-                   
-
                     if (password != confirmPaswd) throw new ArgumentException("Password and confirmation does not match");
 
-                    LogicLayerEntities.Users.Employee employee = new LogicLayerEntities.Users.Employee(firstName, lastName, email, password, phoneNumber, address, postalCode, role);
+                    Employee employee = new Employee(firstName, lastName, email, password, phoneNumber, address, postalCode, role, null);
 
                     userHandler.AddEmployee(employee);
 
-                    foreach (Control co in this.Controls)
-                    {
-                        if (co is TextBox || co is ComboBox)
-                        {
-                            co.ResetText();
-                        }
-                    }
                     MessageBox.Show("Employee added successfully!");
                     fEmployee.ADD_EMPLOYEE_FORM_OPEN = false;
                     this.Close();

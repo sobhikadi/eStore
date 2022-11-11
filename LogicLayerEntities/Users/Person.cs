@@ -1,18 +1,23 @@
 ﻿using Konscious.Security.Cryptography;
+using LogicLayerEntities.Products;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LogicLayerEntities.Users
 {
     public abstract class Person
     {
         private string firstName, lastName, email, phoneNumber, address, postalCode;
+        private DateTime? lastModified;
 
         public int Id { get; set; }
         public string FirstName 
@@ -60,6 +65,7 @@ namespace LogicLayerEntities.Users
                 phoneNumber = value;
             }
         }
+        public DateTime? LastModified { get { return lastModified; } private set { lastModified = value; } }
 
         public string? Address 
         {
@@ -91,7 +97,7 @@ namespace LogicLayerEntities.Users
             }
         }
 
-        public Person(string firstName, string lastName, string email, string password, string? phoneNumber, string? address, string? postalCode)
+        public Person(string firstName, string lastName, string email, string password, string? phoneNumber, string? address, string? postalCode, DateTime? lastModified)
         {
             byte[] salt = CreateSalt();
             FirstName = firstName;
@@ -99,21 +105,26 @@ namespace LogicLayerEntities.Users
             Email = email;
             SaltPassword = salt;
             if (string.IsNullOrEmpty(password)) throw new ArgumentException("The field password cannot be empty");
-            Password = HashPassword(password, salt);
+            if (password == "DoNoTUPdaTePassWord!@#HHGTR") Password = Encoding.UTF8.GetBytes(password);
+            else Password = HashPassword(password, salt);
             PhoneNumber = phoneNumber;
             Address = address;
             PostalCode = postalCode;
+            LastModified = lastModified;
         }
 
-        public Person(int id, string firstName, string lastName, string email, string? phoneNumber, string? address, string? postalCode)
+        public Person(int id, string firstName, string lastName, string email, byte[] salt, byte[] password, string? phoneNumber, string? address, string? postalCode, DateTime? lastModified)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
+            SaltPassword = salt;
+            Password = password;
             PhoneNumber = phoneNumber;
             Address = address;
             PostalCode = postalCode;
+            LastModified = lastModified;    
         }
 
         public byte[] CreateSalt()
@@ -132,6 +143,28 @@ namespace LogicLayerEntities.Users
             argon2.MemorySize = 1024 * 1024; // 1 GB RAM
 
             return argon2.GetBytes(16);
+        }
+
+        public void ChangeInformation(Employee updatedEmployee, Employee currentEmployee)
+        {
+            FirstName = updatedEmployee.FirstName;
+            LastName = updatedEmployee.LastName;
+            Email = updatedEmployee.Email;
+            if (Encoding.Default.GetString(updatedEmployee.Password) == "DoNoTUPdaTePassWord!@#HHGTR")
+            {
+                SaltPassword = currentEmployee.SaltPassword;
+                Password = currentEmployee.Password;
+            }
+            else 
+            {
+                SaltPassword = updatedEmployee.SaltPassword;
+                Password = updatedEmployee.Password;
+            }
+            PhoneNumber = updatedEmployee.PhoneNumber;
+            Address = updatedEmployee.Address;
+            PostalCode = updatedEmployee.PostalCode;
+            currentEmployee.ChangeRole(updatedEmployee.Role);
+            LastModified = updatedEmployee.LastModified;
         }
 
     }

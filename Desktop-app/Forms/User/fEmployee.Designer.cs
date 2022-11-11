@@ -253,6 +253,7 @@
             this.btnUpdateEmployee.TabIndex = 36;
             this.btnUpdateEmployee.Text = "Update Employee";
             this.btnUpdateEmployee.UseVisualStyleBackColor = false;
+            this.btnUpdateEmployee.Click += new System.EventHandler(this.btnUpdateEmployee_Click);
             // 
             // btnDeleteEmployee
             // 
@@ -268,8 +269,9 @@
             this.btnDeleteEmployee.TabIndex = 37;
             this.btnDeleteEmployee.Text = "Delete Employee";
             this.btnDeleteEmployee.UseVisualStyleBackColor = false;
+            this.btnDeleteEmployee.Click += new System.EventHandler(this.btnDeleteEmployee_Click);
             // 
-            // Employee
+            // fEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -281,7 +283,7 @@
             this.Controls.Add(this.listViewEmployees);
             this.Controls.Add(this.gboxSearchUsers);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Employee";
+            this.Name = "fEmployee";
             this.Text = "TestForm2";
             this.gboxSearchUsers.ResumeLayout(false);
             this.gboxSearchUsers.PerformLayout();

@@ -68,6 +68,7 @@
             // 
             // cboxRoles
             // 
+            this.cboxRoles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxRoles.FormattingEnabled = true;
             this.cboxRoles.ItemHeight = 23;
             this.cboxRoles.Location = new System.Drawing.Point(175, 305);

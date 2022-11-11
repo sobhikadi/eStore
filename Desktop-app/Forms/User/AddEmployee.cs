@@ -25,7 +25,7 @@ namespace Desktop_app.Forms
             this.userHandler = userHandler;
 
             cboxRoles.DataSource = null;
-            cboxRoles.DataSource = Enum.GetValues(typeof(Roles));
+            cboxRoles.DataSource = Enum.GetValues(typeof(EmployeeRoles));
         }
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
@@ -65,7 +65,7 @@ namespace Desktop_app.Forms
                         }
                     }
                     MessageBox.Show("Employee added successfully!");
-                    Employee.ADD_EMPLOYEE_FORM_OPEN = false;
+                    fEmployee.ADD_EMPLOYEE_FORM_OPEN = false;
                     this.Close();
                 }
                 catch (SqlException) { MessageBox.Show("Unable to communicate with database"); }
@@ -76,7 +76,7 @@ namespace Desktop_app.Forms
 
         private void fAddEmployee_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Employee.ADD_EMPLOYEE_FORM_OPEN = false;
+            fEmployee.ADD_EMPLOYEE_FORM_OPEN = false;
         }
     }
 }

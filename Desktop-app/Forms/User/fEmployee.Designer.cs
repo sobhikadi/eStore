@@ -1,6 +1,6 @@
 ﻿namespace Desktop_app.Forms
 {
-    partial class Employee
+    partial class fEmployee
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.gboxSearchUsers = new System.Windows.Forms.GroupBox();
+            this.cboxSearchTerm = new System.Windows.Forms.ComboBox();
             this.cboxSearchCriteria = new System.Windows.Forms.ComboBox();
             this.btnSearchUser = new System.Windows.Forms.Button();
             this.lblSearchCriteria = new System.Windows.Forms.Label();
@@ -52,6 +53,7 @@
             // 
             this.gboxSearchUsers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gboxSearchUsers.Controls.Add(this.cboxSearchTerm);
             this.gboxSearchUsers.Controls.Add(this.cboxSearchCriteria);
             this.gboxSearchUsers.Controls.Add(this.btnSearchUser);
             this.gboxSearchUsers.Controls.Add(this.lblSearchCriteria);
@@ -69,21 +71,30 @@
             this.gboxSearchUsers.TabStop = false;
             this.gboxSearchUsers.Text = "Search Employee Or Show All Employees";
             // 
+            // cboxSearchTerm
+            // 
+            this.cboxSearchTerm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboxSearchTerm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxSearchTerm.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cboxSearchTerm.FormattingEnabled = true;
+            this.cboxSearchTerm.Location = new System.Drawing.Point(151, 25);
+            this.cboxSearchTerm.Name = "cboxSearchTerm";
+            this.cboxSearchTerm.Size = new System.Drawing.Size(795, 31);
+            this.cboxSearchTerm.TabIndex = 38;
+            this.cboxSearchTerm.Visible = false;
+            // 
             // cboxSearchCriteria
             // 
             this.cboxSearchCriteria.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboxSearchCriteria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxSearchCriteria.FormattingEnabled = true;
-            this.cboxSearchCriteria.Items.AddRange(new object[] {
-            "Id",
-            "FirstName",
-            "LastName",
-            "Role",
-            "Email"});
             this.cboxSearchCriteria.Location = new System.Drawing.Point(151, 63);
             this.cboxSearchCriteria.Name = "cboxSearchCriteria";
             this.cboxSearchCriteria.Size = new System.Drawing.Size(795, 31);
             this.cboxSearchCriteria.TabIndex = 13;
+            this.cboxSearchCriteria.SelectedIndexChanged += new System.EventHandler(this.cboxSearchCriteria_SelectedIndexChanged);
             // 
             // btnSearchUser
             // 
@@ -91,7 +102,7 @@
             this.btnSearchUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
             this.btnSearchUser.FlatAppearance.BorderSize = 0;
             this.btnSearchUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearchUser.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnSearchUser.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSearchUser.ForeColor = System.Drawing.Color.White;
             this.btnSearchUser.Location = new System.Drawing.Point(967, 27);
             this.btnSearchUser.Name = "btnSearchUser";
@@ -99,6 +110,7 @@
             this.btnSearchUser.TabIndex = 7;
             this.btnSearchUser.Text = "Search";
             this.btnSearchUser.UseVisualStyleBackColor = false;
+            this.btnSearchUser.Click += new System.EventHandler(this.btnSearchUser_Click);
             // 
             // lblSearchCriteria
             // 
@@ -118,13 +130,13 @@
             this.btnShowAllUsers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(144)))), ((int)(((byte)(149)))));
             this.btnShowAllUsers.FlatAppearance.BorderSize = 0;
             this.btnShowAllUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowAllUsers.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnShowAllUsers.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnShowAllUsers.ForeColor = System.Drawing.Color.White;
             this.btnShowAllUsers.Location = new System.Drawing.Point(967, 64);
             this.btnShowAllUsers.Name = "btnShowAllUsers";
             this.btnShowAllUsers.Size = new System.Drawing.Size(256, 30);
             this.btnShowAllUsers.TabIndex = 8;
-            this.btnShowAllUsers.Text = "Show All Users";
+            this.btnShowAllUsers.Text = "Show Employees";
             this.btnShowAllUsers.UseVisualStyleBackColor = false;
             this.btnShowAllUsers.Click += new System.EventHandler(this.btnShowAllUsers_Click);
             // 
@@ -132,7 +144,7 @@
             // 
             this.tbSearchTerm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbSearchTerm.Location = new System.Drawing.Point(151, 27);
+            this.tbSearchTerm.Location = new System.Drawing.Point(151, 25);
             this.tbSearchTerm.Margin = new System.Windows.Forms.Padding(4);
             this.tbSearchTerm.Name = "tbSearchTerm";
             this.tbSearchTerm.Size = new System.Drawing.Size(795, 30);
@@ -297,5 +309,6 @@
         private ColumnHeader columnHeader5;
         private Button btnUpdateEmployee;
         private Button btnDeleteEmployee;
+        private ComboBox cboxSearchTerm;
     }
 }

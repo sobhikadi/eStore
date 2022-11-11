@@ -104,7 +104,7 @@ namespace Desktop_app.Forms
 
         private void btnEmployees_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.Employee(), sender);
+            OpenChildForm(new Forms.fEmployee(), sender);
         }
 
         private void brnCustomers_Click(object sender, EventArgs e)

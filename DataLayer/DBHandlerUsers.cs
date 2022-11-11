@@ -8,6 +8,7 @@ using System.Data.SqlTypes;
 using System.Net;
 using LogicLayerEntities.Users;
 using LogicLayerEntities.Products;
+using LogicLayerEntities.User;
 
 namespace DataAccessLayer
 {
@@ -110,7 +111,7 @@ namespace DataAccessLayer
 
                 conn.Open();
                 string sqlEmp =
-                    " select users.Id, firstName, lastName, email, [Password], phoneNumber, [Address], postalCode, [role] from users inner join Employee on Users.Id = Employee.Id order by users.id;";
+                    " select users.Id, firstName, lastName, email, phoneNumber, [Address], postalCode, [role] from users inner join Employee on Users.Id = Employee.Id order by users.id;";
 
                 SqlCommand cmdEmp = new SqlCommand(sqlEmp, conn);
 
@@ -197,63 +198,52 @@ namespace DataAccessLayer
             return role;
         }
 
-        //public static SearchEmployee(string term, SearchType type)
-        //{
-        //    Employee emp = null;
-        //    string qsrt = "id=0";
-        //    switch ((int)type)
-        //    {
-        //        case 0:
-        //            qsrt = $"id={term}";
-        //            break;
-        //        case 1:
-        //            qsrt = $"username='{term}'";
-        //            break;
-        //        case 2:
-        //            qsrt = $"first_name='{term}'";
-        //            break;
-        //        case 3:
-        //            qsrt = $"last_name='{term}'";
-        //            break;
-        //    }
+        public IList<Employee> SearchEmployee(string term, SearchTypeEmployee type)
+        {
+            IList<Employee> employees = new List<Employee>();
+            string query = "";
+            int int_search_term;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
 
-        //    using (SqlConnection conn = new SqlConnection(adress))
-        //    {
-        //        string quary = $"SELECT id, username, first_name, last_name, employee_status, phone_number, street, house_number, zipcode, city, email, bsn, d_o_b, emergency_contact FROM employee WHERE {qsrt} ORDER BY id;";
-        //        using (SqlCommand cmd = new SqlCommand(quary, conn))
-        //        {
-        //            conn.Open();
-        //            SqlDataReader result = cmd.ExecuteReader();
-        //            if (result.HasRows)
-        //            {
-        //                while (result.Read())
-        //                {
-        //                    int id = result.GetInt32(0);
-        //                    string uname = result.GetString(1);
-        //                    string fname = result.GetString(2);
-        //                    string lname = result.GetString(3);
-        //                    EmployeeStatus status = (EmployeeStatus)Enum.Parse(typeof(EmployeeStatus), result.GetString(4));
-        //                    string phnmb = result.GetString(5);
-        //                    string str = result.GetString(6);
-        //                    string hsnbr = result.GetString(7);
-        //                    string zcde = result.GetString(8);
-        //                    string city = result.GetString(9);
-        //                    string email = result.GetString(10);
-        //                    string bsn = result.GetString(11);
-        //                    DateTime dob = result.GetDateTime(12);
-        //                    string[] emc = result.GetString(13).Split("%");
-        //                    emp = new(id, uname, fname, lname, status, phnmb, str, hsnbr, zcde, city, email, bsn, dob, emc);
-        //                }
-        //            }
-        //            else
-        //            {
-        //                throw new Exception("No results found");
-        //            }
-        //        }
-        //    }
 
-        //    return emp;
-        //}
+                if (type == SearchTypeEmployee.Role)
+                {
+                    query = $"select users.Id, firstName, lastName, email, phoneNumber, [Address], postalCode, [role] from users inner join Employee on Users.Id = Employee.Id WHERE Role = '{term}' ORDER BY id;";
+
+                }
+                else
+                {
+                    query = $"select users.Id, firstName, lastName, email, phoneNumber, [Address], postalCode, [role] from users inner join Employee on Users.Id = Employee.Id WHERE {type} LIKE '%{term}%' ORDER BY id;";
+                }
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                conn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        string? phoneNumber, address, postalCode;
+
+                        if (dr["phoneNumber"] != DBNull.Value) phoneNumber = (string)dr["phoneNumber"];
+                        else phoneNumber = null;
+                        if (dr["address"] != DBNull.Value) address = (string)dr["address"];
+                        else address = null;
+                        if (dr["postalCode"] != DBNull.Value) postalCode = (string)dr["postalCode"];
+                        else postalCode = null;
+
+                        employees.Add(new Employee(Convert.ToInt32(dr["id"]), (string)dr["firstName"], (string)dr["lastName"], (string)dr["email"], (string)dr["phoneNumber"], (string)dr["address"], (string)dr["postalCode"], (string)dr["role"]));
+                    }
+                }
+                else
+                {
+                    throw new Exception("No results found");
+                }
+                conn.Close();
+            }
+            return employees;
+        }
 
     }
 }

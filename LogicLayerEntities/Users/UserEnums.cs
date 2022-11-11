@@ -6,9 +6,17 @@ using System.Threading.Tasks;
 
 namespace LogicLayerEntities.User
 {
-    public enum Roles
+    public enum EmployeeRoles
     {
         Admin,
         Employee
+    }
+
+    public enum SearchTypeEmployee 
+    {
+        FirstName,
+        LastName,
+        Role,
+        Email
     }
 }

@@ -1,5 +1,7 @@
 ﻿using DataAccessLayer;
 using Konscious.Security.Cryptography;
+using LogicLayerEntities.Products;
+using LogicLayerEntities.User;
 using LogicLayerEntities.Users;
 using System;
 using System.Collections.Generic;
@@ -71,6 +73,11 @@ namespace LogicLayerHandlers
                 if (emp.FirstName == employee.FirstName) return true;
             }
             return false;
+        }
+
+        public IList<Employee> SearchEmployee(string term, SearchTypeEmployee type)
+        {
+            return dbHandlerUsers.SearchEmployee(term, type);
         }
     }
 }

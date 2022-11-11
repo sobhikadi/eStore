@@ -21,7 +21,7 @@ namespace LogicLayerEntities.Products
             Products = products;
             Discount = discount;
         }
-        public ComboProduct(int id, string name, List<SingleProduct> products, double discount, int quantity, DateTime? lastModified) : base(id, name, lastModified)
+        public ComboProduct(int id, string name, List<SingleProduct> products, double discount, DateTime? lastModified) : base(id, name, lastModified)
         {
             this.products = new List<SingleProduct>();
             Products = products;
@@ -29,9 +29,9 @@ namespace LogicLayerEntities.Products
         }
 
         public List<SingleProduct> Products { get { return products; } 
-            private set 
+            set 
             {
-                if (value.Count == 0) throw new ArgumentException("ComboProduct must at least have one product");
+                
                 if (value.Count > 5) throw new ArgumentException("ComboProduct can have at max 5 products");
                 products = value;
             }

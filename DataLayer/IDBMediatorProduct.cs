@@ -13,9 +13,11 @@ namespace DataAccessLayer
 
         public List<SingleProduct> GetSingleProducts();
 
+        public List<ComboProduct> GetComboProducts();
+
         public bool UpdateProduct(SingleProduct newProduct, SingleProduct currentProduct);
 
-        public IList<Product> SearchProduct(string term, SearchTypeProduct type);
+        public List<SingleProduct> SearchProduct(string term, SearchTypeProduct type);
 
         public bool CheckIfProductModified(SingleProduct currentProduct);
 
@@ -28,5 +30,7 @@ namespace DataAccessLayer
         public bool DeleteSpecFromDB(int productId, string specName);
 
         public bool CheckIfProductExist(string name);
+
+        public int InsertComboProduct(ComboProduct comboProduct);
     }
 }

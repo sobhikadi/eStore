@@ -24,7 +24,6 @@ namespace LogicLayerHandlers
 
         public IList<Product> Products { get 
             {
-                //UpdateListOfProducts();
                 return products.AsReadOnly(); 
             } }
 
@@ -62,13 +61,14 @@ namespace LogicLayerHandlers
         public void AddComboProduct(ComboProduct comboProduct) 
         {
             if (CheckProductExist(comboProduct)) throw new Exception($"Product with the name {comboProduct.Name} already exist in database");
-            //int id = dbHandlerProducts.InsertProduct(product);
-            //if (id == 0) throw new Exception("Product has not been added");
-            //product.Id = id;
+            int id = dbHandlerProducts.InsertComboProduct(comboProduct);
+            if (id == 0) throw new Exception("Product has not been added");
+            comboProduct.Id = id;
             products.Add(comboProduct);
+            UpdateListOfProducts();
         }
 
-        public IList<Product> SearchProduct(string term, SearchTypeProduct type)
+        public List<SingleProduct> SearchProduct(string term, SearchTypeProduct type)
         {
             return dbHandlerProducts.SearchProduct(term, type);
         }
@@ -86,6 +86,7 @@ namespace LogicLayerHandlers
         {
             products.Clear();
             products.AddRange(dbHandlerProducts.GetSingleProducts());
+            products.AddRange(dbHandlerProducts.GetComboProducts());
         }
 
         public void AddSpecificationToProduct(SingleProduct product, string name, string value) 
@@ -99,6 +100,7 @@ namespace LogicLayerHandlers
 
             if (!CheckProductExist(product)) throw new ArgumentException("The product you are trying to edit has been altered while you are working please refresh the information and try again");
             product.AddSpecifications(name, value);
+            UpdateListOfProducts();
         }
 
         public void DeleteSpecification(SingleProduct product, int productId, string specsName) 
@@ -106,6 +108,7 @@ namespace LogicLayerHandlers
             bool deleted = dbHandlerProducts.DeleteSpecFromDB(productId, specsName);
             if (!deleted) throw new ArgumentException("Specification has not been deleted successfully");
             product.GetSpecsFromDB(dbHandlerProducts.GetProductSpecifications(productId));
+            UpdateListOfProducts();
 
         }
 

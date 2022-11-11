@@ -51,9 +51,10 @@ namespace DataAccessLayer
             return 1;
         }
 
-        public IList<Product> SearchProduct(string term, SearchTypeProduct type)
+        public List<SingleProduct> SearchProduct(string term, SearchTypeProduct type)
         {
-            List<Product> products = new List<Product>();
+            List<SingleProduct> products = new List<SingleProduct>();
+
             return products;
         }
 
@@ -70,5 +71,20 @@ namespace DataAccessLayer
             }
             return false;
         }
+
+        public int InsertComboProduct(ComboProduct comboProduct)
+        {
+            if (CheckIfProductExist(comboProduct.Name)) return 0;
+            products.Add(comboProduct);
+            return 1;
+        }
+
+        public List<ComboProduct> GetComboProducts()
+        {
+            List<ComboProduct> products = new List<ComboProduct>();
+            return products;
+        }
+
+        
     }
 }

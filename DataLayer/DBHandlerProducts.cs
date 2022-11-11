@@ -95,6 +95,63 @@ namespace DataAccessLayer
             return products;
         }
 
+        public List<ComboProduct> GetComboProducts()
+        {
+            ComboProduct product = null;
+            List<ComboProduct> comboProducts = new List<ComboProduct>();
+
+            int idCombo = 0;
+            string name = "";
+            double discount = 0;
+            List<SingleProduct> singleInCombo = new List<SingleProduct>();
+            DateTime? lastModified = null;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "select  id , name, discount, lastModified from ComboProduct order by ComboProduct.id;";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+
+                    idCombo = Convert.ToInt32(dr["id"]);
+                    name = (string)dr["name"];
+                    discount = Convert.ToDouble(dr["discount"]);
+                    if (dr["lastModified"] != DBNull.Value) lastModified = (DateTime)dr["lastModified"];
+                    else lastModified = null;
+                    product = new ComboProduct(idCombo, name, singleInCombo, discount, lastModified);
+                    comboProducts.Add(product);
+                }
+                conn.Close();
+                foreach (ComboProduct produ in comboProducts)
+                {
+                    using (SqlConnection connSub = new SqlConnection(connectionString))
+                    {
+                        connSub.Open();
+                        string sqlSub = "select id from SingleProductInCombo where comboId = @comboId order by id;";
+                        SqlCommand cmdSub = new SqlCommand(sqlSub, connSub);
+                        cmdSub.Parameters.AddWithValue("comboId", produ.Id);
+
+                        SqlDataReader drSub = cmdSub.ExecuteReader();
+                        singleInCombo.Clear();
+                        while (drSub.Read())
+                        {
+                            int singleId = Convert.ToInt32(drSub["id"]);
+
+                            singleInCombo.AddRange(SearchProduct(singleId.ToString(), SearchTypeProduct.Id));
+                        }
+                        produ.Products = singleInCombo;
+                        connSub.Close();
+                    }
+                }
+            }
+
+            
+            return comboProducts;
+        }
+
         public bool UpdateProduct(SingleProduct newProduct, SingleProduct currentProduct) 
         {
             bool update = false;
@@ -131,9 +188,9 @@ namespace DataAccessLayer
             return update;
         }
 
-        public IList<Product> SearchProduct(string term, SearchTypeProduct type)
+        public List<SingleProduct> SearchProduct(string term, SearchTypeProduct type)
         {
-            IList<Product> products = new List<Product>();
+            List<SingleProduct> products = new List<SingleProduct>();
             string query = "";
             int int_search_term;
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -312,6 +369,44 @@ namespace DataAccessLayer
                 conn.Close();
             }
             return exist;
+        }
+
+        public int InsertComboProduct(ComboProduct comboProduct)
+        {
+            if (CheckIfProductExist(comboProduct.Name)) throw new ArgumentException("Product already exist");
+            int id = 0;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "insert into ComboProduct (name, discount, LastModified) values (@name, @discount, @lastModified); select SCOPE_IDENTITY();";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@name", comboProduct.Name);
+                cmd.Parameters.AddWithValue("@discount", comboProduct.Discount);
+                cmd.Parameters.AddWithValue("@lastModified", DBNull.Value);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read()) id = Convert.ToInt32(dr[0]);
+                conn.Close();
+            }
+            if (id != 0) 
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    foreach (SingleProduct prod in comboProduct.Products)
+                    {
+                        string sql = "insert into SingleProductInCombo (id, ComboId) values (@SingleId, @ComboId);";
+                        SqlCommand cmd = new SqlCommand(sql, conn);
+                        cmd.Parameters.AddWithValue("@SingleId", prod.Id);
+                        cmd.Parameters.AddWithValue("@ComboId", id);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                    conn.Close();
+                }
+            }
+            return id;
         }
 
     }

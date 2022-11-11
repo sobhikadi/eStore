@@ -81,6 +81,8 @@ namespace Desktop_app.Forms.Products
                     dataGridViewComboProducts.Rows.Clear();
                     DataGridComboProducts();
                     dataGridViewSingleInCombo.Rows.Clear();
+                    tbName.Clear();
+                    tbDiscount.Clear();
 
 
                 }
@@ -182,6 +184,7 @@ namespace Desktop_app.Forms.Products
                 {
                     dataGridViewComboProducts.ClearSelection();
                     selectedProductFromComboProduct = null;
+                    return;
                 }
                 int index = dataGridViewComboProducts.CurrentCell.RowIndex;
                 selectedProductFromComboProduct = (ComboProduct)dataGridViewComboProducts.Rows[index].Tag;

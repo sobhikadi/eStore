@@ -16,6 +16,7 @@ namespace LogicLayerEntities.Products
 
     public enum SearchTypeProduct 
     {
+        Id,
         Name,
         Category,
         Subcategory

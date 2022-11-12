@@ -59,9 +59,11 @@ namespace LogicLayerEntities.Users
             get { return phoneNumber; }
             private set
             {
-                if (string.IsNullOrEmpty(value)) throw new ArgumentException("The field phone number cannot be empty");
-                Regex regex = new Regex(@"^((\+|00(\s|\s?\-\s?)?)31(\s|\s?\-\s?)?(\(0\)[\-\s]?)?|0)[1-9]((\s|\s?\-\s?)?[0-9])((\s|\s?-\s?)?[0-9])((\s|\s?-\s?)?[0-9])\s?[0-9]\s?[0-9]\s?[0-9]\s?[0-9]\s?[0-9]$");
-                if (!regex.IsMatch(value)) throw new ArgumentException("Phone number has been entered in an incorrect format");
+                if (!string.IsNullOrEmpty(value))
+                {
+                    Regex regex = new Regex(@"^((\+|00(\s|\s?\-\s?)?)31(\s|\s?\-\s?)?(\(0\)[\-\s]?)?|0)[1-9]((\s|\s?\-\s?)?[0-9])((\s|\s?-\s?)?[0-9])((\s|\s?-\s?)?[0-9])\s?[0-9]\s?[0-9]\s?[0-9]\s?[0-9]\s?[0-9]$");
+                    if (!regex.IsMatch(value)) throw new ArgumentException("Phone number has been entered in an incorrect format");
+                }
                 phoneNumber = value;
             }
         }

@@ -6,6 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LogicLayerEntities.Products
 {
@@ -198,7 +199,9 @@ namespace LogicLayerEntities.Products
             specifications.Clear();
             specifications = specs;
         }
+
         
-        
+
+
     }
 }

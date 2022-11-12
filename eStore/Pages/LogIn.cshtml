@@ -50,3 +50,12 @@
         </div>
     </div>
 </div>
+
+@if (ViewData["successMessage"] != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewData["successMessage"]");
+        };
+    </script>
+}

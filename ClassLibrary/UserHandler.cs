@@ -27,11 +27,7 @@ namespace LogicLayerHandlers
             UpdateListOfUsers();
         }
 
-        public IList<Person> Users { get 
-            {
-                UpdateListOfUsers();
-                return users.AsReadOnly(); 
-            } }
+        public IList<Person> Users { get {return users.AsReadOnly(); } }
 
         public void AddEmployee(Employee employee)
         {
@@ -94,7 +90,6 @@ namespace LogicLayerHandlers
 
             currentEmployee.ChangeInformation(newEmployee, currentEmployee);
 
-            UpdateListOfUsers();
         }
 
         private void UpdateListOfUsers()

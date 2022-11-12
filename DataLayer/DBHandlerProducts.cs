@@ -98,7 +98,7 @@ namespace DataAccessLayer
         public List<ComboProduct> GetComboProducts()
         {
             ComboProduct product = null;
-            List<ComboProduct> comboProducts = new List<ComboProduct>();
+            List<ComboProduct> comboProducts;
 
             int idCombo = 0;
             string name = "";
@@ -112,6 +112,7 @@ namespace DataAccessLayer
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
                 SqlDataReader dr = cmd.ExecuteReader();
+                comboProducts = new List<ComboProduct>();
 
                 while (dr.Read())
                 {
@@ -125,11 +126,14 @@ namespace DataAccessLayer
                     comboProducts.Add(product);
                 }
                 conn.Close();
+                
                 foreach (ComboProduct produ in comboProducts)
                 {
+                    int coId = produ.Id;
                     using (SqlConnection connSub = new SqlConnection(connectionString))
                     {
                         connSub.Open();
+                        
                         string sqlSub = "select id from SingleProductInCombo where comboId = @comboId order by id;";
                         SqlCommand cmdSub = new SqlCommand(sqlSub, connSub);
                         cmdSub.Parameters.AddWithValue("comboId", produ.Id);
@@ -140,15 +144,16 @@ namespace DataAccessLayer
                         {
                             int singleId = Convert.ToInt32(drSub["id"]);
 
-                            singleInCombo.AddRange(SearchProduct(singleId.ToString(), SearchTypeProduct.Id));
+                            foreach (SingleProduct single in SearchProduct(singleId.ToString(), SearchTypeProduct.Id))
+                            {
+                                singleInCombo.Add(single);
+                            }
                         }
-                        produ.Products = singleInCombo;
                         connSub.Close();
                     }
+                    if (produ.Id == coId) produ.Products = singleInCombo;
                 }
             }
-
-            
             return comboProducts;
         }
 

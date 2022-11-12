@@ -51,58 +51,20 @@
                         <a class="nav-item text-decoration-none ms-2" asp-page="/Products" role="button">
                             Products
                         </a>
-                        <a class="dropdown-item dropdown-toggle dropdown-toggle-split ms-2 pt-1 rounded-pill" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                        <a class="dropdown-link dropdown-toggle ms-2 pt-1" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">
                         <span class="visually-hidden">Toggle Dropdown</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="nav-item dropend d-flex align-items-center text-decoration-none justify-content-between">
-                                <a class="nav-item text-decoration-none ms-2" asp-page="/Products" role="button">
-                                    Products
-                                </a>
-                                <a class="dropdown-item dropdown-toggle dropdown-toggle-split w-auto me-2 rounded-pill" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span class="visually-hidden">Toggle Dropdown</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" asp-page="/index">Home</a></li>
-                                    <li><a class="dropdown-item" asp-page="/privacy">Privacy</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropend d-flex align-items-center text-decoration-none justify-content-between">
-                                <a class="nav-item text-decoration-none ms-2" asp-page="/Products" role="button">
-                                    Products
-                                </a>
-                                <a class="dropdown-item dropdown-toggle dropdown-toggle-split w-auto me-2 rounded-pill" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span class="visually-hidden">Toggle Dropdown</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" asp-page="/index">Home</a></li>
-                                    <li><a class="dropdown-item" asp-page="/privacy">Privacy</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropend d-flex align-items-center text-decoration-none justify-content-between">
-                                <a class="nav-item text-decoration-none ms-2" asp-page="/Products" role="button">
-                                    Products
-                                </a>
-                                <a class="dropdown-item dropdown-toggle dropdown-toggle-split w-auto me-2 rounded-pill" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span class="visually-hidden">Toggle Dropdown</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" asp-page="/index">Home</a></li>
-                                    <li><a class="dropdown-item" asp-page="/privacy">Privacy</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropend d-flex align-items-center text-decoration-none justify-content-between">
-                                <a class="nav-item text-decoration-none ms-2" asp-page="/Products" role="button">
-                                    Products
-                                </a>
-                                <a class="dropdown-item dropdown-toggle dropdown-toggle-split w-auto me-2 rounded-pill" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span class="visually-hidden">Toggle Dropdown</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" asp-page="/index">Home</a></li>
-                                    <li><a class="dropdown-item" asp-page="/privacy">Privacy</a></li>
-                                </ul>
-                            </li>
+                            
+                            @foreach(string category in Enum.GetNames(typeof(LogicLayerEntities.Products.Categories)))
+                            {
+                                <li class="nav-link">
+                                <a class="nav-item text-decoration-none ms-2" asp-route-name="@category" asp-page="/Products" role="button">
+                                        @category
+                                    </a>
+                                </li>
+                            }
+                           
                         </ul>
                     </li>
                   <li class="nav-item ms-auto">

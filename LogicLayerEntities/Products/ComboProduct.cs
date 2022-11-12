@@ -31,7 +31,6 @@ namespace LogicLayerEntities.Products
         public List<SingleProduct> Products { get { return products; } 
             set 
             {
-                
                 if (value.Count > 5) throw new ArgumentException("ComboProduct can have at max 5 products");
                 products = value;
             }

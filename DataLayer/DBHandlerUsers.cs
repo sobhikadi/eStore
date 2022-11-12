@@ -53,13 +53,14 @@ namespace DataAccessLayer
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                string sql = "insert into Users (firstName, lastName, email, password, phoneNumber, address, postalCode) values (@firstName, @lastName, @email, @password, @phoneNumber, @address, @postalCode); select SCOPE_IDENTITY(); insert into Customer (id, billingAddress, billingPostalCode) values (SCOPE_IDENTITY(), @billingAddress, @billingPostalCode)";
+                string sql = "insert into Users (firstName, lastName, email, salt, password, phoneNumber, address, postalCode, lastModified) values (@firstName, @lastName, @email, @salt, @password, @phoneNumber, @address, @postalCode, @LastModified); select SCOPE_IDENTITY(); insert into Customer (id, billingAddress, billingPostalCode) values (SCOPE_IDENTITY(), @billingAddress, @billingPostalCode)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@firstName", customer.FirstName);
                 cmd.Parameters.AddWithValue("@lastName", customer.LastName);
                 cmd.Parameters.AddWithValue("@email", customer.Email);
+                cmd.Parameters.AddWithValue("@salt", customer.SaltPassword);
                 cmd.Parameters.AddWithValue("@password", customer.Password);
-
+                cmd.Parameters.AddWithValue("@LastModified", DBNull.Value);
 
                 if (!string.IsNullOrEmpty(customer.PhoneNumber)) cmd.Parameters.AddWithValue("@phoneNumber", customer.PhoneNumber);
                 else cmd.Parameters.AddWithValue("@phoneNumber", DBNull.Value);
@@ -71,7 +72,7 @@ namespace DataAccessLayer
                 else cmd.Parameters.AddWithValue("@billingAddress", DBNull.Value);
                 if (!string.IsNullOrEmpty(customer.BillingPostalCode)) cmd.Parameters.AddWithValue("@billingPostalCode", customer.BillingPostalCode);
                 else cmd.Parameters.AddWithValue("@billingPostalCode", DBNull.Value);
-
+                
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read()) id = Convert.ToInt32(dr[0]);
                 conn.Close();

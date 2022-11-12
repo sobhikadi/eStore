@@ -6,15 +6,24 @@
 <div class="conatiner d-flex flex-wrap flex-column justify-content-around my-3 mb-5">
     @foreach(var e in Model.Products)
     {
-        <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img src="..." class="img-fluid rounded-start" alt="No image availabe">
-            </div>
+
+        <div class="card mb-3" >
+            <div class="row g-0">
+                <div class="col-md-4">
+                    @if (e.Image != null) 
+                    {
+                    <img src="data:image;base64,@System.Convert.ToBase64String(e.Image)" class="img-fluid rounded-start" alt="No image availabe">
+                    }
+                    else
+                    {
+                        <img src="" class="img-fluid rounded-start" alt="No image availabe">
+                    }
+                </div>
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">@e.Name</h5>
                     <p class="card-text">@e.Description</p>
+                        <p class="card-text">@e.SubCategory</p>
                     <p class="card-text">@e.Price</p>
                 </div>
             </div>

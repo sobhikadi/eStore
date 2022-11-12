@@ -22,8 +22,10 @@ namespace eStore.Pages
 
 
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(string successMessage)
         {
+            ViewData["successMessage"] = successMessage;
+
             string role = "";
 
             if (Request.Cookies.ContainsKey("user"))

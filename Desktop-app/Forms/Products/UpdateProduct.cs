@@ -77,7 +77,7 @@ namespace Desktop_app.Forms.Products
             }
         }
 
-        private Image ConvertByteArrayToImage(byte[] data)
+        public static Image ConvertByteArrayToImage(byte[] data)
         {
             if (data == null) return null;
             using (MemoryStream ms = new MemoryStream(data))

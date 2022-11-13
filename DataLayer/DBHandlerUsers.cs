@@ -144,7 +144,6 @@ namespace DataAccessLayer
             return users;
         }
 
-
         public byte[] GetSalt(string email) 
         {
             byte[] salt = null;

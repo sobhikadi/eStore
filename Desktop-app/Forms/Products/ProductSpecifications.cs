@@ -81,7 +81,7 @@ namespace Desktop_app.Forms.Products
                     string name;
                     name = (string)dataGridViewSpecifications.SelectedCells[0].Value;
 
-                    ProductHandler.DeleteSpecification(product, product.Id, name);
+                    ProductHandler.DeleteSpecification(product, name);
 
                     dataGridViewSpecifications.Rows.Clear();
                     foreach (KeyValuePair<string, string> kvp in product.Specifications)

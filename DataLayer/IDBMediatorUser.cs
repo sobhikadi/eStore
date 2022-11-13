@@ -1,4 +1,5 @@
-﻿using LogicLayerEntities.Users;
+﻿using LogicLayerEntities.User;
+using LogicLayerEntities.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +19,13 @@ namespace DataAccessLayer
         public byte[] GetSalt(string email);
 
         public string ComaparePassword(string email, byte[] password);
+
+        public IList<Employee> SearchEmployee(string term, SearchTypeEmployee type);
+
+        public bool UpdateEmployee(Employee newEmployee, Employee currentEmployee);
+
+        public bool CheckIfEmployeeModified(Employee currentEmployee);
+
+        public bool DeleteEmployee(Employee employee);
     }
 }

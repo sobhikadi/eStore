@@ -105,11 +105,11 @@ namespace LogicLayerHandlers
             product.AddSpecifications(name, value);
         }
 
-        public void DeleteSpecification(SingleProduct product, int productId, string specsName) 
+        public void DeleteSpecification(SingleProduct product, string specsName) 
         {
-            bool deleted = dbHandlerProducts.DeleteSpecFromDB(productId, specsName);
+            bool deleted = dbHandlerProducts.DeleteSpecFromDB(product.Id, specsName);
             if (!deleted) throw new ArgumentException("Specification has not been deleted successfully");
-            product.GetSpecsFromDB(dbHandlerProducts.GetProductSpecifications(productId));
+            product.GetSpecsFromDB(dbHandlerProducts.GetProductSpecifications(product.Id));
         }
     }
 }

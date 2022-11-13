@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="LogicLayerEntities.Products.Product" Collapsed="true">
-    <Position X="1.25" Y="2" Width="1.5" />
+    <Position X="1.25" Y="2" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAACAAAAEAAAAAQCAAAEAgACAAAAAEAAAAA=</HashCode>
       <FileName>Products\Product.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LogicLayerEntities.Products.ComboProduct" Collapsed="true">
-    <Position X="2.5" Y="3" Width="1.5" />
+    <Position X="3.5" Y="3" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAACAAAAFAAAAIAAAAAAAAACAgAABAIAAAQ=</HashCode>
       <FileName>Products\ComboProduct.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LogicLayerEntities.Products.SingleProduct" Collapsed="true">
-    <Position X="0.5" Y="3" Width="1.5" />
+    <Position X="0.75" Y="3.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>QAABAEAAAQEiAASAMAABgAAAGQEAABiCCAAYgAgASAA=</HashCode>
       <FileName>Products\SingleProduct.cs</FileName>
@@ -23,21 +23,21 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="LogicLayerEntities.Users.Person" Collapsed="true">
-    <Position X="7.5" Y="0.5" Width="1.5" />
+    <Position X="7.5" Y="1.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAACAEAAACBEAAAgsAAAQCACAEIAAgACAAAACAAAQAg=</HashCode>
       <FileName>Users\Person.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="LogicLayerEntities.Users.Employee" Collapsed="true">
-    <Position X="6" Y="1.75" Width="1.5" />
+  <Class Name="LogicLayerEntities.Users.Employee">
+    <Position X="6.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Users\Employee.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="LogicLayerEntities.Users.Customer" Collapsed="true">
-    <Position X="8.75" Y="1.75" Width="1.5" />
+  <Class Name="LogicLayerEntities.Users.Customer">
+    <Position X="10.25" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Users\Customer.cs</FileName>
@@ -58,14 +58,14 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="LogicLayerEntities.User.EmployeeRoles" Collapsed="true">
-    <Position X="6.75" Y="3" Width="1.5" />
+    <Position X="6.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAQAACAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Users\UserEnums.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="LogicLayerEntities.User.SearchTypeEmployee">
-    <Position X="8.5" Y="3" Width="1.5" />
+  <Enum Name="LogicLayerEntities.User.SearchTypeEmployee" Collapsed="true">
+    <Position X="8.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAEAAACAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
       <FileName>Users\UserEnums.cs</FileName>
